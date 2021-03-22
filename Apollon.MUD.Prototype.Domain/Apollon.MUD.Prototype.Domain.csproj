@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -16,6 +16,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Apollon.MUD.Prototype.Outbound.Adapters.Storage\Apollon.MUD.Prototype.Outbound.Adapters.Storage.csproj" />
+    <ProjectReference Include="..\Apollon.MUD.Prototype.Outbound.Ports.Storage\Apollon.MUD.Prototype.Outbound.Ports.Storage.csproj" />
   </ItemGroup>
 
 </Project>
