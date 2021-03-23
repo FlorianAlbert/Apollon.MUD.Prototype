@@ -1,0 +1,62 @@
+﻿@page "/games"
+
+    <AuthorizeView>
+        <Authorized>
+            <div class="container shadow d-flex bg-white min-vh-100">
+                <div class="row container-fluid">
+                    <div class="col-md-auto mt-3">
+                        <h2>Filter</h2>
+                        <div class="card shadow-sm" style="width: 18rem;">
+                            <div class="card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="SearchName">Name</label>
+                                        <input type="search" class="form-control" id="searchName" placeholder="Search for a name">
+                                    </div>
+                                    <div class="form-check mt-2">
+                                        <input type="checkbox" class="form-check-input" id="CheckOnline">
+                                        <label class="form-check-label" for="exampleCheck1">Only show Online</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mt-2">Search</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 mt-3">
+                        <div class="container ">
+                            <h1>Games</h1>
+                            <div class="card mt-2 shadow">
+                                <h5 class="card-header">Game One</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.<a href="game1" class="btn btn-primary float-end">Play</a></p>
+                                </div>
+                            </div>
+                            <div class="card mt-2 shadow">
+                                <h5 class="card-header">Game Two</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.<a href="#" class="btn btn-primary float-end">Play</a></p>
+                                </div>
+                            </div>
+                            <div class="card mt-2 shadow">
+                                <h5 class="card-header">Game Three</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.<a href="#" class="btn btn-primary float-end">Play</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <div class="alert alert-danger" role="alert">
+                You need to be logged in to see this page.<a href="Identity/Account/Login" class="alert-link">Login</a>
+            </div>
+        </NotAuthorized>
+    </AuthorizeView>
+    @code {
+
+    }
