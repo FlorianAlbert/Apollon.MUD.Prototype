@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Domain", "Apollon.MUD.Prototype.Domain\Apollon.MUD.Prototype.Domain.csproj", "{F72EBE48-FBC5-403D-B330-9607D9784CD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollon.MUD.Prototype.Core.Implementation", "Apollon.MUD.Prototype.Core.Implementation\Apollon.MUD.Prototype.Core.Implementation.csproj", "{C748C411-1D9E-478A-A262-CFB360F9E1F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollon.MUD.Prototype.Core.Interfaces", "Apollon.MUD.Prototype.Core.Interfaces\Apollon.MUD.Prototype.Core.Interfaces.csproj", "{3E6C31B2-1B3E-480E-8E32-66E0D314939B}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollon.MUD.Prototype.Outbound.Adapters.Storage", "Apollon.MUD.Prototype.Outbound.Adapters.Storage\Apollon.MUD.Prototype.Outbound.Adapters.Storage.csproj", "{044D5423-43DC-4613-BF72-78B629FB50D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollon.MUD.Prototype.Outbound.Ports.Storage", "Apollon.MUD.Prototype.Outbound.Ports.Storage\Apollon.MUD.Prototype.Outbound.Ports.Storage.csproj", "{D1653C85-C99B-4033-A1D9-EEBDE00A6DA4}"
@@ -19,6 +23,14 @@ Global
 		{F72EBE48-FBC5-403D-B330-9607D9784CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F72EBE48-FBC5-403D-B330-9607D9784CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F72EBE48-FBC5-403D-B330-9607D9784CD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C748C411-1D9E-478A-A262-CFB360F9E1F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C748C411-1D9E-478A-A262-CFB360F9E1F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C748C411-1D9E-478A-A262-CFB360F9E1F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C748C411-1D9E-478A-A262-CFB360F9E1F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E6C31B2-1B3E-480E-8E32-66E0D314939B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E6C31B2-1B3E-480E-8E32-66E0D314939B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E6C31B2-1B3E-480E-8E32-66E0D314939B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E6C31B2-1B3E-480E-8E32-66E0D314939B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{044D5423-43DC-4613-BF72-78B629FB50D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{044D5423-43DC-4613-BF72-78B629FB50D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{044D5423-43DC-4613-BF72-78B629FB50D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
