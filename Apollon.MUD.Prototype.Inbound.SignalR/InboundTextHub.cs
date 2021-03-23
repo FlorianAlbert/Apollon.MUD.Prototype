@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,7 +8,7 @@ namespace Apollon.MUD.Prototype.Inbound.SignalR
 {
     public class InboundTextHub : Hub
     {
-        public static ConcurrentDictionary<string, List<string>> ConnectedUsers = new ConcurrentDictionary<string, List<string>>();
+        public static ConcurrentDictionary<string, List<string>> ConnectedUsers = new();
 
         public override async Task OnConnectedAsync()
         {
