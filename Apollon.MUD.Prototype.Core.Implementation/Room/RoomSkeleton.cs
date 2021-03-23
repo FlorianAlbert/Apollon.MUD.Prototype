@@ -10,9 +10,9 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
     {
         public string Description = "Please enter a description.";
         public int RoomId { get; }
-        public List<IItem> Items { get; set; } = new List<IItem>();
-        public List<INPC> Npcs { get; set; } = new List<INPC>();
-        public List<IAvatar> Avatars { get; } = new List<IAvatar>();
+        public List<IItem> Items { get; set; } = new();
+        public List<INPC> Npcs { get; set; } = new();
+        public List<IAvatar> Avatars { get; } = new();
 
         public RoomSkeleton(int roomId)
         {
@@ -29,9 +29,9 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
 
         public int CompareTo(RoomSkeleton other)
         {
-            if (RoomId == other.RoomId) { return 0; }
-            else if (RoomId > other.RoomId || other == null) { return 1; }
-            else { return -1; }
+            if (RoomId == other.RoomId) return 0;
+            if (RoomId < other.RoomId) return -1;
+            return 1;
         }
 
         public void Inspect(string aimName)

@@ -36,11 +36,11 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
 
         /// <summary>
         /// </summary>
-        /// <param name="roomID"></param>
+        /// <param name="roomId"></param>
         /// <returns>The room if exist else null.</returns>
-        public RoomSkeleton GetRoom(int roomID)
+        public RoomSkeleton GetRoom(int roomId)
         {
-            return Rooms.Find(r => r.RoomId == roomID);
+            return Rooms.Find(r => r.RoomId == roomId);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
         /// <returns>True if a room was removed.</returns>
         public bool RemoveRoom(RoomSkeleton room)
         {
-            Neighborships.RemoveAll(n => n.isInvolved(room.RoomId));
+            Neighborships.RemoveAll(n => n.IsInvolved(room.RoomId));
             return Rooms.Remove(room);
         }
 
@@ -60,13 +60,13 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
 
             var neighborAlreadyExists = Neighborships
                 .Select(x => x).Count(x => x.SourceId.Equals(newNeighborship.SourceId) &&
-                                           x.fromSourceToSink == newNeighborship.fromSourceToSink ||
+                                           x.FromSourceToSinkDirection == newNeighborship.FromSourceToSinkDirection ||
                                            x.SinkId.Equals(newNeighborship.SinkId) &&
-                                           x.fromSinkToSource == newNeighborship.fromSinkToSource ||
+                                           x.FromSinkToSourceDirection == newNeighborship.FromSinkToSourceDirection ||
                                            x.SinkId.Equals(newNeighborship.SourceId) &&
-                                           x.fromSinkToSource == newNeighborship.fromSourceToSink ||
+                                           x.FromSinkToSourceDirection == newNeighborship.FromSourceToSinkDirection ||
                                            x.SourceId.Equals(newNeighborship.SinkId) &&
-                                           x.fromSourceToSink == newNeighborship.fromSinkToSource) != 0;
+                                           x.FromSourceToSinkDirection == newNeighborship.FromSinkToSourceDirection) != 0;
 
             if (neighborAlreadyExists) return false;
 
@@ -84,7 +84,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
         {
             int newRoomId;
 
-            var requestedNeighborship = Neighborships.Find(x => x.SourceId == currentRoomId && x.fromSourceToSink == direction);
+            var requestedNeighborship = Neighborships.Find(x => x.SourceId == currentRoomId && x.FromSourceToSinkDirection == direction);
 
             if (requestedNeighborship != null)
             {
@@ -92,7 +92,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
             }
             else
             {
-                requestedNeighborship = Neighborships.Find(x => x.SinkId == currentRoomId && x.fromSinkToSource == direction);
+                requestedNeighborship = Neighborships.Find(x => x.SinkId == currentRoomId && x.FromSinkToSourceDirection == direction);
 
                 if (requestedNeighborship != null)
                 {
