@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Apollon.MUD.Prototype.Core.Implementation\Apollon.MUD.Prototype.Core.Implementation.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
   </ItemGroup>
 
 </Project>
