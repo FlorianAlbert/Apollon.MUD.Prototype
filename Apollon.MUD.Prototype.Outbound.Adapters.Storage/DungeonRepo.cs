@@ -1,13 +1,10 @@
-﻿using Apollon.MUD.Prototype.Core.Implementation.Direction;
-using Apollon.MUD.Prototype.Core.Implementation.Dungeon;
+﻿using Apollon.MUD.Prototype.Core.Implementation.Dungeon;
 using Apollon.MUD.Prototype.Outbound.Ports.Storage;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
+using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 
 namespace Apollon.MUD.Prototype.Outbound.Adapters.Storage
 {
@@ -42,7 +39,7 @@ namespace Apollon.MUD.Prototype.Outbound.Adapters.Storage
             ActiveDungeons.Find(x => x.DungeonId == currentDungeonId).GetRoom(currentRoomId).TakeItem(avatar, itemName);
         }
 
-        public void ChangeRoom(int currentDungeonId, int currentRoomId, IAvatar avatar, Directions direction)
+        public void ChangeRoom(int currentDungeonId, int currentRoomId, IAvatar avatar, EDirections direction)
         {
             ActiveDungeons.Find(x => x.DungeonId == currentDungeonId).ChangeRoom(currentRoomId, avatar, direction);
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Apollon.MUD.Prototype.Core.Implementation.Room;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
-using Apollon.MUD.Prototype.Core.Interfaces.EDirection;
+using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
 using Apollon.MUD.Prototype.Core.Interfaces.Room;
 

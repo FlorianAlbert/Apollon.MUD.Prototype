@@ -1,4 +1,4 @@
-﻿using Apollon.MUD.Prototype.Core.Interfaces.EDirection;
+﻿using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Room
 {
