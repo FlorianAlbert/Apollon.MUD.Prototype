@@ -1,4 +1,5 @@
 ﻿using System;
+using Apollon.MUD.Prototype.Core.Implementation.Direction;
 using Apollon.MUD.Prototype.Core.Interfaces;
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Room
@@ -15,13 +16,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
             this.source = source;
             this.fromSourceToSink = fromSourceToSink;
             this.sink = sink;
-            switch (fromSourceToSink)
-            {
-                case Directions.NORTH: fromSinkToSource = Directions.SOUTH; break;
-                case Directions.EAST: fromSinkToSource = Directions.WEST; break;
-                case Directions.SOUTH: fromSinkToSource = Directions.NORTH; break;
-                case Directions.WEST: fromSinkToSource = Directions.EAST; break;
-            }
+            fromSinkToSource = (Directions) ((int) (fromSourceToSink + 2) % 4);
         }
 
         public bool isInvolved(RoomSkeleton room)

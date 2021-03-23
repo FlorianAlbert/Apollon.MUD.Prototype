@@ -5,10 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dungeon\" />
     <Folder Include="Avatar\" />
     <Folder Include="Item\" />
     <Folder Include="NPC\" />
-    <Folder Include="Direction\" />
   </ItemGroup>
 </Project>

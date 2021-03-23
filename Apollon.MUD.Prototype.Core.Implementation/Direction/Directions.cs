@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Apollon.MUD.Prototype.Core.Interfaces
+namespace Apollon.MUD.Prototype.Core.Implementation.Direction
 {
     public enum Directions
     {

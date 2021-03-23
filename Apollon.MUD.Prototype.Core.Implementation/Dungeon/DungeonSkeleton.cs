@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Apollon.MUD.Prototype.Core.Implementation.Direction;
 using Apollon.MUD.Prototype.Core.Implementation.Room;
-using Apollon.MUD.Prototype.Core.Interfaces;
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
 {
     public class DungeonSkeleton
     {
         protected List<RoomSkeleton> rooms = new List<RoomSkeleton>();
-        protected List<Neighborship> neighbors = new List<Neighborship>(); 
+        protected List<Neighborship> neighbors = new List<Neighborship>();
 
         public DungeonSkeleton()
         {
