@@ -1,27 +1,25 @@
-﻿using System;
-using Apollon.MUD.Prototype.Core.Implementation.Direction;
-using Apollon.MUD.Prototype.Core.Interfaces;
+﻿using Apollon.MUD.Prototype.Core.Implementation.Direction;
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Room
 {
     public class Neighborship
     {
-        public RoomSkeleton source { get; }
+        public int SourceId { get; }
         public Directions fromSourceToSink { get; }
-        public RoomSkeleton sink { get; }
+        public int SinkId { get; }
         public Directions fromSinkToSource{ get; }
 
-        public Neighborship(RoomSkeleton source, Directions fromSourceToSink, RoomSkeleton sink)
+        public Neighborship(int sourceId, Directions fromSourceToSink, int sinkId)
         {
-            this.source = source;
+            this.SourceId = sourceId;
             this.fromSourceToSink = fromSourceToSink;
-            this.sink = sink;
+            this.SinkId = sinkId;
             fromSinkToSource = (Directions) ((int) (fromSourceToSink + 2) % 4);
         }
 
-        public bool isInvolved(RoomSkeleton room)
+        public bool isInvolved(int roomId)
         {
-            return source == room || sink == room;
+            return SourceId == roomId || SinkId == roomId;
         }
     }
 }

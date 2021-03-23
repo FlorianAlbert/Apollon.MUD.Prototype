@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Room\" />
     <Folder Include="Dungeon\" />
     <Folder Include="Direction\" />
   </ItemGroup>
