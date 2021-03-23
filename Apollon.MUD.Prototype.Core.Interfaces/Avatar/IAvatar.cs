@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Apollon.MUD.Prototype.Core.Interfaces.Item;
 
 namespace Apollon.MUD.Prototype.Core.Interfaces.Avatar
