@@ -1,7 +1,7 @@
 ﻿using System;
-namespace Apollon.MUD.Prototype.Core.Implementation.Direction
+namespace Apollon.MUD.Prototype.Core.Interfaces.EDirection
 {
-    public enum Directions
+    public enum EDirections
     {
         NORTH = 0,
         EAST = 1,

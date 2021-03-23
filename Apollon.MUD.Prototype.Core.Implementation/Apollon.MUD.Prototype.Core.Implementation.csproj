@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Dungeon\" />
-    <Folder Include="Direction\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Apollon.MUD.Prototype.Core.Interfaces\Apollon.MUD.Prototype.Core.Interfaces.csproj" />

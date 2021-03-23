@@ -1,20 +1,20 @@
-﻿using Apollon.MUD.Prototype.Core.Implementation.Direction;
+﻿using Apollon.MUD.Prototype.Core.Interfaces.EDirection;
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Room
 {
     public class Neighborship
     {
         public int SourceId { get; }
-        public Directions fromSourceToSink { get; }
+        public EDirections fromSourceToSink { get; }
         public int SinkId { get; }
-        public Directions fromSinkToSource{ get; }
+        public EDirections fromSinkToSource{ get; }
 
-        public Neighborship(int sourceId, Directions fromSourceToSink, int sinkId)
+        public Neighborship(int sourceId, EDirections fromSourceToSink, int sinkId)
         {
             this.SourceId = sourceId;
             this.fromSourceToSink = fromSourceToSink;
             this.SinkId = sinkId;
-            fromSinkToSource = (Directions) ((int) (fromSourceToSink + 2) % 4);
+            fromSinkToSource = (EDirections) ((int) (fromSourceToSink + 2) % 4);
         }
 
         public bool isInvolved(int roomId)

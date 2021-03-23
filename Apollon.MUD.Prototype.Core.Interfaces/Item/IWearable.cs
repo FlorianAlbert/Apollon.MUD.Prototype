@@ -3,6 +3,7 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Item
 {
     public interface IWearable : IItem
     {
-        //TODO add methods
+        //protected int ProtectionBoost { get; set; }
+        //protected int Durability { get; set; }
     }
 }

@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Apollon.MUD.Prototype.Core.Implementation.Direction;
 using Apollon.MUD.Prototype.Core.Implementation.Room;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
+using Apollon.MUD.Prototype.Core.Interfaces.EDirection;
+using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
+using Apollon.MUD.Prototype.Core.Interfaces.Room;
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
 {
-    public class DungeonSkeleton
+    public class DungeonSkeleton : IDungeon
     {
         protected List<Neighborship> Neighborships = new();
-        protected List<RoomSkeleton> Rooms = new();
+        protected List<IRoom> Rooms = new();
 
         private int DefaultRoomId { get; set; }
 
         public int DungeonId { get; }
 
-        public RoomSkeleton AddRoom(bool asDefault = false)
+        public IRoom AddRoom(bool asDefault = false)
         {
             //TODO does foreach truely iterate over the index structure of the list? -> found on stackoverflow but I'm not sure
             var nextIndex = 0;
@@ -25,7 +27,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
                 if (room.RoomId == nextIndex)
                     nextIndex++;
                 else break;
-            var newRoom = new RoomSkeleton(nextIndex);
+            var newRoom = new RoomSkeleton(nextIndex) as IRoom;
 
             if (asDefault || Rooms.Count == 0) DefaultRoomId = newRoom.RoomId;
 
@@ -34,29 +36,20 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
             return newRoom;
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="roomID"></param>
-        /// <returns>The room if exist else null.</returns>
-        public RoomSkeleton GetRoom(int roomID)
+        public IRoom GetRoom(int roomID)
         {
-            return Rooms.Find(r => r.RoomId == roomID);
+            return (IRoom) Rooms.Find(r => r.RoomId == roomID);
         }
 
-        /// <summary>
-        /// Removes the room and all neighborships where it is involed.
-        /// </summary>
-        /// <param name="room"></param>
-        /// <returns>True if a room was removed.</returns>
-        public bool RemoveRoom(RoomSkeleton room)
+        public bool RemoveRoom(int RoomId)
         {
-            Neighborships.RemoveAll(n => n.isInvolved(room.RoomId));
-            return Rooms.Remove(room);
+            Neighborships.RemoveAll(n => n.isInvolved(RoomId));
+            return Rooms.Remove(Rooms.Find(r => r.RoomId == RoomId));
         }
 
-        public bool AddNeighborship(RoomSkeleton source, Directions fromSourceToSink, RoomSkeleton sink)
+        public bool AddNeighborship(int SourceId, EDirections fromSourceToSink, int SinkId)
         {
-            var newNeighborship = new Neighborship(source.RoomId, fromSourceToSink, sink.RoomId);
+            var newNeighborship = new Neighborship(SourceId, fromSourceToSink, SinkId);
 
             var neighborAlreadyExists = Neighborships
                 .Select(x => x).Count(x => x.SourceId.Equals(newNeighborship.SourceId) &&
@@ -80,7 +73,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
             return DefaultRoomId;
         }
 
-        public void ChangeRoom(int currentRoomId, IAvatar avatar, Directions direction)
+        public void ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction)
         {
             int newRoomId;
 
