@@ -4,4 +4,11 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Room\" />
+    <Folder Include="Dungeon\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Apollon.MUD.Prototype.Core.Interfaces\Apollon.MUD.Prototype.Core.Interfaces.csproj" />
+  </ItemGroup>
 </Project>
