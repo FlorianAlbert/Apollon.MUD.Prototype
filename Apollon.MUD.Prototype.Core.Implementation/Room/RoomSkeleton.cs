@@ -52,5 +52,10 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
             return Avatars.Contains(avatar);
 
         }
+
+        public void DoSpecialAction(IAvatar avatar, string action)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

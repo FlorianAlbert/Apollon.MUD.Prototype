@@ -20,6 +20,6 @@ namespace Apollon.MUD.Prototype.Outbound.Ports.Storage
 
         void RemoveDungeon(int dungeonId);
 
-        int EnterDungeon(int dungeonId, IAvatar avatar);
+        int? EnterDungeon(int dungeonId, IAvatar avatar);
     }
 }

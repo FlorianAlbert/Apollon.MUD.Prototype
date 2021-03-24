@@ -18,5 +18,6 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Room
         bool Leave(IAvatar avatar);
         bool TakeItem(IAvatar avatar, string itemName);
         bool Enter(IAvatar avatar);
+        void DoSpecialAction(IAvatar avatar, string action);
     }
 }
