@@ -13,9 +13,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
 
         // Usage correct?!
         public int RoomId { get; }
-        public List<IItem> Items { get; set; } = new();
-        public List<INPC> Npcs { get; set; } = new();
-        public List<IAvatar> Avatars { get; } = new();
+        public List<IInspectable> Inspectables { get; set; } = new();
 
         public RoomSkeleton(int roomId)
         {
@@ -33,23 +31,36 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
         public string Inspect(IAvatar avatar, string aimName)
         {
             throw new NotImplementedException();
+
         }
 
         public bool TakeItem(IAvatar avatar, string itemName)
         {
+            var item = Inspectables.Find(x => x.Name == itemName);
+
+            if (item is ITakeable takeableItem)
+            {
+                avatar.AddItemToInventory(takeableItem);
+                Inspectables.Remove(takeableItem);
+            }
+            else
+            {
+                //gib error aus
+            }
             throw new NotImplementedException();
         }
 
         public bool Leave(IAvatar avatar)
         {
-            return Avatars.Remove(avatar);
+            return Inspectables.Remove(avatar);
         }
         
         public bool Enter(IAvatar avatar)
         {
-            Avatars.Add(avatar);
+            Inspectables.Add(avatar);
+            //avatar.SendPrivateMessage(Description);
             // TODO: Send Room Description to Client
-            return Avatars.Contains(avatar);
+            return Inspectables.Contains(avatar);
 
         }
 

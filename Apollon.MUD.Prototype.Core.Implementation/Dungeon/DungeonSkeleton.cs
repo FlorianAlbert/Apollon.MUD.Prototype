@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Apollon.MUD.Prototype.Core.Implementation.Room;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
+using Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs;
 using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
 using Apollon.MUD.Prototype.Core.Interfaces.Room;
@@ -12,6 +13,8 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
     public class DungeonSkeleton : IDungeon
     {
         public int DungeonId { get; }
+        public List<IRace> ConfiguredRaces { get; }
+        public List<IClass> ConfiguredClasses { get; }
         protected List<Neighborship> _Neighborships = new();
         protected List<IRoom> _Rooms = new();
         private int DefaultRoomId { get; set; }

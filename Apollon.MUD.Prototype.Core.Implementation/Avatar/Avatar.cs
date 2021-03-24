@@ -2,44 +2,53 @@
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
 using Apollon.MUD.Prototype.Core.Interfaces.Item;
 using System.Collections.Generic;
+using System.Linq;
+using Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs;
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Avatar
 {
     public class Avatar : IAvatar
     { 
-        public string Name => throw new NotImplementedException();
-        public string Description => throw new NotImplementedException();
-        public List<IItem> Inventory => throw new NotImplementedException();
-        public IWearable HeadArmor { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IWearable BodyArmor { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IWearable LegArmor { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IUseable Weapon { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Name { get; }
+        public string Description { get; }
+
+        private List<ITakeable> _Inventory;
+        private List<ITakeable> Inventory
+        {
+            get
+            {
+                return _Inventory ??= new List<ITakeable>();
+            }
+        }
+
+        public IRace Race => throw new NotImplementedException();
+
+        public IClass Class => throw new NotImplementedException();
+
+        public int HealthMax => throw new NotImplementedException();
+
+        public int Damage => throw new NotImplementedException();
+
+        public int Protection => throw new NotImplementedException();
 
         public event ChatHandler Chat;
 
-        public bool AddItemToInventar(IItem item)
+        public Avatar(string name, string description)
         {
-            throw new NotImplementedException();
+            Name = name;
+            Description = description;
         }
 
-        public bool ConsumeItem(IConsumable consumable)
+        public bool AddItemToInventory(ITakeable inspectable)
         {
-            throw new NotImplementedException();
+            Inventory.Add(inspectable);
+            return Inventory.Contains(inspectable);
         }
 
-        public bool PullOut(IUseable useable)
+        public List<string> GetInventoryContent()
         {
-            throw new NotImplementedException();
-        }
-
-        public bool PutIn(IUseable useable)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool RemoveArmor(IWearable wearable)
-        {
-            throw new NotImplementedException();
+            var result = Inventory.Select(x => x.Name).ToList();
+            return result;
         }
 
         public void SendPrivateMessage(string message)
@@ -47,19 +56,11 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Avatar
             Chat?.Invoke(message);
         }
 
-        public bool ThrowAway(IItem item)
+        public ITakeable ThrowAway(string itemName)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool UseItem(IUseable useable)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool WearArmor(IWearable wearable)
-        {
-            throw new NotImplementedException();
+            var itemToRemove = Inventory.Find(x => x.Name == itemName);
+            Inventory.Remove(itemToRemove);
+            return itemToRemove;
         }
     }
 

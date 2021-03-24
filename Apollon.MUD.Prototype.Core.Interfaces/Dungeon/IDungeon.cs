@@ -1,4 +1,6 @@
-﻿using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
+﻿using System.Collections.Generic;
+using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
+using Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs;
 using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 using Apollon.MUD.Prototype.Core.Interfaces.Room;
 
@@ -7,6 +9,10 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Dungeon
     public interface IDungeon
     {
         int DungeonId { get; }
+
+        List<IRace> ConfiguredRaces { get; }
+
+        List<IClass> ConfiguredClasses { get; }
 
         bool AddNeighborship(int SourceId, EDirections fromSourceToSink, int SinkId);
         IRoom AddRoom(bool asDefault = false);

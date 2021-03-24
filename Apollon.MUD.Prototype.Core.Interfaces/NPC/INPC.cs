@@ -1,9 +1,11 @@
 ﻿using System;
+using Apollon.MUD.Prototype.Core.Interfaces.Item;
+
 namespace Apollon.MUD.Prototype.Core.Interfaces.NPC
 {
-    public interface INPC
+    public interface INPC : IInspectable
     {
-        //int Health { get ; }
+        //int HealthMax { get ; }
         //int Damage { get; }
         //int Protection { get; }
         //bool Alive { get; set; }
@@ -11,8 +13,6 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.NPC
         //IWearable BodyArmor { get; }
         //IWearable LegArmor { get; }
         //IUseable Weapon { get; }
-        string Name { get; }
-        string Description { get; }
 
         string Speak();
         //int DealDamage();
