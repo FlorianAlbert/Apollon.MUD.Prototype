@@ -64,6 +64,19 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
 
         }
 
+        public bool TalkToNPC(IAvatar avatar, INPC npc)
+        {
+            if (Inspectables.Contains(npc))
+            {
+                avatar.SendPrivateMessage(npc.Speak());
+            }
+            else
+            {
+                //Gib Error aus
+            }
+            throw new NotImplementedException();
+        }
+
         public void DoSpecialAction(IAvatar avatar, string action)
         {
             throw new NotImplementedException();
