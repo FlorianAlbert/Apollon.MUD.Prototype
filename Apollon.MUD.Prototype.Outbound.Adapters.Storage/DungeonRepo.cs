@@ -1,19 +1,19 @@
-﻿using Apollon.MUD.Prototype.Core.Implementation.Dungeon;
-using Apollon.MUD.Prototype.Outbound.Ports.Storage;
+﻿using Apollon.MUD.Prototype.Outbound.Ports.Storage;
 using System.Collections.Generic;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
 using Apollon.MUD.Prototype.Core.Interfaces.Direction;
+using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
 
 namespace Apollon.MUD.Prototype.Outbound.Adapters.Storage
 {
     public class DungeonRepo : IDungeonRepo
     {
-        private List<DungeonSkeleton> _ActiveDungeons;
-        private List<DungeonSkeleton> ActiveDungeons
+        private List<IDungeon> _ActiveDungeons;
+        public List<IDungeon> ActiveDungeons
         {
             get
             {
-                return _ActiveDungeons ??= new List<DungeonSkeleton>();
+                return _ActiveDungeons ??= new List<IDungeon>();
             }
         }
 
@@ -42,7 +42,7 @@ namespace Apollon.MUD.Prototype.Outbound.Adapters.Storage
             ActiveDungeons.Find(x => x.DungeonId == currentDungeonId)?.ChangeRoom(currentRoomId, avatar, direction);
         }
 
-        public void AddDungeon(DungeonSkeleton dungeon)
+        public void AddDungeon(IDungeon dungeon)
         {
             ActiveDungeons.Add(dungeon);
         }

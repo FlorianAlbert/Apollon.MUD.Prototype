@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Apollon.MUD.Prototype.Core.Implementation.Dungeon;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
 
-namespace Apollon.MUD.Prototype.Core.Implementation
+namespace Apollon.MUD.Prototype.Outbound.Adapters.Storage
 {
     public class ClientContext
     {

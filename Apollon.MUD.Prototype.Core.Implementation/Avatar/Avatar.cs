@@ -62,6 +62,4 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Avatar
             return itemToRemove;
         }
     }
-
-    public delegate void ChatHandler(string message);
 }

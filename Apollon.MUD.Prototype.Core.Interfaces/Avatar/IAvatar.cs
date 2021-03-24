@@ -11,6 +11,8 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Avatar
         int HealthMax { get; }
         int Damage { get; }
         int Protection { get; }
+
+        event ChatHandler Chat;
         //bool Alive { get; }
         //List<IInspectable> Inventory { get; }
         //IWearable HeadArmor { get; }
@@ -31,4 +33,6 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Avatar
         //bool IncreaseHealth(int Amount);
         //bool DecreaseHealth(int Amount);
     }
+
+    public delegate void ChatHandler(string message);
 }

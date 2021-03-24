@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Apollon.MUD.Prototype.Core.Implementation\Apollon.MUD.Prototype.Core.Implementation.csproj" />
+    <ProjectReference Include="..\Apollon.MUD.Prototype.Core.Interfaces\Apollon.MUD.Prototype.Core.Interfaces.csproj" />
+    <ProjectReference Include="..\Apollon.MUD.Prototype.Outbound.Ports.Storage\Apollon.MUD.Prototype.Outbound.Ports.Storage.csproj" />
+  </ItemGroup>
+
+</Project>
