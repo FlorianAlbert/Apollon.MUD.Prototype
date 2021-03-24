@@ -10,33 +10,32 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Avatar
     public class Avatar : IAvatar
     { 
         public string Name { get; }
-        public string Description { get; }
+        public string Description => Race.Description;
 
         private List<ITakeable> _Inventory;
+
         private List<ITakeable> Inventory
         {
-            get
-            {
-                return _Inventory ??= new List<ITakeable>();
-            }
+            get { return _Inventory ??= new List<ITakeable>(); }
         }
 
-        public IRace Race => throw new NotImplementedException();
+        public IRace Race { get; }
 
-        public IClass Class => throw new NotImplementedException();
+        public IClass Class { get; }
 
-        public int HealthMax => throw new NotImplementedException();
+        public int HealthMax => Race.DefaultHealthMax + Class.DefaultHealthMax;
 
-        public int Damage => throw new NotImplementedException();
+        public int Damage => Race.DefaultDamage + Class.DefaultDamage;
 
-        public int Protection => throw new NotImplementedException();
+        public int Protection => Race.DefaultProtection + Class.DefaultProtection;
 
         public event ChatHandler Chat;
 
-        public Avatar(string name, string description)
+        public Avatar(string avatarName, IRace avatarRace, IClass avatarClass)
         {
-            Name = name;
-            Description = description;
+            Name = avatarName;
+            Race = avatarRace;
+            Class = avatarClass;
         }
 
         public bool AddItemToInventory(ITakeable inspectable)
