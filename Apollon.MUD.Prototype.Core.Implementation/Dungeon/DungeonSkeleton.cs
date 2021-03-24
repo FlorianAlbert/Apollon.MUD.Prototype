@@ -13,17 +13,25 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
     public class DungeonSkeleton : IDungeon
     {
         public int DungeonId { get; }
+        public string DungeonDescription { get; set; }
+        public string DungeonEpoch { get; }
         public List<IRace> ConfiguredRaces { get; }
         public List<IClass> ConfiguredClasses { get; }
         protected List<Neighborship> _Neighborships = new();
         protected List<IRoom> _Rooms = new();
         private int DefaultRoomId { get; set; }
 
+        public DungeonSkeleton (string dungeonEpoch)
+        {
+            DungeonEpoch = dungeonEpoch;
+        }
+
         public IRoom AddRoom(bool asDefault = false)
         {
             //TODO does foreach truely iterate over the index structure of the list? -> found on stackoverflow but I'm not sure
             var nextIndex = 0;
-            _Rooms.Sort((r1, r2) => r1.CompareTo(r2));
+            //_Rooms.Sort((r1, r2) => r1.CompareTo(r2));
+            _Rooms.OrderBy(x => x.RoomId);
             foreach (var room in _Rooms)
                 if (room.RoomId == nextIndex)
                     nextIndex++;

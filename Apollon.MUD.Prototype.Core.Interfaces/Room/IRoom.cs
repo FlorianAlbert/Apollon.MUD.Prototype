@@ -10,7 +10,7 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Room
     {
         int RoomId { get; }
         string Description { get; set; }
-        List<IInspectable> Inspectables { get; }
+        List<IInspectable> Inspectables { get; set; }
         
         string Inspect(IAvatar avatar, string aimName);
         bool Leave(IAvatar avatar);
