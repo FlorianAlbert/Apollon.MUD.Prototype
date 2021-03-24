@@ -5,8 +5,8 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Item
 {
     public interface IConsumable : IItem
     {
-        protected bool GoodEffect { get; set; }
+        bool GoodEffect { get; set; }
 
-        public bool Consume(IAvatar avatar);
+        bool Consume(IAvatar avatar);
     }
 }

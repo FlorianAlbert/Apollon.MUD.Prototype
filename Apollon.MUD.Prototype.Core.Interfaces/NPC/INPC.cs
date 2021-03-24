@@ -3,17 +3,17 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.NPC
 {
     public interface INPC
     {
-        //protected int Health { get ; set; }
-        //protected int Damage { get; set; }
-        //protected int Protection { get; set; }
-        //protected bool Alive { get; set; }
-        //protected IWearable HeadArmor { get; set; }
-        //protected IWearable BodyArmor { get; set; }
-        //protected IWearable LegArmor { get; set; }
-        //protected IUseable Weapon { get; set; }
+        //int Health { get ; set; }
+        //int Damage { get; set; }
+        //int Protection { get; set; }
+        //bool Alive { get; set; }
+        //IWearable HeadArmor { get; set; }
+        //IWearable BodyArmor { get; set; }
+        //IWearable LegArmor { get; set; }
+        //IUseable Weapon { get; set; }
 
-        public string Speak();
-        //public int DealDamage();
+        string Speak();
+        //int DealDamage();
         //bool IncreaseHealth(int Amount);
         //bool DecreaseHealth(int Amount);
     }

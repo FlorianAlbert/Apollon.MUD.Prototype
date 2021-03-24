@@ -6,10 +6,10 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Avatar
     //TODO Generalisierung von NPC wäre möglich ?!
     public interface IAvatar
     {
-        //protected int Health { get ; set; }
-        //protected int Damage { get; set; }
-        //protected int Protection { get; set; }
-        //protected bool Alive { get; set; }
+        //int Health { get ; set; }
+        //int Damage { get; set; }
+        //int Protection { get; set; }
+        //bool Alive { get; set; }
         List<IItem> Inventory { get; set; }
         IWearable HeadArmor { get; set; }
         IWearable BodyArmor { get; set; }

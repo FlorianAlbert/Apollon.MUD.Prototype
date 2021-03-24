@@ -6,14 +6,14 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Dungeon
 {
     public interface IDungeon
     {
-        public int DungeonId { get; }
+        int DungeonId { get; }
 
-        public bool AddNeighborship(int SourceId, EDirections fromSourceToSink, int SinkId);
-        public IRoom AddRoom(bool asDefault = false);
-        public void ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction);
-        public int Enter(IAvatar avatar);
-        public IRoom GetRoom(int roomID);
-        public int RemoveNeighborship(int firstNeighborId, int secondNeighborId);
-        public bool RemoveRoom(int RoomId);
+        bool AddNeighborship(int SourceId, EDirections fromSourceToSink, int SinkId);
+        IRoom AddRoom(bool asDefault = false);
+        void ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction);
+        int Enter(IAvatar avatar);
+        IRoom GetRoom(int roomID);
+        int RemoveNeighborship(int firstNeighborId, int secondNeighborId);
+        bool RemoveRoom(int RoomId);
     }
 }
