@@ -9,21 +9,17 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
 {
     public class RoomSkeleton : IRoom
     {
-        
-        public int RoomId => roomId;
-        protected int roomId { get; }
-        public string Discription => discription;
-        protected string discription = "Please enter a description.";
-        public List<IItem> Items => items;
-        protected List<IItem> items { get; set; } = new();
-        public List<INPC> Npcs => npcs;
-        protected List<INPC> npcs { get; set; } = new();
-        public List<IAvatar> Avatars => avatars;
-        protected List<IAvatar> avatars { get; } = new();
+        protected string Description { get; } = "Please enter a description.";
+
+        // Usage correct?!
+        public int RoomId { get; }
+        protected List<IItem> Items { get; set; } = new();
+        protected List<INPC> Npcs { get; set; } = new();
+        protected List<IAvatar> Avatars { get; } = new();
 
         public RoomSkeleton(int roomId)
         {
-            this.roomId = roomId;
+            RoomId = roomId;
         }
 
         public bool SetDiscription(string discription)
@@ -34,16 +30,13 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
 
         public int CompareTo(object other)
         {
-            if (typeof(IRoom).IsInstanceOfType(other) && other != null)
-            {
-                var room = other as IRoom;
-                if (roomId == room.RoomId) { return 0; }
-                if (roomId > room.RoomId) { return 1; }
-            }
-            return -1;
+            if (other == null) return 1;
+
+            if (other is IRoom otherRoom) return RoomId.CompareTo(otherRoom.RoomId);
+            throw new ArgumentException("Object is not a Room");
         }
 
-        public string Inspect(string aimName)
+        public string Inspect(IAvatar avatar, string aimName)
         {
             throw new NotImplementedException();
         }
@@ -57,14 +50,13 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
         {
             return avatars.Remove(avatar);
         }
-
-        //why enter internal when leave is public aswell
+        
         public bool Enter(IAvatar avatar)
         {
-            avatars.Add(avatar);
-            return avatars.Contains(avatar);
-
+            Avatars.Add(avatar);
             // TODO: Send Room Description to Client
+            return Avatars.Contains(avatar);
+
         }
     }
 }

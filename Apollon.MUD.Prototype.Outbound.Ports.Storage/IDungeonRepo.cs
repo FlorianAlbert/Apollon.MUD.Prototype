@@ -6,9 +6,9 @@ namespace Apollon.MUD.Prototype.Outbound.Ports.Storage
 {
     public interface IDungeonRepo
     {
-        void DoSpecialAction(int currentDungeonId, int currentRoomId, string action);
+        void DoSpecialAction(int currentDungeonId, int currentRoomId, IAvatar avatar, string action);
 
-        void Inspect(int currentDungeonId, int currentRoomId, string aimName);
+        void Inspect(int currentDungeonId, int currentRoomId, IAvatar avatar, string aimName);
 
         void LeaveDungeon(int currentDungeonId, int currentRoomId, IAvatar avatar);
 

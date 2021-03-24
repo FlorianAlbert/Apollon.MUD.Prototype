@@ -7,13 +7,13 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Avatar
 {
     public class Avatar : IAvatar
     { 
-        string IAvatar.Name => throw new NotImplementedException();
-        string IAvatar.Discription => throw new NotImplementedException();
-        List<IItem> IAvatar.Inventory => throw new NotImplementedException();
-        IWearable IAvatar.HeadArmor => throw new NotImplementedException();
-        IWearable IAvatar.BodyArmor => throw new NotImplementedException();
-        IWearable IAvatar.LegArmor => throw new NotImplementedException();
-        IUseable IAvatar.Weapon => throw new NotImplementedException();
+        public string Name => throw new NotImplementedException();
+        public string Description => throw new NotImplementedException();
+        public List<IItem> Inventory => throw new NotImplementedException();
+        public IWearable HeadArmor { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IWearable BodyArmor { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IWearable LegArmor { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IUseable Weapon { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public event ChatHandler Chat;
 

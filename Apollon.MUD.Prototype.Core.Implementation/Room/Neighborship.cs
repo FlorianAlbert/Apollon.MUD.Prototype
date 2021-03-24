@@ -5,19 +5,19 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
     public class Neighborship
     {
         public int SourceId { get; }
-        public EDirections FromSourceToSink { get; }
+        public EDirections FromSourceToSinkDirection { get; }
         public int SinkId { get; }
-        public EDirections FromSinkToSource{ get; }
+        public EDirections FromSinkToSourceDirection { get; }
 
-        public Neighborship(int sourceId, EDirections fromSourceToSink, int sinkId)
+        public Neighborship(int sourceId, EDirections fromSourceToSinkDirection, int sinkId)
         {
-            this.SourceId = sourceId;
-            this.FromSourceToSink = fromSourceToSink;
-            this.SinkId = sinkId;
-            FromSinkToSource = (EDirections) ((int) (fromSourceToSink + 2) % 4);
+            SourceId = sourceId;
+            FromSourceToSinkDirection = fromSourceToSinkDirection;
+            SinkId = sinkId;
+            FromSinkToSourceDirection = (EDirections) ((int) (fromSourceToSinkDirection + 2) % 4);
         }
 
-        public bool isInvolved(int roomId)
+        public bool IsInvolved(int roomId)
         {
             return SourceId == roomId || SinkId == roomId;
         }

@@ -6,17 +6,17 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Avatar
     //TODO Generalisierung von NPC wäre möglich ?!
     public interface IAvatar
     {
-        //protected int Health { get ; }
-        //protected int Damage { get; }
-        //protected int Protection { get; }
-        //protected bool Alive { get; }
-        public string Name { get; }
-        public string Discription { get;  }
-        protected List<IItem> Inventory { get; }
-        protected IWearable HeadArmor { get; }
-        protected IWearable BodyArmor { get; }
-        protected IWearable LegArmor { get; }
-        protected IUseable Weapon { get; }
+        //int Health { get ; }
+        //int Damage { get; }
+        //int Protection { get; }
+        //bool Alive { get; }
+        string Name { get; }
+        string Description { get; }
+        List<IItem> Inventory { get; }
+        IWearable HeadArmor { get; }
+        IWearable BodyArmor { get; }
+        IWearable LegArmor { get; }
+        IUseable Weapon { get; }
 
         void SendPrivateMessage(string message);
         bool ConsumeItem(IConsumable consumable);
