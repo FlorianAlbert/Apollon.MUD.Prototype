@@ -9,14 +9,13 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Room
     public interface IRoom : IComparable
     {
         int RoomId { get; }
-        string Description { get; }
+        string Description { get; set; }
         List<IItem> Items { get; }
         List<INPC> Npcs { get; }
         List<IAvatar> Avatars { get; }
         
         string Inspect(IAvatar avatar, string aimName);
         bool Leave(IAvatar avatar);
-        bool SetDiscription(string description);
         bool TakeItem(IAvatar avatar, string itemName);
         bool Enter(IAvatar avatar);
     }

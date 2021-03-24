@@ -9,23 +9,17 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
 {
     public class RoomSkeleton : IRoom
     {
-        protected string Description { get; } = "Please enter a description.";
+        public string Description { get; set; } = "Please enter a description.";
 
         // Usage correct?!
         public int RoomId { get; }
-        protected List<IItem> Items { get; set; } = new();
-        protected List<INPC> Npcs { get; set; } = new();
-        protected List<IAvatar> Avatars { get; } = new();
+        public List<IItem> Items { get; set; } = new();
+        public List<INPC> Npcs { get; set; } = new();
+        public List<IAvatar> Avatars { get; } = new();
 
         public RoomSkeleton(int roomId)
         {
             RoomId = roomId;
-        }
-
-        public bool SetDiscription(string discription)
-        {
-            if (discription.Length < 500) { this.discription = discription; return true; }
-            return false;
         }
 
         public int CompareTo(object other)
@@ -48,7 +42,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
 
         public bool Leave(IAvatar avatar)
         {
-            return avatars.Remove(avatar);
+            return Avatars.Remove(avatar);
         }
         
         public bool Enter(IAvatar avatar)
