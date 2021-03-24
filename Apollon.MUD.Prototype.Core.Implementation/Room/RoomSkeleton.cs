@@ -11,17 +11,14 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
     {
         protected string Description = "Please enter a description.";
         // Usage correct?!
-        int IRoom.RoomId => roomId;
-        private int roomId { get; }
+        public int RoomId { get; }
         protected List<IItem> Items { get; set; } = new();
         protected List<INPC> Npcs { get; set; } = new();
         protected List<IAvatar> Avatars { get; } = new();
 
-        
-
         public RoomSkeleton(int roomId)
         {
-            this.roomId = roomId;
+            RoomId = roomId;
         }
 
         public string GetDiscription() { return Description; }
@@ -34,17 +31,13 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
 
         public int CompareTo(object other)
         {
-            if (typeof(IRoom).IsInstanceOfType(other))
-            {
-                var room = other as IRoom;
-                if (roomId == room.RoomId) { return 0; }
-                else if (roomId > room.RoomId || other == null) { return 1; }
-                else { return -1; }
-            }
-            throw new ArgumentException("No instance of type IRoom");
+            if (other == null) return 1;
+
+            if (other is IRoom otherRoom) return RoomId.CompareTo(otherRoom.RoomId);
+            throw new ArgumentException("Object is not a Room");
         }
 
-        public string Inspect(string aimName)
+        public string Inspect(IAvatar avatar, string aimName)
         {
             throw new NotImplementedException();
         }
@@ -58,14 +51,13 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
         {
             return Avatars.Remove(avatar);
         }
-
-        //why enter internal when leave is public aswell
+        
         public bool Enter(IAvatar avatar)
         {
             Avatars.Add(avatar);
+            // TODO: Send Room Description to Client
             return Avatars.Contains(avatar);
 
-            // TODO: Send Room Description to Client
         }
     }
 }

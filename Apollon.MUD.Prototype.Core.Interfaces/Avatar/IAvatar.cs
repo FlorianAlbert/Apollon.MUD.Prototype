@@ -10,11 +10,11 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Avatar
         //protected int Damage { get; set; }
         //protected int Protection { get; set; }
         //protected bool Alive { get; set; }
-        protected List<IItem> Inventory { get; set; }
-        protected IWearable HeadArmor { get; set; }
-        protected IWearable BodyArmor { get; set; }
-        protected IWearable LegArmor { get; set; }
-        protected IUseable Weapon { get; set; }
+        List<IItem> Inventory { get; set; }
+        IWearable HeadArmor { get; set; }
+        IWearable BodyArmor { get; set; }
+        IWearable LegArmor { get; set; }
+        IUseable Weapon { get; set; }
 
         void SendPrivateMessage(string message);
         bool ConsumeItem(IConsumable consumable);

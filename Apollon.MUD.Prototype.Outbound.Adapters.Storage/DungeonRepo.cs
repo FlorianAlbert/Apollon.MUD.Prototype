@@ -19,14 +19,14 @@ namespace Apollon.MUD.Prototype.Outbound.Adapters.Storage
             HttpContextAccessor = httpContextAccessor;
         }
 
-        public void DoSpecialAction(int currentDungeonId, int currentRoomId, string action)
+        public void DoSpecialAction(int currentDungeonId, int currentRoomId, IAvatar avatar, string action)
         {
             throw new NotImplementedException();
         }
 
-        public void Inspect(int currentDungeonId, int currentRoomId, string aimName)
+        public void Inspect(int currentDungeonId, int currentRoomId, IAvatar avatar, string aimName)
         {
-            ActiveDungeons.Find(x => x.DungeonId == currentDungeonId).GetRoom(currentRoomId).Inspect(aimName);
+            ActiveDungeons.Find(x => x.DungeonId == currentDungeonId).GetRoom(currentRoomId).Inspect(avatar, aimName);
         }
 
         public void LeaveDungeon(int currentDungeonId, int currentRoomId, IAvatar avatar)

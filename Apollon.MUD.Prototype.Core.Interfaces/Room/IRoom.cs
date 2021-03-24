@@ -5,13 +5,13 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Room
 {
     public interface IRoom : IComparable
     {
-        public int RoomId { get; }
+        int RoomId { get; }
 
-        public string GetDiscription();
-        public string Inspect(string aimName);
-        public bool Leave(IAvatar avatar);
-        public bool SetDiscription(string description);
-        public bool TakeItem(IAvatar avatar, string itemName);
-        public bool Enter(IAvatar avatar);
+        string GetDiscription();
+        string Inspect(IAvatar avatar, string aimName);
+        bool Leave(IAvatar avatar);
+        bool SetDiscription(string description);
+        bool TakeItem(IAvatar avatar, string itemName);
+        bool Enter(IAvatar avatar);
     }
 }
