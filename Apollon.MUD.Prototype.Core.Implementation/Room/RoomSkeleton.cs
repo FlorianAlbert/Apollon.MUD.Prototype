@@ -9,39 +9,38 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
 {
     public class RoomSkeleton : IRoom
     {
-        protected string Description = "Please enter a description.";
-        // Usage correct?!
-        int IRoom.RoomId => roomId;
-        private int roomId { get; }
-        protected List<IItem> Items { get; set; } = new();
-        protected List<INPC> Npcs { get; set; } = new();
-        protected List<IAvatar> Avatars { get; } = new();
-
         
+        public int RoomId => roomId;
+        protected int roomId { get; }
+        public string Discription => discription;
+        protected string discription = "Please enter a description.";
+        public List<IItem> Items => items;
+        protected List<IItem> items { get; set; } = new();
+        public List<INPC> Npcs => npcs;
+        protected List<INPC> npcs { get; set; } = new();
+        public List<IAvatar> Avatars => avatars;
+        protected List<IAvatar> avatars { get; } = new();
 
         public RoomSkeleton(int roomId)
         {
             this.roomId = roomId;
         }
 
-        public string GetDiscription() { return Description; }
-
-        public bool SetDiscription(string description)
+        public bool SetDiscription(string discription)
         {
-            if (description.Length < 500) { this.Description = description; return true; }
+            if (discription.Length < 500) { this.discription = discription; return true; }
             return false;
         }
 
         public int CompareTo(object other)
         {
-            if (typeof(IRoom).IsInstanceOfType(other))
+            if (typeof(IRoom).IsInstanceOfType(other) && other != null)
             {
                 var room = other as IRoom;
                 if (roomId == room.RoomId) { return 0; }
-                else if (roomId > room.RoomId || other == null) { return 1; }
-                else { return -1; }
+                if (roomId > room.RoomId) { return 1; }
             }
-            throw new ArgumentException("No instance of type IRoom");
+            return -1;
         }
 
         public string Inspect(string aimName)
@@ -56,14 +55,14 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
 
         public bool Leave(IAvatar avatar)
         {
-            return Avatars.Remove(avatar);
+            return avatars.Remove(avatar);
         }
 
         //why enter internal when leave is public aswell
         public bool Enter(IAvatar avatar)
         {
-            Avatars.Add(avatar);
-            return Avatars.Contains(avatar);
+            avatars.Add(avatar);
+            return avatars.Contains(avatar);
 
             // TODO: Send Room Description to Client
         }

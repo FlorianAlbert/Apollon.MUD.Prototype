@@ -11,12 +11,10 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
 {
     public class DungeonSkeleton : IDungeon
     {
+        public int DungeonId { get; }
         protected List<Neighborship> Neighborships = new();
         protected List<IRoom> Rooms = new();
-
         private int DefaultRoomId { get; set; }
-
-        public int DungeonId { get; }
 
         public IRoom AddRoom(bool asDefault = false)
         {
@@ -53,13 +51,13 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
 
             var neighborAlreadyExists = Neighborships
                 .Select(x => x).Count(x => x.SourceId.Equals(newNeighborship.SourceId) &&
-                                           x.fromSourceToSink == newNeighborship.fromSourceToSink ||
+                                           x.FromSourceToSink == newNeighborship.FromSourceToSink ||
                                            x.SinkId.Equals(newNeighborship.SinkId) &&
-                                           x.fromSinkToSource == newNeighborship.fromSinkToSource ||
+                                           x.FromSinkToSource == newNeighborship.FromSinkToSource ||
                                            x.SinkId.Equals(newNeighborship.SourceId) &&
-                                           x.fromSinkToSource == newNeighborship.fromSourceToSink ||
+                                           x.FromSinkToSource == newNeighborship.FromSourceToSink ||
                                            x.SourceId.Equals(newNeighborship.SinkId) &&
-                                           x.fromSourceToSink == newNeighborship.fromSinkToSource) != 0;
+                                           x.FromSourceToSink == newNeighborship.FromSinkToSource) != 0;
 
             if (neighborAlreadyExists) return false;
 
@@ -77,7 +75,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
         {
             int newRoomId;
 
-            var requestedNeighborship = Neighborships.Find(x => x.SourceId == currentRoomId && x.fromSourceToSink == direction);
+            var requestedNeighborship = Neighborships.Find(x => x.SourceId == currentRoomId && x.FromSourceToSink == direction);
 
             if (requestedNeighborship != null)
             {
@@ -85,7 +83,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
             }
             else
             {
-                requestedNeighborship = Neighborships.Find(x => x.SinkId == currentRoomId && x.fromSinkToSource == direction);
+                requestedNeighborship = Neighborships.Find(x => x.SinkId == currentRoomId && x.FromSinkToSource == direction);
 
                 if (requestedNeighborship != null)
                 {
