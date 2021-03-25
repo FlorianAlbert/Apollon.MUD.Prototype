@@ -11,7 +11,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Configuration.AvatarConfigs
         public int DefaultDamage { get; set; }
         public int DefaultProtection { get; set; }
 
-        public ClassSkeleton(string Name, string Description, int DefaultHealthMax, int DefaultDamage, int DefaultProtection)
+        public ClassSkeleton(string Name, string Description = "", int DefaultHealthMax = 0, int DefaultDamage = 0, int DefaultProtection = 0)
         {
             this.Name = Name;
             this.Description = Description;
