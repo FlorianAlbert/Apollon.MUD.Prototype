@@ -22,11 +22,11 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Race
 
         public class RaceBuilder
         {
-            private string Name;
-            private string Description;
-            private int DefaultHealthMax;
-            private int DefaultDamage;
-            private int DefaultProtection;
+            private string Name = "Please enter a name.";
+            private string Description = "Please enter a description.";
+            private int DefaultHealthMax = 0;
+            private int DefaultDamage = 0;
+            private int DefaultProtection = 0;
 
             public RaceSkeleton build()
             {
@@ -35,12 +35,14 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Race
 
             public RaceBuilder setName(string name)
             {
+                if(name == null) { throw new ArgumentNullException("The name was null."); }
                 Name = name;
                 return this;
             }
 
             public RaceBuilder setDescription(string description)
             {
+                if (description == null) { throw new ArgumentNullException("The description was null."); }
                 Description = description;
                 return this;
             }
