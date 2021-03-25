@@ -1,0 +1,82 @@
+﻿@page "/create"
+
+<AuthorizeView>
+    <Authorized>
+
+        <div class="container-fluid bg-light ">
+            <div class="row min-vh-100">
+                <nav class="col-md-2 d-none d-md-block bg-secondary sidebar">
+                    <div class="sidebar-sticky">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">
+                                    <span data-feather="home"></span>
+                                    Settings
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    Rooms
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    Classes
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    Items
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    Players
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Dungeon 1</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group mr-2">
+                                <button class="btn btn-sm btn-outline-secondary">Invite</button>
+                            </div>
+                        </div>
+                    </div>
+                    <section class="General">
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Name</label>
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Description</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                        </form>
+                    </section>
+                    <section class="Classes">
+
+
+                    </section>
+
+                    <h2>Section title</h2>
+
+
+                </main>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="alert alert-danger" role="alert">
+            You need to be logged in to see this page.<a href="Identity/Account/Login" class="alert-link">Login</a>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+    @code {
+
+    }
