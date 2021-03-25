@@ -8,7 +8,6 @@ namespace Apollon.MUD.Prototype.Core.Domain
     public class RoomConfigurator
     {
 
-        private static int _MaxDescriptionLength = 2048;
         private IRoom RoomToConfigure { get; set; }
         private IRoom ConfiguredRoom { get; set; }
 
@@ -34,7 +33,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
 
         public bool UpdateDescription (string Description)
         {
-            if (_MaxDescriptionLength >= Description.Length) { ConfiguredRoom.Description = Description; }
+            ConfiguredRoom.Description = Description;
             return !(ConfiguredRoom.Description == RoomToConfigure.Description);
         }
 
