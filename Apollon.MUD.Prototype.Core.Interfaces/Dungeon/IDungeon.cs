@@ -18,6 +18,10 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Dungeon
 
         List<IAvatar> AllAvatars { get; }
 
+        List<INeighborship> Neighborships { get; }
+
+        List<IRoom> Rooms { get; }
+
         bool AddNeighborship(int SourceId, EDirections fromSourceToSink, int SinkId);
         int RemoveNeighborship(int firstNeighborId, int secondNeighborId);
         IRoom AddRoom(bool asDefault = false);

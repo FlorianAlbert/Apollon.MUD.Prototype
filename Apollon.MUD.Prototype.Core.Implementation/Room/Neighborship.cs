@@ -1,8 +1,9 @@
 ﻿using Apollon.MUD.Prototype.Core.Interfaces.Direction;
+using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Room
 {
-    public class Neighborship
+    public class Neighborship : INeighborship
     {
         public int SourceId { get; }
         public EDirections FromSourceToSinkDirection { get; }
