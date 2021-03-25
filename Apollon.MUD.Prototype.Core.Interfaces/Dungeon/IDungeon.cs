@@ -16,6 +16,8 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Dungeon
 
         List<IClass> ConfiguredClasses { get; }
 
+        List<IAvatar> AllAvatars { get; }
+
         bool AddNeighborship(int SourceId, EDirections fromSourceToSink, int SinkId);
         IRoom AddRoom(bool asDefault = false);
         void ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction);

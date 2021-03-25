@@ -9,6 +9,7 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs
     public interface IRace
     {
         string Name { get; }
+        string Description { get; }
         int DefaultHealthMax { get; }
         int DefaultDamage { get; }
         int DefaultProtection { get; }

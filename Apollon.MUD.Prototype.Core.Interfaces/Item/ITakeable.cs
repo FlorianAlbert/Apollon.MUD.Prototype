@@ -8,5 +8,6 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Item
 {
     public interface ITakeable : IInspectable
     {
+        short Weight { get; }
     }
 }
