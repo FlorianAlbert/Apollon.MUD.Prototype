@@ -1,6 +1,8 @@
 using System.Linq;
 using Apollon.MUD.Prototype.Domain.Areas.Identity;
 using Apollon.MUD.Prototype.Domain.Data;
+using Apollon.MUD.Prototype.Outbound.Adapters.Storage;
+using Apollon.MUD.Prototype.Outbound.Ports.Storage;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -51,6 +53,8 @@ namespace Apollon.MUD.Prototype.Domain
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                     new[] { "application/octet-stream" });
             });
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IDungeonRepo, DungeonRepo>();
 
             // TODO: This adds all mediators found in the Assembly where class 'Startup' is located. Change 'Startup' to one specific actual Mediator type
             services.AddMediatR(typeof(Startup).Assembly);
