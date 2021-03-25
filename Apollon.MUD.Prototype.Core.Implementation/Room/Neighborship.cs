@@ -1,5 +1,5 @@
 ﻿using Apollon.MUD.Prototype.Core.Interfaces.Direction;
-using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
+using Apollon.MUD.Prototype.Core.Interfaces.Room;
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Room
 {

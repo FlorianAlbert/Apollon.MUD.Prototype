@@ -33,6 +33,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Apollon.MUD.Prototype.Outbound.Adapters.Storage\Apollon.MUD.Prototype.Outbound.Adapters.Storage.csproj" />
     <ProjectReference Include="..\Apollon.MUD.Prototype.Outbound.Ports.Storage\Apollon.MUD.Prototype.Outbound.Ports.Storage.csproj" />
+    <ProjectReference Include="..\Apollon.MUD.Prototype.Core.Domain\Apollon.MUD.Prototype.Core.Domain.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>

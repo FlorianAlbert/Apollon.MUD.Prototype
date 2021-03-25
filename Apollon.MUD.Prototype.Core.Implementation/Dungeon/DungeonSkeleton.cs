@@ -6,9 +6,10 @@ using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
 using Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs;
 using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
+using Apollon.MUD.Prototype.Core.Interfaces.Item;
 using Apollon.MUD.Prototype.Core.Interfaces.Room;
 
-namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
+namespace Apollon.MUD.Prototype.Core.Interface.Dungeon
 {
     public class DungeonSkeleton : IDungeon
     {
@@ -17,6 +18,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
         public string DungeonEpoch { get; }
         public List<IRace> ConfiguredRaces { get; }
         public List<IClass> ConfiguredClasses { get; }
+        public List<IInspectable> ConfiguredInspectables { get; }
         public List<INeighborship> Neighborships { get; } = new() ;
         public List<IRoom> Rooms { get; } = new();
         private int DefaultRoomId { get; set; }

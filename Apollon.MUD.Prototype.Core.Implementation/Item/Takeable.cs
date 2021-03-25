@@ -1,6 +1,6 @@
 ﻿using Apollon.MUD.Prototype.Core.Interfaces.Item;
 
-namespace Apollon.MUD.Prototype.Core.Implementation.Item
+namespace Apollon.MUD.Prototype.Core.Interface.Item
 {
     class Takeable : ITakeable
     {

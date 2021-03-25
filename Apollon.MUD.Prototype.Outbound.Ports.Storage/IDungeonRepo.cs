@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Apollon.MUD.Prototype.Core.Implementation.Dungeon;
+using Apollon.MUD.Prototype.Core.Interface.Dungeon;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
 using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;

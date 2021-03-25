@@ -1,7 +1,7 @@
 ﻿using System;
 using Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs;
 
-namespace Apollon.MUD.Prototype.Core.Implementation.Configuration.AvatarConfigs
+namespace Apollon.MUD.Prototype.Core.Interface.Configuration.AvatarConfigs
 {
     public class ClassSkeleton : IClass
     {

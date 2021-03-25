@@ -2,7 +2,7 @@
 using Apollon.MUD.Prototype.Core.Interfaces.Item;
 using System;
 
-namespace Apollon.MUD.Prototype.Core.Implementation.Item
+namespace Apollon.MUD.Prototype.Core.Interface.Item
 {
     class Consumable : IConsumable
     {

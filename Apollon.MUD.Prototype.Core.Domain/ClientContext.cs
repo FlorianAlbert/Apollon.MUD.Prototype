@@ -1,4 +1,4 @@
-﻿using Apollon.MUD.Prototype.Core.Implementation.Enums;
+﻿using Apollon.MUD.Prototype.Core.Interface.Enums;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
 using Apollon.MUD.Prototype.Outbound.Ports.Storage;
 using System;

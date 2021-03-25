@@ -2,6 +2,7 @@
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
 using Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs;
 using Apollon.MUD.Prototype.Core.Interfaces.Direction;
+using Apollon.MUD.Prototype.Core.Interfaces.Item;
 using Apollon.MUD.Prototype.Core.Interfaces.Room;
 
 namespace Apollon.MUD.Prototype.Core.Interfaces.Dungeon
@@ -15,6 +16,8 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Dungeon
         List<IRace> ConfiguredRaces { get; }
 
         List<IClass> ConfiguredClasses { get; }
+
+        List<IInspectable> ConfiguredInspectables { get; }
 
         List<IAvatar> AllAvatars { get; }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 
-namespace Apollon.MUD.Prototype.Core.Interfaces.Dungeon
+namespace Apollon.MUD.Prototype.Core.Interfaces.Room
 {
     public interface INeighborship
     {

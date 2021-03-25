@@ -1,5 +1,5 @@
 ﻿using System;
-using Apollon.MUD.Prototype.Core.Implementation.Configuration.AvatarConfigs;
+using Apollon.MUD.Prototype.Core.Interface.Configuration.AvatarConfigs;
 using Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs;
 using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
 
@@ -16,10 +16,11 @@ namespace Apollon.MUD.Prototype.Core.Domain
         private int DefaultProtection { get; set; }
 
 
-        public ClassConfigurator(IDungeon dungeon)
+        public ClassConfigurator SetDungeon(IDungeon dungeon)
         {
             if (dungeon == null) { throw new ArgumentNullException(); }
             ReferenceDungeon = dungeon;
+            return this;
         }
 
         public bool SetClass(IClass classToConfigure)
