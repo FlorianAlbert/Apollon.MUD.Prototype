@@ -17,7 +17,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Configuration
         public void SetRoom(IRoom roomToConfigure)
         {
             RoomToConfigure = roomToConfigure;
-            ConfiguredRoom = new RoomSkeleton(-1);
+            ConfiguredRoom = new RoomSkeleton(RoomToConfigure.RoomId);
             ConfiguredRoom.Inspectables.AddRange(roomToConfigure.Inspectables);
             ConfiguredRoom.Description = RoomToConfigure.Description;
         }
@@ -32,22 +32,24 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Configuration
 
         public int RemoveInspectable (string aimName)
         {
-            if (ConfiguredRoom == null) { return 0; }
+            if (ConfiguredRoom == null || ConfiguredRoom.RoomId != RoomToConfigure.RoomId) { return 0; }
             return ConfiguredRoom.Inspectables.RemoveAll(x => x.Name == aimName);
         }
 
         public bool UpdateDescription (string Description)
         {
-            if (ConfiguredRoom == null) { return false; }
+            if (ConfiguredRoom == null || ConfiguredRoom.RoomId != RoomToConfigure.RoomId) { return false; }
             if (_MaxDescriptionLength >= Description.Length) { ConfiguredRoom.Description = Description; }
             return !(ConfiguredRoom.Description == RoomToConfigure.Description);
         }
 
-        public void SaveChanges()
+        public bool SaveChanges()
         {
+            if(ConfiguredRoom == null || ConfiguredRoom.RoomId != RoomToConfigure.RoomId) { return false; }
             RoomToConfigure.Inspectables = ConfiguredRoom.Inspectables;
             RoomToConfigure.Description = ConfiguredRoom.Description;
             ConfiguredRoom = null;
+            return true;
         }
 
     }
