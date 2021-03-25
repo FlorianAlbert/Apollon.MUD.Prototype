@@ -6,13 +6,15 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Class
     public class ClassSkeleton : IClass
     {
         public string Name { get; }
+        public string Description { get;  }
         public int DefaultHealthMax { get; }
         public int DefaultDamage { get; }
         public int DefaultProtection { get; }
 
-        private ClassSkeleton(string Name, int DefaultHealthMax, int DefaultDamage, int DefaultProtection)
+        private ClassSkeleton(string Name, string Description, int DefaultHealthMax, int DefaultDamage, int DefaultProtection)
         {
             this.Name = Name;
+            this.Description = Description;
             this.DefaultHealthMax = DefaultHealthMax;
             this.DefaultDamage = DefaultDamage;
             this.DefaultProtection = DefaultProtection;
@@ -21,18 +23,25 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Class
         public class ClassBuilder
         {
             private string Name;
+            private string Description;
             private int DefaultHealthMax;
             private int DefaultDamage;
             private int DefaultProtection;
 
             public ClassSkeleton build()
             {
-                return new ClassSkeleton(Name, DefaultHealthMax, DefaultDamage, DefaultProtection);
+                return new ClassSkeleton(Name, Description, DefaultHealthMax, DefaultDamage, DefaultProtection);
             }
 
             public ClassBuilder setName(string name)
             {
                 Name = name;
+                return this;
+            }
+
+            public ClassBuilder setDescription(string description)
+            {
+                Description = description;
                 return this;
             }
 
