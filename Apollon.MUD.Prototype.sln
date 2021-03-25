@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Blazor.Domain", "Apollon.MUD.Prototype.Domain\Apollon.MUD.Prototype.Blazor.Domain.csproj", "{F72EBE48-FBC5-403D-B330-9607D9784CD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Blazor.Domain", "Apollon.MUD.Prototype.Blazor.Domain\Apollon.MUD.Prototype.Blazor.Domain.csproj", "{F72EBE48-FBC5-403D-B330-9607D9784CD1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Core.Implementation", "Apollon.MUD.Prototype.Core.Implementation\Apollon.MUD.Prototype.Core.Implementation.csproj", "{C748C411-1D9E-478A-A262-CFB360F9E1F1}"
 EndProject
