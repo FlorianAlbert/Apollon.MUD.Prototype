@@ -9,6 +9,8 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Dungeon
     public interface IDungeon
     {
         int DungeonId { get; }
+        string DungeonDescription { get; set; }
+        string DungeonEpoch { get;  }
 
         List<IRace> ConfiguredRaces { get; }
 
