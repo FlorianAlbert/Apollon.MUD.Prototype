@@ -1,30 +1,23 @@
-﻿.play {
-    border-top: 2px solid #495869;
-    width: 100%;
-    position: absolute;
-    top: 58px;
-    bottom: 0;
-}
+﻿
+.play {
 
-.play .window {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
+    text-align: left;
 }
 
 .play .terminal {
-    width: 70%;
-    padding: 16px;
+
+    flex: 0 1 auto;
+    position: relative;
+    max-height: 85.5vh;
     flex-grow: 1;
     overflow-y: scroll;
     background-color: #000;
     color: #c3cbd5;
     white-space: pre-wrap;
-    z-index: 2;
+    
 }
 
 .play .prompt {
-    width: 70%;
     display: flex;
     flex-shrink: 0;
     padding: 16px;
