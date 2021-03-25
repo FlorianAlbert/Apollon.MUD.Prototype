@@ -1,12 +1,12 @@
 ﻿using System;
 using Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs;
 
-namespace Apollon.MUD.Prototype.Core.Implementation.Class
+namespace Apollon.MUD.Prototype.Core.Implementation.Configuration.AvatarConfigs
 {
     public class ClassSkeleton : IClass
     {
         public string Name { get; }
-        public string Description { get;  }
+        public string Description { get; }
         public int DefaultHealthMax { get; }
         public int DefaultDamage { get; }
         public int DefaultProtection { get; }

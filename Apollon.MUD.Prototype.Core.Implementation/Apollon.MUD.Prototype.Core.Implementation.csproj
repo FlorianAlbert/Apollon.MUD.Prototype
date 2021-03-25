@@ -7,8 +7,6 @@
   <ItemGroup>
     <Folder Include="Configuration\AvatarConfigs\" />
     <Folder Include="Dungeon\" />
-    <Folder Include="Race\" />
-    <Folder Include="Class\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Apollon.MUD.Prototype.Core.Interfaces\Apollon.MUD.Prototype.Core.Interfaces.csproj" />
