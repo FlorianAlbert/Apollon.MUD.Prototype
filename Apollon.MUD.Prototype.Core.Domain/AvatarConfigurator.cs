@@ -23,23 +23,14 @@ namespace Apollon.MUD.Prototype.Core.Domain
             ReferenceDungeon = dungeon;
         }
 
-        public void SetName(string name)
+        public bool SetName(string name)
         {
-            if (ReferenceDungeon != null)
-            {
-                if (!ReferenceDungeon.AllAvatars.Exists(x => string.Equals(x.Name, name, StringComparison.CurrentCultureIgnoreCase)))
-                {
-                    AvatarName = name;
-                }
-                else
-                {
-                    //TODO: send error to client
-                }
-            }
-            else
-            {
-                //TODO: send error to client
-            }
+            if (ReferenceDungeon == null) return false;
+            if (ReferenceDungeon.AllAvatars.Exists(x =>
+                string.Equals(x.Name, name, StringComparison.CurrentCultureIgnoreCase))) return false;
+            AvatarName = name;
+            return true;
+
         }
 
         public bool SetRace(string raceName)

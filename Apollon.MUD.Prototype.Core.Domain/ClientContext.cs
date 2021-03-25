@@ -42,12 +42,18 @@ namespace Apollon.MUD.Prototype.Core.Domain
                 case ClientState.Playing:
                     EvaluateCommand(message);
                     break;
-                case ClientState.SettingName: 
-                    AvatarConfigurator.SetName(message);
+                case ClientState.SettingName:
+                    if (AvatarConfigurator.SetName(message))
+                    {
+                        ClientState = ClientState.SettingRace;
 
-                    ClientState = ClientState.SettingRace;
+                        SendMessageToClient($"Bitte gib deine Art ein. \nZur Verfügung stehen\n\t-: {string.Join("\n\t-", AvatarConfigurator.GetRaceNames())}");
+                    }
+                    else
+                    {
+                        SendMessageToClient("Dieser Avatar existiert bereits. Vielleicht solltest du lieber einen eindeutigeren Namen wählen...");
+                    }
                     
-                    SendMessageToClient($"Bitte gib deine Art ein. \nZur Verfügung stehen\n\t-: {string.Join("\n\t-" ,AvatarConfigurator.GetRaceNames())}");
                     break;
                 case ClientState.SettingRace:
                     if (AvatarConfigurator.SetRace(message))
@@ -94,7 +100,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
 
             ClientState = ClientState.SettingName;
 
-            SendMessageToClient("Please enter the name of your Avatar: ");
+            SendMessageToClient("Bitte gib den Namen deines Avatars ein: ");
 
             return true;
         }
