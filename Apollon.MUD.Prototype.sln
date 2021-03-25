@@ -3,6 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
+<<<<<<< HEAD
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Core.Implementation", "Apollon.MUD.Prototype.Core.Implementation\Apollon.MUD.Prototype.Core.Implementation.csproj", "{C748C411-1D9E-478A-A262-CFB360F9E1F1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Core.Interfaces", "Apollon.MUD.Prototype.Core.Interfaces\Apollon.MUD.Prototype.Core.Interfaces.csproj", "{3E6C31B2-1B3E-480E-8E32-66E0D314939B}"
@@ -18,6 +19,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollon.MUD.Prototype.Blazor.Domain", "Apollon.MUD.Prototype.Blazor.Domain\Apollon.MUD.Prototype.Blazor.Domain.csproj", "{8AB6F24E-BBBB-4B38-A80D-6BFB527231B8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollon.MUD.Prototype.Core.Domain", "Apollon.MUD.Prototype.Core.Domain\Apollon.MUD.Prototype.Core.Domain.csproj", "{3792C582-BD65-45CC-9E3E-1CE16A2B8F18}"
+=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Domain", "Apollon.MUD.Prototype.Domain\Apollon.MUD.Prototype.Domain.csproj", "{F72EBE48-FBC5-403D-B330-9607D9784CD1}"
+>>>>>>> origin/Frontend
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
