@@ -7,12 +7,16 @@ namespace Apollon.MUD.Prototype.Core.Domain
     public class DungeonConfigurator
     {
         //TODO connection to UI => listener? and response
+        //TODO add ItemConfigurator
 
         private IDungeon DungeonToConfigur { get; set; }
         private IDungeon ConfiguredDungeon { get; set; }
-        private bool _NewDungeon { get; set; } = false;
+        private RaceConfigurator RaceConfigurator { get; set; }
+        private ClassConfigurator ClassConfigurator { get; set; }
+        private RoomConfigurator RoomConfigurator { get; set; }
+        private bool IsNewDungeon { get; set; } = false;
 
-        public bool SetDungeon(IDungeon dungeon)
+        public bool LoadDungeon(IDungeon dungeon)
         {
             if(dungeon == null) { return false; }
             DungeonToConfigur = dungeon;
@@ -20,6 +24,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
             ConfiguredDungeon.ConfiguredRaces.AddRange(DungeonToConfigur.ConfiguredRaces);
             ConfiguredDungeon.Rooms.AddRange(DungeonToConfigur.Rooms);
             ConfiguredDungeon.Neighborships.AddRange(DungeonToConfigur.Neighborships);
+            SetUpConfigurators();
             return true;
         }
 
@@ -27,7 +32,8 @@ namespace Apollon.MUD.Prototype.Core.Domain
         {
             if(epoch == null) { return false; }
             DungeonToConfigur = new DungeonSkeleton(epoch);
-            _NewDungeon = true;
+            IsNewDungeon = true;
+            SetUpConfigurators();
             return true;
         }
 
@@ -35,7 +41,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
 
         public void SaveDungeon()
         {
-            if (_NewDungeon)
+            if (IsNewDungeon)
             {
                 //TODO save Dungeon into DungeonRepo
                 throw new NotImplementedException();
@@ -48,6 +54,19 @@ namespace Apollon.MUD.Prototype.Core.Domain
             DungeonToConfigur.Rooms.AddRange(ConfiguredDungeon.Rooms);
             DungeonToConfigur.Neighborships.Clear();
             DungeonToConfigur.Neighborships.AddRange(ConfiguredDungeon.Neighborships);
+        }
+
+        public RaceConfigurator ConfigureRace() { return RaceConfigurator; }
+
+        public ClassConfigurator ConfigureClass() { return ClassConfigurator; }
+
+        public RoomConfigurator ConfigureRoom() { return RoomConfigurator;  }
+
+        private void SetUpConfigurators()
+        {
+            RaceConfigurator = new RaceConfigurator(ConfiguredDungeon);
+            ClassConfigurator = new ClassConfigurator(ConfiguredDungeon);
+            RoomConfigurator = new RoomConfigurator();
         }
     }
 }

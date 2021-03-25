@@ -16,11 +16,10 @@ namespace Apollon.MUD.Prototype.Core.Domain
         private int DefaultProtection { get; set; }
 
 
-        public bool SetDungeon(IDungeon dungeon)
+        public RaceConfigurator(IDungeon dungeon)
         {
-            if (dungeon == null) { return false; }
+            if (dungeon == null) { throw new ArgumentNullException(); }
             ReferenceDungeon = dungeon;
-            return true;
         }
 
         public bool SetClass(IRace raceToConfigure)

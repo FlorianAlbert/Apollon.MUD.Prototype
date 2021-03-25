@@ -11,6 +11,8 @@ namespace Apollon.MUD.Prototype.Core.Domain
 
         private ClientState ClientState { get; set; }
 
+        public DungeonConfigurator DungeonConfigurator { get; set; }
+
         private int? _DungeonId;
         private int? DungeonId
         {
@@ -28,11 +30,12 @@ namespace Apollon.MUD.Prototype.Core.Domain
 
         private int? RoomId { get; set; }
 
-        public ClientContext(IDungeonRepo dungeonRepo, AvatarConfigurator avatarConfigurator)
+        public ClientContext(IDungeonRepo dungeonRepo, AvatarConfigurator avatarConfigurator, DungeonConfigurator dungeonConfigurator)
         {
             ClientState = ClientState.Inactive;
             AvatarConfigurator = avatarConfigurator;
             DungeonRepo = dungeonRepo;
+            DungeonConfigurator = dungeonConfigurator;
         }
 
         public void ClientMessage(string message)
