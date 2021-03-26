@@ -62,12 +62,14 @@ namespace Apollon.MUD.Prototype.Core.Interface.Dungeon
 
         public bool RemoveRoom(int roomId)
         {
+            //TODO update Neigborship Directions in Room
             Neighborships.RemoveAll(n => n.IsInvolved(roomId));
             return Rooms.Remove(Rooms.Find(r => r.RoomId == roomId));
         }
 
         public bool AddNeighborship(int sourceId, EDirections fromSourceToSink, int sinkId)
         {
+            //TODO update Neigborship Directions in Room
             var newNeighborship = new Neighborship(sourceId, fromSourceToSink, sinkId);
 
             var neighborAlreadyExists = Neighborships
@@ -123,6 +125,7 @@ namespace Apollon.MUD.Prototype.Core.Interface.Dungeon
 
         public int RemoveNeighborship(int firstNeighborId, int secondNeighborId)
         {
+            //TODO update Neigborship Directions in Room
             //TODO add Direction? removes all neighborships between firsNeighbor and secondNeighbor
             return Neighborships.RemoveAll(n => n.SourceId == firstNeighborId && n.SinkId == secondNeighborId ||
                                             n.SourceId == secondNeighborId && n.SinkId == firstNeighborId);

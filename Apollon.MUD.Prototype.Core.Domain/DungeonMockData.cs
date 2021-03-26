@@ -8,6 +8,7 @@ using Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs;
 using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
 using Apollon.MUD.Prototype.Core.Interfaces.Item;
 using Apollon.MUD.Prototype.Core.Interfaces.Room;
+using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 
 namespace Apollon.MUD.Prototype.Core.Domain
 {
@@ -27,16 +28,36 @@ namespace Apollon.MUD.Prototype.Core.Domain
         static Takeable Flasche = new Takeable("Flasche", "Diese Flasche ist leer.", 2);
         static Takeable Stab = new Takeable("Stab", "Dies ist ein sonderbarer Stab.", 1);
         static List<IInspectable> configuredInspectables = new List<IInspectable> { Baum, Busch, Flasche, Stab };
-        static IRoom Room1 = new RoomSkeleton(0, "Dies ist der erste Raum des Dungeons.");
-        static IRoom Room2 = new RoomSkeleton(1, "Dies ist der zweite Raum des Dungeons.");
-        static IRoom Room3 = new RoomSkeleton(2, "Dies ist der dritte Raum des Dungeons.");
-        static IRoom Room4 = new RoomSkeleton(3, "Dies ist der vierte Raum des Dungeons.");
-        static IRoom Room5 = new RoomSkeleton(4, "Dies ist der fünfte Raum des Dungeons.");
+        static IRoom Room1 = new RoomSkeleton(0, "Dies ist der erste Raum des Dungeons.")
+        {
+            Inspectables = new List<IInspectable> { Busch, Baum },
+            DirectionsToNeigbors = new List<Interfaces.Direction.EDirections> { EDirections.NORTH}
+        };
+        static IRoom Room2 = new RoomSkeleton(1, "Dies ist der zweite Raum des Dungeons.")
+        {
+            Inspectables = new List<IInspectable> { Baum, Flasche },
+            DirectionsToNeigbors = new List<Interfaces.Direction.EDirections> { EDirections.NORTH, EDirections.SOUTH, EDirections.EAST, EDirections.WEST }
+        };
+        static IRoom Room3 = new RoomSkeleton(2, "Dies ist der dritte Raum des Dungeons.")
+        {
+            Inspectables = new List<IInspectable> { Baum, Stab },
+            DirectionsToNeigbors = new List<Interfaces.Direction.EDirections> { EDirections.SOUTH }
+        };
+        static IRoom Room4 = new RoomSkeleton(3, "Dies ist der vierte Raum des Dungeons.")
+        {
+            Inspectables = new List<IInspectable> { Baum, Flasche },
+            DirectionsToNeigbors = new List<Interfaces.Direction.EDirections> { EDirections.WEST }
+        };
+        static IRoom Room5 = new RoomSkeleton(4, "Dies ist der fünfte Raum des Dungeons.")
+        {
+            Inspectables = new List<IInspectable> { Baum, Stab, Flasche },
+            DirectionsToNeigbors = new List<Interfaces.Direction.EDirections> { EDirections.EAST }
+        };
         static List<IRoom> rooms = new List<IRoom> { Room1, Room2, Room3, Room4, Room5};
-        static Neighborship Neighborship1 = new Neighborship(0, Interfaces.Direction.EDirections.NORTH, 1);
-        static Neighborship Neighborship2 = new Neighborship(1, Interfaces.Direction.EDirections.NORTH, 2);
-        static Neighborship Neighborship3 = new Neighborship(1, Interfaces.Direction.EDirections.EAST, 3);
-        static Neighborship Neighborship4 = new Neighborship(1, Interfaces.Direction.EDirections.WEST, 4);
+        static Neighborship Neighborship1 = new Neighborship(0, EDirections.NORTH, 1);
+        static Neighborship Neighborship2 = new Neighborship(1, EDirections.NORTH, 2);
+        static Neighborship Neighborship3 = new Neighborship(1, EDirections.EAST, 3);
+        static Neighborship Neighborship4 = new Neighborship(1, EDirections.WEST, 4);
         static List<INeighborship> neighborships = new List<INeighborship> { Neighborship1, Neighborship2, Neighborship3, Neighborship4};
         static int defaultRoomId = 0;
         public static IDungeon Dungeon = new DungeonSkeleton(dungeonEpoch)
