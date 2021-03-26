@@ -6,7 +6,7 @@ using Apollon.MUD.Prototype.Core.Interfaces.NPC;
 
 namespace Apollon.MUD.Prototype.Core.Interfaces.Room
 {
-    public interface IRoom : IComparable
+    public interface IRoom : IComparable<IRoom>
     {
         int RoomId { get; }
         string Description { get; set; }

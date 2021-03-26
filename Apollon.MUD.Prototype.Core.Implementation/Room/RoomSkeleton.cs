@@ -19,12 +19,10 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
             RoomId = roomId;
         }
 
-        public int CompareTo(object other)
+        public int CompareTo(IRoom other)
         {
             if (other == null) return 1;
-
-            if (other is IRoom otherRoom) return RoomId.CompareTo(otherRoom.RoomId);
-            throw new ArgumentException("Object is not a Room");
+            return RoomId.CompareTo(other.RoomId);
         }
 
         public string Inspect(IAvatar avatar, string aimName)

@@ -13,6 +13,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
         private RaceConfigurator RaceConfigurator { get; set; }
         private ClassConfigurator ClassConfigurator { get; set; }
         private RoomConfigurator RoomConfigurator { get; set; }
+        private InspectableConfigurator InspectableConfigurator { get; set; }
         private bool IsNewDungeon { get; set; } = false;
 
         public DungeonConfigurator(RaceConfigurator raceConfigurator, ClassConfigurator classConfigurator, RoomConfigurator roomConfigurator)
@@ -65,7 +66,11 @@ namespace Apollon.MUD.Prototype.Core.Domain
 
         public ClassConfigurator ConfigureClass() { return ClassConfigurator.SetDungeon(ConfiguredDungeon); }
 
-        public RoomConfigurator ConfigureRoom() { return RoomConfigurator;  }
+        public RoomConfigurator ConfigureRoom() { return RoomConfigurator; }
+
+        public InspectableConfigurator ConfigureInspectables () { return InspectableConfigurator.SetDungeon(ConfiguredDungeon); }
+
+        public IDungeon ConfigureDungeon() { return ConfiguredDungeon; }
 
     }
 }

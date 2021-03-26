@@ -1,5 +1,6 @@
 ﻿using Apollon.MUD.Prototype.Core.Interface.Enums;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
+using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
 using Apollon.MUD.Prototype.Outbound.Ports.Storage;
 using System;
 
@@ -12,6 +13,8 @@ namespace Apollon.MUD.Prototype.Core.Domain
         private ClientState ClientState { get; set; }
 
         public DungeonConfigurator DungeonConfigurator { get; set; }
+
+        public IDungeon DungeonMock => DungeonMockData.Dungeon;
 
         private int? _DungeonId;
         private int? DungeonId

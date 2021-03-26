@@ -21,7 +21,7 @@ namespace Apollon.MUD.Prototype.Core.Interface.Dungeon
         public List<IInspectable> ConfiguredInspectables { get; }
         public List<INeighborship> Neighborships { get; } = new() ;
         public List<IRoom> Rooms { get; } = new();
-        private int DefaultRoomId { get; set; }
+        public int DefaultRoomId { get; set; }
 
         public DungeonSkeleton (string dungeonEpoch)
         {

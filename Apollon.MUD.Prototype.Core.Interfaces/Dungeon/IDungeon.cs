@@ -12,6 +12,7 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Dungeon
         int DungeonId { get; }
         string DungeonDescription { get; set; }
         string DungeonEpoch { get;  }
+        int DefaultRoomId { get;  }
 
         List<IRace> ConfiguredRaces { get; }
 
