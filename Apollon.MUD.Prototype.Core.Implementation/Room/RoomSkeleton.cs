@@ -51,12 +51,10 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
             if (item is ITakeable takeableItem)
             {
                 avatar.AddItemToInventory(takeableItem);
-                Inspectables.Remove(takeableItem);
-            }
-            else
-            {
-                avatar.SendPrivateMessage("Wie willst du das denn mit dir schleppen?!");
-            }
+                return Inspectables.Remove(takeableItem);
+            } 
+            avatar.SendPrivateMessage("Wie willst du das denn mit dir schleppen?!");
+            return false;
         }
 
         public bool Leave(IAvatar avatar)
