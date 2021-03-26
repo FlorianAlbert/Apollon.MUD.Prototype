@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs;
 using Apollon.MUD.Prototype.Core.Interfaces.Item;
 
@@ -11,6 +12,8 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Avatar
         int HealthMax { get; }
         int Damage { get; }
         int Protection { get; }
+
+        string ConnectionId { get; }
 
         event ChatHandler Chat;
         //bool Alive { get; }
@@ -34,5 +37,5 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Avatar
         //bool DecreaseHealth(int Amount);
     }
 
-    public delegate void ChatHandler(string message);
+    public delegate Task ChatHandler(string message, string connectionId);
 }
