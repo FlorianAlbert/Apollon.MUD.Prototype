@@ -1,9 +1,12 @@
 ﻿@page "/game1"
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager NavigationManager
+@implements IAsyncDisposable
 
 <AuthorizeView>
     <Authorized>
         <div class="container-fluid max-vh-100">
-                <div class="play">
+            <div class="play">
                 <div class="window">
                     <div class="row">
                         <div class="col">
@@ -11,37 +14,37 @@
                                 <span>Welcome to Apollon Dungeons</span>
                                 <span>Welcome to Apollon Dungeons</span>
                                 <span>Welcome to Apollon Dungeons</span>
-                            <span>   _____                .__  .__                           </span>
-                            <span>  /  _  \ ______   ____ |  | |  |   ____   ____            </span>
-                            <span> /  /_\  \\____ \ /  _ \|  | |  |  /  _ \ /    \           </span>
-                            <span>/    |    \  |_&gt; &gt;  &lt;_&gt; )  |_|  |_(  &lt;_&gt; )   |  \          </span>
-                            <span>\____|__  /   __/ \____/|____/____/\____/|___|  /          </span>
-                            <span>        \/|__|                                \/           </span>
-                            <span>________                                                   </span>
-                            <span>\______ \  __ __  ____    ____   ____  ____   ____   ______</span>
-                            <span> |    |  \|  |  \/    \  / ___\_/ __ \/  _ \ /    \ /  ___/</span>
-                            <span> |    `   \  |  /   |  \/ /_/  &gt;  ___(  &lt;_&gt; )   |  \\___ \ </span>
-                            <span>/_______  /____/|___|  /\___  / \___  &gt;____/|___|  /____  &gt;</span>
-                            <span>        \/           \//_____/      \/           \/     \/ </span>
+                                <span>   _____                .__  .__                           </span>
+                                <span>  /  _  \ ______   ____ |  | |  |   ____   ____            </span>
+                                <span> /  /_\  \\____ \ /  _ \|  | |  |  /  _ \ /    \           </span>
+                                <span>/    |    \  |_&gt; &gt;  &lt;_&gt; )  |_|  |_(  &lt;_&gt; )   |  \          </span>
+                                <span>\____|__  /   __/ \____/|____/____/\____/|___|  /          </span>
+                                <span>        \/|__|                                \/           </span>
+                                <span>________                                                   </span>
+                                <span>\______ \  __ __  ____    ____   ____  ____   ____   ______</span>
+                                <span> |    |  \|  |  \/    \  / ___\_/ __ \/  _ \ /    \ /  ___/</span>
+                                <span> |    `   \  |  /   |  \/ /_/  &gt;  ___(  &lt;_&gt; )   |  \\___ \ </span>
+                                <span>/_______  /____/|___|  /\___  / \___  &gt;____/|___|  /____  &gt;</span>
+                                <span>        \/           \//_____/      \/           \/     \/ </span>
                                 <span> </span>
-                                @foreach (var entry in entries){
-
+                                <span>> Bitte gib deinen Namen ein: </span>
+                                @foreach (var entry in entries)
+                                {
+                                    <span>@entry</span>
+                                    <span></span>
                                 }
+                            </div>
+                            <div class="prompt d-flex">
+                                <input @bind="messageInput" id="prompt" type="text" class="form-control" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
+                                <button id="send" class="btn btn-primary" @onclick="Send" disabled="@(!IsConnected)">Send</button>
+                            </div>
                         </div>
-                        <div class="prompt d-flex">
-                            <input id="prompt" type="text" class="form-control" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" value="">
-                            <button id="send" class="btn btn-primary">Send</button>
-                        </div>
-                    </div>
                         <div class="col-3">
                             <Chat />
                         </div>
                     </div>
                 </div>
-                </div>
-  
-                    
-    
+            </div>
         </div>
     </Authorized>
     <NotAuthorized>
@@ -53,10 +56,39 @@
 
 
 @code {
-    List<string> entries = new List<string>();
+    private HubConnection hubConnection;
+    private List<string> entries = new List<string>();
+    private string messageInput;
 
-        protected override async Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(NavigationManager.ToAbsoluteUri("/hubs/ConsoleHub"))
+            .Build();
+
+        hubConnection.On<string>("ReceiveMessage", message =>
         {
+            var encodedMsg = $"> {message}";
+            entries.Add(encodedMsg);
+            StateHasChanged();
+        });
 
-}
+        await hubConnection.StartAsync();
+        hubConnection.SendAsync("EnterMockDungeonRequest");
+    }
+
+    Task Send()
+    {
+        entries.Add(messageInput);
+        StateHasChanged();
+        return hubConnection.SendAsync("SendMessage", messageInput, hubConnection.ConnectionId);
+    }
+
+    public bool IsConnected =>
+    hubConnection.State == HubConnectionState.Connected;
+
+    public async ValueTask DisposeAsync()
+    {
+        await hubConnection.DisposeAsync();
+    }
 }

@@ -2,6 +2,7 @@ using System.Linq;
 using Apollon.MUD.Prototype.Core.Domain;
 using Apollon.MUD.Prototype.Domain.Areas.Identity;
 using Apollon.MUD.Prototype.Domain.Data;
+using Apollon.MUD.Prototype.Inbound.SignalR;
 using Apollon.MUD.Prototype.Outbound.Adapters.Storage;
 using Apollon.MUD.Prototype.Outbound.Ports.Storage;
 using MediatR;
@@ -56,7 +57,8 @@ namespace Apollon.MUD.Prototype.Domain
             });
             services.AddHttpContextAccessor();
             services.AddSingleton<IDungeonRepo, DungeonRepo>();
-
+            services.AddScoped<AvatarConfigurator>();
+            services.AddScoped<ClientContext>();
             services.AddScoped<DungeonConfigurator>();
             services.AddScoped<RoomConfigurator>();
             services.AddScoped<ClassConfigurator>();
@@ -69,6 +71,7 @@ namespace Apollon.MUD.Prototype.Domain
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
             app.UseResponseCompression();
 
             if (env.IsDevelopment())
@@ -96,6 +99,7 @@ namespace Apollon.MUD.Prototype.Domain
                 endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
+                endpoints.MapHub<ConsoleHub>("/hubs/ConsoleHub");
             });
         }
     }

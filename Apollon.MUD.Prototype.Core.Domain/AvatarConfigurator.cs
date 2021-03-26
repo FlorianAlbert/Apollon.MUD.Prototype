@@ -67,9 +67,9 @@ namespace Apollon.MUD.Prototype.Core.Domain
 
         }
 
-        public (int, IAvatar) BuildAvatar()
+        public (int, IAvatar) BuildAvatar(string connectionId)
         {
-            return (ReferenceDungeon.DungeonId, new Avatar(AvatarName, AvatarRace, AvatarClass));
+            return (ReferenceDungeon.DungeonId, new Avatar(AvatarName, AvatarRace, AvatarClass, connectionId));
         }
 
 

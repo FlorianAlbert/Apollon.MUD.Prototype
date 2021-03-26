@@ -12,6 +12,8 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Avatar
         int Damage { get; }
         int Protection { get; }
 
+        string ConnectionId { get; }
+
         event ChatHandler Chat;
         //bool Alive { get; }
         //List<IInspectable> Inventory { get; }
@@ -34,5 +36,5 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Avatar
         //bool DecreaseHealth(int Amount);
     }
 
-    public delegate void ChatHandler(string message);
+    public delegate void ChatHandler(string message, string connectionId);
 }
