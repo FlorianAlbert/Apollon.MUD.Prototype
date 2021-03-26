@@ -28,7 +28,7 @@ namespace Apollon.MUD.Prototype.Outbound.Ports.Storage
 
         void TakeItem(int currentRoomId, IAvatar avatar, string itemName);
 
-        void ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction);
+        int ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction);
 
         void AddDungeon(IDungeon dungeon);
 

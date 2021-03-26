@@ -118,7 +118,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
                     DungeonRepo.LeaveDungeon(RoomId.Value, Avatar);
                     break;
                 case "move":
-                    DungeonRepo.ChangeRoom(RoomId.Value, Avatar, (EDirections)Enum.Parse(typeof(EDirections), stringParts[1].ToUpper()));
+                    RoomId = DungeonRepo.ChangeRoom(RoomId.Value, Avatar, (EDirections)Enum.Parse(typeof(EDirections), stringParts[1].ToUpper()));
                     break;
             }
         }

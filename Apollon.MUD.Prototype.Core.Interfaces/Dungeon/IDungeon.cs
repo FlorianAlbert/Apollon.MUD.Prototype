@@ -31,7 +31,7 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Dungeon
         IRoom AddRoom(bool asDefault = false);
         bool RemoveRoom(int RoomId);
         IRoom GetRoom(int roomID);
-        void ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction);
+        int ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction);
         int Enter(IAvatar avatar);
     }
 }
