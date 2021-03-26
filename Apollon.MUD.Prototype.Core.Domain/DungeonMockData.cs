@@ -48,7 +48,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
             ConfiguredInspectables = configuredInspectables,
             Neighborships = neighborships,
             Rooms = rooms,
-            DefaultRoomId = dungeonId
+            DefaultRoomId = defaultRoomId
     };
     }
 }

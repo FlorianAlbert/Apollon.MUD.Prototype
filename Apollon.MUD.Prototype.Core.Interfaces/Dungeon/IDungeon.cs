@@ -20,7 +20,7 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Dungeon
 
         List<IInspectable> ConfiguredInspectables { get; init; }
 
-        List<IAvatar> AllAvatars { get; init; }
+        List<IAvatar> AllAvatars { get; }
 
         List<INeighborship> Neighborships { get; init; }
 

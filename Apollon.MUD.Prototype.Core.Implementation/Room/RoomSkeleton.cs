@@ -14,6 +14,12 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
         public int RoomId { get; }
         public List<IInspectable> Inspectables { get; set; } = new();
 
+
+        public RoomSkeleton(int roomId)
+        {
+            RoomId = roomId;
+        }
+
         public RoomSkeleton(int roomId, string description)
         {
             RoomId = roomId;
