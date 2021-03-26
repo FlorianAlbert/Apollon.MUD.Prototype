@@ -9,11 +9,13 @@
   <ItemGroup>
     <None Remove="Pages\Create.razor.css" />
     <None Remove="Pages\GamePage.razor.css" />
+    <None Remove="Shared\Chat.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Pages\Create.razor.css" />
     <Content Include="Pages\GamePage.razor.css" />
+    <Content Include="Shared\Chat.razor.css" />
   </ItemGroup>
 
   <ItemGroup>

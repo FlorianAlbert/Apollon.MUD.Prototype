@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Outbo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Inbound.SignalR", "Apollon.MUD.Prototype.Inbound.SignalR\Apollon.MUD.Prototype.Inbound.SignalR.csproj", "{0FE26813-CDD8-4334-BC6B-2114641CAD24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollon.MUD.Prototype.Core.Domain", "Apollon.MUD.Prototype.Core.Domain\Apollon.MUD.Prototype.Core.Domain.csproj", "{119A8320-00C8-499A-91E4-0313D9708AD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Core.Domain", "Apollon.MUD.Prototype.Core.Domain\Apollon.MUD.Prototype.Core.Domain.csproj", "{119A8320-00C8-499A-91E4-0313D9708AD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

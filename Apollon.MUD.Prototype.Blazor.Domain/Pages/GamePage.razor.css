@@ -8,13 +8,18 @@
 
     flex: 0 1 auto;
     position: relative;
-    max-height: 85.5vh;
+    max-height: 80vh;
     flex-grow: 1;
     overflow-y: scroll;
     background-color: #000;
     color: #c3cbd5;
     white-space: pre-wrap;
     
+}
+
+.terminal .span {
+
+    text-align:left;
 }
 
 .play .prompt {
