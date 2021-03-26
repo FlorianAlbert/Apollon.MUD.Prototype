@@ -4,6 +4,7 @@ using Apollon.MUD.Prototype.Core.Interfaces.Item;
 using System.Collections.Generic;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
 using Apollon.MUD.Prototype.Core.Interfaces.Room;
+using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Room
 {
@@ -13,7 +14,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
 
         public int RoomId { get; }
         public List<IInspectable> Inspectables { get; set; } = new();
-
+        public List<EDirections> DirectionsToNeigbors { get; init; } = new();
 
         public RoomSkeleton(int roomId)
         {
@@ -98,9 +99,19 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
             var description = Description;
             foreach(var inspectable in Inspectables)
             {
-                description = description + "\n" + inspectable.Name;
+                description += "\n" + inspectable.Name;
             }
+            description += "\nExits:";
+            if (DirectionsToNeigbors.Contains(EDirections.NORTH)) description += "\nNORDEN";
+            if (DirectionsToNeigbors.Contains(EDirections.SOUTH)) description += "\nSUEDEN";
+            if (DirectionsToNeigbors.Contains(EDirections.EAST)) description += "\nOSTEN";
+            if (DirectionsToNeigbors.Contains(EDirections.WEST)) description += "\nWESTEN";
             avatar.SendPrivateMessage(description);
+        }
+
+        public void InspectRoom(IAvatar avatar, string exitDirections)
+        {
+            throw new NotImplementedException();
         }
     }
 }
