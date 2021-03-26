@@ -2,7 +2,7 @@
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Item
 {
-    class Inspectable : IInspectable
+    public class Inspectable : IInspectable
     {
         public Inspectable(string inspectableName, string inspectableDescription)
         {

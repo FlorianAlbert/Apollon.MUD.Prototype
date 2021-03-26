@@ -4,9 +4,9 @@ using System;
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Item
 {
-    class Consumable : IConsumable
+    public class Consumable : IConsumable
     {
-        public Consumable(bool consumableEffect, string consumableName, string consumableDescription)
+        public Consumable(string consumableName, string consumableDescription, bool consumableEffect)
         {
             GoodEffect = consumableEffect;
             Name = consumableName;

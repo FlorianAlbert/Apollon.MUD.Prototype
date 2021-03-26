@@ -8,9 +8,10 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs
 {
     public interface IClass
     {
-        string Name { get; }
-        int DefaultHealthMax { get; }
-        int DefaultDamage { get; }
-        int DefaultProtection { get; }
+        string Name { get; set; }
+        string Description { get; set; }
+        int DefaultHealthMax { get; set; }
+        int DefaultDamage { get; set; }
+        int DefaultProtection { get; set; }
     }
 }

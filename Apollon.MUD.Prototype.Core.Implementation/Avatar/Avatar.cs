@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs;
 
-namespace Apollon.MUD.Prototype.Core.Implementation.Avatar
+namespace Apollon.MUD.Prototype.Core.Interface.Avatar
 {
     public class Avatar : IAvatar
     { 

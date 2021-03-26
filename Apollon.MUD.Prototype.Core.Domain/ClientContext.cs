@@ -1,5 +1,6 @@
-﻿using Apollon.MUD.Prototype.Core.Implementation.Enums;
+﻿using Apollon.MUD.Prototype.Core.Interface.Enums;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
+using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
 using Apollon.MUD.Prototype.Outbound.Ports.Storage;
 using System;
 
@@ -10,6 +11,10 @@ namespace Apollon.MUD.Prototype.Core.Domain
         private IAvatar Avatar { get; set; }
 
         private ClientState ClientState { get; set; }
+
+        public DungeonConfigurator DungeonConfigurator { get; set; }
+
+        public IDungeon DungeonMock => DungeonMockData.Dungeon;
 
         private int? _DungeonId;
         private int? DungeonId
@@ -28,11 +33,12 @@ namespace Apollon.MUD.Prototype.Core.Domain
 
         private int? RoomId { get; set; }
 
-        public ClientContext(IDungeonRepo dungeonRepo, AvatarConfigurator avatarConfigurator)
+        public ClientContext(IDungeonRepo dungeonRepo, AvatarConfigurator avatarConfigurator, DungeonConfigurator dungeonConfigurator)
         {
             ClientState = ClientState.Inactive;
             AvatarConfigurator = avatarConfigurator;
             DungeonRepo = dungeonRepo;
+            DungeonConfigurator = dungeonConfigurator;
         }
 
         public void ClientMessage(string message)

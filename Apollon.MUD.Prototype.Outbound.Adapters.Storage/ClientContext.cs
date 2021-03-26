@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Apollon.MUD.Prototype.Core.Implementation.Dungeon;
+using Apollon.MUD.Prototype.Core.Interface.Dungeon;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
 
 namespace Apollon.MUD.Prototype.Outbound.Adapters.Storage

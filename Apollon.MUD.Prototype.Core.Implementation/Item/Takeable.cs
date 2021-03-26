@@ -2,7 +2,7 @@
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Item
 {
-    class Takeable : ITakeable
+    public class Takeable : ITakeable
     {
         public Takeable(string takeableName, string takeableDescription, short takeableWeight)
         {

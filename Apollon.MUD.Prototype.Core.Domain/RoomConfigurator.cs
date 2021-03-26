@@ -3,19 +3,17 @@ using Apollon.MUD.Prototype.Core.Implementation.Room;
 using Apollon.MUD.Prototype.Core.Interfaces.Item;
 using Apollon.MUD.Prototype.Core.Interfaces.Room;
 
-namespace Apollon.MUD.Prototype.Core.Implementation.Configuration
+namespace Apollon.MUD.Prototype.Core.Domain
 {
     public class RoomConfigurator
     {
 
-        private static int _MaxDescriptionLength = 2048;
-
         private IRoom RoomToConfigure { get; set; }
         private IRoom ConfiguredRoom { get; set; }
 
-        public RoomConfigurator (IRoom roomToConfigure)
+        public void SetRoom(IRoom roomToConfigure)
         {
-            if(roomToConfigure == null) { throw new ArgumentNullException("The room to configure was null."); }
+            if (roomToConfigure == null) { throw new ArgumentNullException("The room to configure was null."); }
             RoomToConfigure = roomToConfigure;
             ConfiguredRoom = new RoomSkeleton(RoomToConfigure.RoomId);
             ConfiguredRoom.Inspectables.AddRange(roomToConfigure.Inspectables);
@@ -35,7 +33,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Configuration
 
         public bool UpdateDescription (string Description)
         {
-            if (_MaxDescriptionLength >= Description.Length) { ConfiguredRoom.Description = Description; }
+            ConfiguredRoom.Description = Description;
             return !(ConfiguredRoom.Description == RoomToConfigure.Description);
         }
 

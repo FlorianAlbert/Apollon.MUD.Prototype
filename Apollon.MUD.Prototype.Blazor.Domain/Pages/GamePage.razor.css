@@ -1,5 +1,11 @@
 ﻿
 .play {
+    border-top: 2px solid #495869;
+    width: 100%;
+    position: absolute;
+    top: 58px;
+    bottom: 0;
+}
 
     text-align: left;
 }
@@ -24,6 +30,7 @@
 }
 
 .play .prompt {
+    width: 70%;
     display: flex;
     flex-shrink: 0;
     padding: 16px;

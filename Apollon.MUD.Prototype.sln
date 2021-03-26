@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Blazor.Domain", "Apollon.MUD.Prototype.Blazor.Domain\Apollon.MUD.Prototype.Blazor.Domain.csproj", "{F72EBE48-FBC5-403D-B330-9607D9784CD1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Core.Implementation", "Apollon.MUD.Prototype.Core.Implementation\Apollon.MUD.Prototype.Core.Implementation.csproj", "{C748C411-1D9E-478A-A262-CFB360F9E1F1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Core.Interfaces", "Apollon.MUD.Prototype.Core.Interfaces\Apollon.MUD.Prototype.Core.Interfaces.csproj", "{3E6C31B2-1B3E-480E-8E32-66E0D314939B}"
@@ -19,16 +17,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Inbou
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollon.MUD.Prototype.Core.Domain", "Apollon.MUD.Prototype.Core.Domain\Apollon.MUD.Prototype.Core.Domain.csproj", "{119A8320-00C8-499A-91E4-0313D9708AD6}"
 EndProject
+
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F72EBE48-FBC5-403D-B330-9607D9784CD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F72EBE48-FBC5-403D-B330-9607D9784CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F72EBE48-FBC5-403D-B330-9607D9784CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F72EBE48-FBC5-403D-B330-9607D9784CD1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C748C411-1D9E-478A-A262-CFB360F9E1F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C748C411-1D9E-478A-A262-CFB360F9E1F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C748C411-1D9E-478A-A262-CFB360F9E1F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,10 +49,14 @@ Global
 		{0FE26813-CDD8-4334-BC6B-2114641CAD24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FE26813-CDD8-4334-BC6B-2114641CAD24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FE26813-CDD8-4334-BC6B-2114641CAD24}.Release|Any CPU.Build.0 = Release|Any CPU
-		{119A8320-00C8-499A-91E4-0313D9708AD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{119A8320-00C8-499A-91E4-0313D9708AD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{119A8320-00C8-499A-91E4-0313D9708AD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{119A8320-00C8-499A-91E4-0313D9708AD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AB6F24E-BBBB-4B38-A80D-6BFB527231B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AB6F24E-BBBB-4B38-A80D-6BFB527231B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AB6F24E-BBBB-4B38-A80D-6BFB527231B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AB6F24E-BBBB-4B38-A80D-6BFB527231B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3792C582-BD65-45CC-9E3E-1CE16A2B8F18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3792C582-BD65-45CC-9E3E-1CE16A2B8F18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3792C582-BD65-45CC-9E3E-1CE16A2B8F18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3792C582-BD65-45CC-9E3E-1CE16A2B8F18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
