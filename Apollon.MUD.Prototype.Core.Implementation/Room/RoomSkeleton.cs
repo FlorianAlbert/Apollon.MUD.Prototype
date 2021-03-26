@@ -55,9 +55,8 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
             }
             else
             {
-                //gib error aus
+                avatar.SendPrivateMessage("Wie willst du das denn mit dir schleppen?!");
             }
-            throw new NotImplementedException();
         }
 
         public bool Leave(IAvatar avatar)
