@@ -9,22 +9,22 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Dungeon
 {
     public interface IDungeon
     {
-        int DungeonId { get; }
+        int DungeonId { get; init; }
         string DungeonDescription { get; set; }
-        string DungeonEpoch { get;  }
+        string DungeonEpoch { get; init; }
         int DefaultRoomId { get;  }
 
-        List<IRace> ConfiguredRaces { get; }
+        List<IRace> ConfiguredRaces { get; init; }
 
-        List<IClass> ConfiguredClasses { get; }
+        List<IClass> ConfiguredClasses { get; init; }
 
-        List<IInspectable> ConfiguredInspectables { get; }
+        List<IInspectable> ConfiguredInspectables { get; init; }
 
-        List<IAvatar> AllAvatars { get; }
+        List<IAvatar> AllAvatars { get; init; }
 
-        List<INeighborship> Neighborships { get; }
+        List<INeighborship> Neighborships { get; init; }
 
-        List<IRoom> Rooms { get; }
+        List<IRoom> Rooms { get; init; }
 
         bool AddNeighborship(int SourceId, EDirections fromSourceToSink, int SinkId);
         int RemoveNeighborship(int firstNeighborId, int secondNeighborId);

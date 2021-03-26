@@ -14,9 +14,10 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
         public int RoomId { get; }
         public List<IInspectable> Inspectables { get; set; } = new();
 
-        public RoomSkeleton(int roomId)
+        public RoomSkeleton(int roomId, string description)
         {
             RoomId = roomId;
+            Description = description;
         }
 
         public int CompareTo(IRoom other)
@@ -25,9 +26,14 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
             return RoomId.CompareTo(other.RoomId);
         }
 
-        public string Inspect(IAvatar avatar, string aimName)
+        public void Inspect(IAvatar avatar, string aimName)
         {
-            throw new NotImplementedException();
+            var toInspect = Inspectables.Find(x => string.Equals(aimName, x.Name, StringComparison.CurrentCultureIgnoreCase));
+            if(string.Equals(aimName, toInspect.Name, StringComparison.CurrentCultureIgnoreCase))
+            {
+                avatar.SendPrivateMessage(toInspect.Description);
+            }
+            avatar.SendPrivateMessage("Es gibt hier nichts zu untersuchen mit dem Namen " + toInspect.Name + " .");
 
         }
 
@@ -55,7 +61,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
         public bool Enter(IAvatar avatar)
         {
             Inspectables.Add(avatar);
-            //avatar.SendPrivateMessage(Description);
+            InspectRoom(avatar);
             // TODO: Send Room Description to Client
             return Inspectables.Contains(avatar);
 
@@ -79,6 +85,16 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
         public void DoSpecialAction(IAvatar avatar, string action)
         {
             throw new NotImplementedException();
+        }
+
+        public void InspectRoom(IAvatar avatar)
+        {
+            var description = Description;
+            foreach(var inspectable in Inspectables)
+            {
+                description = description + "\n" + inspectable.Name;
+            }
+            avatar.SendPrivateMessage(description);
         }
     }
 }

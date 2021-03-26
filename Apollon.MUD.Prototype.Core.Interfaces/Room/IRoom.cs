@@ -12,7 +12,8 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Room
         string Description { get; set; }
         List<IInspectable> Inspectables { get; set; }
         
-        string Inspect(IAvatar avatar, string aimName);
+        void Inspect(IAvatar avatar, string aimName);
+        void InspectRoom(IAvatar avatar);
         bool Leave(IAvatar avatar);
         bool TakeItem(IAvatar avatar, string itemName);
         bool Enter(IAvatar avatar);

@@ -13,14 +13,14 @@ namespace Apollon.MUD.Prototype.Core.Interface.Dungeon
 {
     public class DungeonSkeleton : IDungeon
     {
-        public int DungeonId { get; }
+        public int DungeonId { get; init; }
         public string DungeonDescription { get; set; }
-        public string DungeonEpoch { get; }
-        public List<IRace> ConfiguredRaces { get; }
-        public List<IClass> ConfiguredClasses { get; }
-        public List<IInspectable> ConfiguredInspectables { get; }
-        public List<INeighborship> Neighborships { get; } = new() ;
-        public List<IRoom> Rooms { get; } = new();
+        public string DungeonEpoch { get; init; }
+        public List<IRace> ConfiguredRaces { get; init; }
+        public List<IClass> ConfiguredClasses { get; init; }
+        public List<IInspectable> ConfiguredInspectables { get; init; }
+        public List<INeighborship> Neighborships { get; init; } = new() ;
+        public List<IRoom> Rooms { get; init; } = new();
         public int DefaultRoomId { get; set; }
 
         public DungeonSkeleton (string dungeonEpoch)
