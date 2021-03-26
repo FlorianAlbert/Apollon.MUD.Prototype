@@ -3,16 +3,18 @@ using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
 using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
 using Apollon.MUD.Prototype.Outbound.Ports.Storage;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR;
 
 
 namespace Apollon.MUD.Prototype.Core.Domain
 {
     public class ClientContext
     {
-        private HubConnection hubConnection;
+        private HubConnection HubConnection { get; }
+
         private IAvatar Avatar { get; set; }
 
         private ClientState ClientState { get; set; }
@@ -44,10 +46,11 @@ namespace Apollon.MUD.Prototype.Core.Domain
             AvatarConfigurator = avatarConfigurator;
             DungeonRepo = dungeonRepo;
             DungeonConfigurator = dungeonConfigurator;
-            hubConnection = new HubConnectionBuilder()
-            .WithUrl("https://127.0.0.1:5001/hubs/ConsoleHub")
-            .Build();
-            hubConnection.StartAsync();
+            HubConnection = new HubConnectionBuilder()
+                .WithUrl("https://localhost:5001/hubs/ConsoleHub")
+                .Build();
+
+            HubConnection.StartAsync();
         }
 
         public void ClientMessage(string message, string connectionId)
@@ -145,9 +148,9 @@ namespace Apollon.MUD.Prototype.Core.Domain
             return true;
         }
 
-        private void SendMessageToClient(string message, string connectionId)
+        private async Task SendMessageToClient(string message, string connectionId)
         {
-            hubConnection.SendAsync("SendMessageToClient", message, connectionId);
+            await HubConnection.SendAsync("ReceiveMessage", message, connectionId);
         }
     }
 }

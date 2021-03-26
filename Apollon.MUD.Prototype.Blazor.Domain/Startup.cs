@@ -2,7 +2,6 @@ using System.Linq;
 using Apollon.MUD.Prototype.Core.Domain;
 using Apollon.MUD.Prototype.Domain.Areas.Identity;
 using Apollon.MUD.Prototype.Domain.Data;
-using Apollon.MUD.Prototype.Inbound.SignalR;
 using Apollon.MUD.Prototype.Outbound.Adapters.Storage;
 using Apollon.MUD.Prototype.Outbound.Ports.Storage;
 using MediatR;
@@ -58,7 +57,7 @@ namespace Apollon.MUD.Prototype.Domain
             services.AddHttpContextAccessor();
             services.AddSingleton<IDungeonRepo, DungeonRepo>();
             services.AddScoped<AvatarConfigurator>();
-            services.AddScoped<ClientContext>();
+            services.AddSingleton<ClientContextProvider>();
             services.AddScoped<DungeonConfigurator>();
             services.AddScoped<RoomConfigurator>();
             services.AddScoped<ClassConfigurator>();

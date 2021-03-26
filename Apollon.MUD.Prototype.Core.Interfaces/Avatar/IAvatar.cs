@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs;
 using Apollon.MUD.Prototype.Core.Interfaces.Item;
 
@@ -36,5 +37,5 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Avatar
         //bool DecreaseHealth(int Amount);
     }
 
-    public delegate void ChatHandler(string message, string connectionId);
+    public delegate Task ChatHandler(string message, string connectionId);
 }

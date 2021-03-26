@@ -1,6 +1,7 @@
 ﻿@page "/game1"
 @using Microsoft.AspNetCore.SignalR.Client
 @inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @implements IAsyncDisposable
 
 <AuthorizeView>
@@ -74,14 +75,15 @@
         });
 
         await hubConnection.StartAsync();
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         hubConnection.SendAsync("EnterMockDungeonRequest");
     }
 
-    Task Send()
+    async Task Send()
     {
         entries.Add(messageInput);
         StateHasChanged();
-        return hubConnection.SendAsync("SendMessage", messageInput, hubConnection.ConnectionId);
+        hubConnection.SendAsync("SendMessage", messageInput);
     }
 
     public bool IsConnected =>

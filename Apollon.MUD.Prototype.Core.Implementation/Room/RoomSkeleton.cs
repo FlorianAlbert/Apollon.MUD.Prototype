@@ -12,7 +12,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
         public string Description { get; set; } = "Please enter a description.";
 
         public int RoomId { get; }
-        public List<IInspectable> Inspectables { get; set; } = new();
+        public List<IInspectable> Inspectables { get; set; }
 
 
         public RoomSkeleton(int roomId)
