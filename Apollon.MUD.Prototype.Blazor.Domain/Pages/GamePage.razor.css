@@ -9,6 +9,7 @@
     flex: 0 1 auto;
     position: relative;
     max-height: 80vh;
+    min-height: 80vh;
     flex-grow: 1;
     overflow-y: scroll;
     background-color: #000;

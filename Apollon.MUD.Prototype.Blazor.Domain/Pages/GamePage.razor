@@ -24,44 +24,9 @@
                                 <span>/_______  /____/|___|  /\___  / \___  &gt;____/|___|  /____  &gt;</span>
                                 <span>        \/           \//_____/      \/           \/     \/ </span>
                                 <span> </span>
-                                <span>   _____                .__  .__                           </span>
-                                <span>  /  _  \ ______   ____ |  | |  |   ____   ____            </span>
-                                <span> /  /_\  \\____ \ /  _ \|  | |  |  /  _ \ /    \           </span>
-                                <span>/    |    \  |_&gt; &gt;  &lt;_&gt; )  |_|  |_(  &lt;_&gt; )   |  \          </span>
-                                <span>\____|__  /   __/ \____/|____/____/\____/|___|  /          </span>
-                                <span>        \/|__|                                \/           </span>
-                                <span>________                                                   </span>
-                                <span>\______ \  __ __  ____    ____   ____  ____   ____   ______</span>
-                                <span> |    |  \|  |  \/    \  / ___\_/ __ \/  _ \ /    \ /  ___/</span>
-                                <span> |    `   \  |  /   |  \/ /_/  &gt;  ___(  &lt;_&gt; )   |  \\___ \ </span>
-                                <span>/_______  /____/|___|  /\___  / \___  &gt;____/|___|  /____  &gt;</span>
-                                <span>        \/           \//_____/      \/           \/     \/ </span>
-                                <span> </span>
-                                <span>   _____                .__  .__                           </span>
-                                <span>  /  _  \ ______   ____ |  | |  |   ____   ____            </span>
-                                <span> /  /_\  \\____ \ /  _ \|  | |  |  /  _ \ /    \           </span>
-                                <span>/    |    \  |_&gt; &gt;  &lt;_&gt; )  |_|  |_(  &lt;_&gt; )   |  \          </span>
-                                <span>\____|__  /   __/ \____/|____/____/\____/|___|  /          </span>
-                                <span>        \/|__|                                \/           </span>
-                                <span>________                                                   </span>
-                                <span>\______ \  __ __  ____    ____   ____  ____   ____   ______</span>
-                                <span> |    |  \|  |  \/    \  / ___\_/ __ \/  _ \ /    \ /  ___/</span>
-                                <span> |    `   \  |  /   |  \/ /_/  &gt;  ___(  &lt;_&gt; )   |  \\___ \ </span>
-                                <span>/_______  /____/|___|  /\___  / \___  &gt;____/|___|  /____  &gt;</span>
-                                <span>        \/           \//_____/      \/           \/     \/ </span>
-                                <span> </span>
-                                <span>   _____                .__  .__                           </span>
-                                <span>  /  _  \ ______   ____ |  | |  |   ____   ____            </span>
-                                <span> /  /_\  \\____ \ /  _ \|  | |  |  /  _ \ /    \           </span>
-                                <span>/    |    \  |_&gt; &gt;  &lt;_&gt; )  |_|  |_(  &lt;_&gt; )   |  \          </span>
-                                <span>\____|__  /   __/ \____/|____/____/\____/|___|  /          </span>
-                                <span>        \/|__|                                \/           </span>
-                                <span>________                                                   </span>
-                                <span>\______ \  __ __  ____    ____   ____  ____   ____   ______</span>
-                                <span> |    |  \|  |  \/    \  / ___\_/ __ \/  _ \ /    \ /  ___/</span>
-                                <span> |    `   \  |  /   |  \/ /_/  &gt;  ___(  &lt;_&gt; )   |  \\___ \ </span>
-                                <span>/_______  /____/|___|  /\___  / \___  &gt;____/|___|  /____  &gt;</span>
-                                <span>        \/           \//_____/      \/           \/     \/ </span>
+                                @foreach (var entry in entries){
+
+                                }
                             </div>
                             <div class="prompt d-flex">
                                 <input id="prompt" type="text" class="form-control" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" value="">
@@ -88,5 +53,10 @@
 
 
 @code {
+    List<string> entries = new List<string>();
 
+        protected override async Task OnInitializedAsync()
+        {
+           
+        }
 }
