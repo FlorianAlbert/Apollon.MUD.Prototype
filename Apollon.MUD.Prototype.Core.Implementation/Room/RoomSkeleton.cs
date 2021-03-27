@@ -108,10 +108,6 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
             avatar.SendPrivateMessage(description);
         }
 
-        public void InspectRoom(IAvatar avatar, string exitDirections)
-        {
-            throw new NotImplementedException();
-        }
 
         public bool PlaceItem(ITakeable item)
         {

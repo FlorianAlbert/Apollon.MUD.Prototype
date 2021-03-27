@@ -129,6 +129,9 @@ namespace Apollon.MUD.Prototype.Core.Domain
                 case "konsumiere":
                     DungeonRepo.ConsumeConsumable(Avatar, stringParts[1].ToLower());
                     break;
+                case "schauen":
+                    DungeonRepo.Show(RoomId.Value, Avatar);
+                    break;
             }
         }
 

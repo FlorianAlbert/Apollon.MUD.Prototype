@@ -119,7 +119,7 @@ namespace Apollon.MUD.Prototype.Outbound.Adapters.Storage
         public void ThrowItemAway(int currentRoomId, IAvatar avatar, string itemName)
         {
             var item = avatar.ThrowAway(itemName);
-            if(item == null)
+            if(item != null)
             {
                 DungeonMockData.Dungeon.GetRoom(currentRoomId).PlaceItem(item);
             }
@@ -128,6 +128,11 @@ namespace Apollon.MUD.Prototype.Outbound.Adapters.Storage
         public void ShowInventory(IAvatar avatar)
         {
             avatar.GetInventoryContent();
+        }
+
+        public void Show(int currentRoomId, IAvatar avatar)
+        {
+            DungeonMockData.Dungeon.GetRoom(currentRoomId).InspectRoom(avatar);
         }
     }
 }

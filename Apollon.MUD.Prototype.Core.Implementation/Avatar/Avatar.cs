@@ -44,6 +44,7 @@ namespace Apollon.MUD.Prototype.Core.Interface.Avatar
         public bool AddItemToInventory(ITakeable inspectable)
         {
             Inventory.Add(inspectable);
+            SendPrivateMessage("Du nimmst " + inspectable.Name +" auf.");
             return Inventory.Contains(inspectable);
         }
 

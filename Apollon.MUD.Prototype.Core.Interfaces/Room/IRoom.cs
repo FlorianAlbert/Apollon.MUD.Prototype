@@ -15,7 +15,7 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Room
         List<EDirections> DirectionsToNeigbors { get; init; }
         
         void Inspect(IAvatar avatar, string aimName);
-        void InspectRoom(IAvatar avatar, string exitDirections);
+        public void InspectRoom(IAvatar avatar);
         bool Leave(IAvatar avatar);
         bool TakeItem(IAvatar avatar, string itemName);
         bool PlaceItem(ITakeable item);

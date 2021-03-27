@@ -36,6 +36,8 @@ namespace Apollon.MUD.Prototype.Outbound.Ports.Storage
 
         void ShowInventory(IAvatar avatar);
 
+        void Show(int currentRoomId, IAvatar avatar);
+
         void AddDungeon(IDungeon dungeon);
 
         void RemoveDungeon(int dungeonId);
