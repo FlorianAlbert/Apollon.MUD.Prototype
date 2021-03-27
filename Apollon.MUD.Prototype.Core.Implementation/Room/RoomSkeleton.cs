@@ -98,13 +98,13 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
             var description = Description + "\n\nRauminhalt:";
             foreach(var inspectable in Inspectables)
             {
-                description += "\n" + inspectable.Name;
+                description += "\n\t" + inspectable.Name;
             }
             description += "\n\nAusgänge:";
-            if (DirectionsToNeigbors.Contains(EDirections.NORDEN)) description += "\nNORDEN";
-            if (DirectionsToNeigbors.Contains(EDirections.SÜDEN)) description += "\nSUEDEN";
-            if (DirectionsToNeigbors.Contains(EDirections.OSTEN)) description += "\nOSTEN";
-            if (DirectionsToNeigbors.Contains(EDirections.WESTEN)) description += "\nWESTEN";
+            if (DirectionsToNeigbors.Contains(EDirections.NORDEN)) description += "\n\tNORDEN";
+            if (DirectionsToNeigbors.Contains(EDirections.SÜDEN)) description += "\n\tSUEDEN";
+            if (DirectionsToNeigbors.Contains(EDirections.OSTEN)) description += "\n\tOSTEN";
+            if (DirectionsToNeigbors.Contains(EDirections.WESTEN)) description += "\n\tWESTEN";
             avatar.SendPrivateMessage(description);
         }
 
