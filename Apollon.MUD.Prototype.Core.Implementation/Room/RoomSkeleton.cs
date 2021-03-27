@@ -95,10 +95,10 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
 
         public void InspectRoom(IAvatar avatar)
         {
-            var description = Description;
+            var description = Description + "\n\nRauminhalt:";
             foreach(var inspectable in Inspectables)
             {
-                description += "\n\n" + inspectable.Name;
+                description += "\n" + inspectable.Name;
             }
             description += "\n\nAusgänge:";
             if (DirectionsToNeigbors.Contains(EDirections.NORDEN)) description += "\nNORDEN";

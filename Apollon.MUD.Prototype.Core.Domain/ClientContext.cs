@@ -126,7 +126,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
                 case "werfe":
                     DungeonRepo.ThrowItemAway(RoomId.Value, Avatar, stringParts[1].ToLower());
                     break;
-                case "kosumiere":
+                case "konsumiere":
                     DungeonRepo.ConsumeConsumable(Avatar, stringParts[1].ToLower());
                     break;
             }

@@ -55,6 +55,7 @@ namespace Apollon.MUD.Prototype.Core.Interface.Avatar
             {
                 content += "\n"+ item;
             }
+            SendPrivateMessage(content);
         }
 
         public void SendPrivateMessage(string message)
@@ -67,7 +68,7 @@ namespace Apollon.MUD.Prototype.Core.Interface.Avatar
             var itemToRemove = Inventory.Find(x => string.Equals(itemName, x.Name, StringComparison.CurrentCultureIgnoreCase));
             if (Inventory.Remove(itemToRemove))
             {
-                SendPrivateMessage("Du wirfst " + itemName + "auf den Boden.");
+                SendPrivateMessage("Du wirfst " + itemName + " auf den Boden.");
             }
             else
             {
@@ -81,12 +82,12 @@ namespace Apollon.MUD.Prototype.Core.Interface.Avatar
             var item = Inventory.Find(x => string.Equals(consumable, x.Name, StringComparison.CurrentCultureIgnoreCase));
             if(item is IConsumable consumableItem)
             {
-                consumableItem.Consume(this);
-                return;
+                SendPrivateMessage("Du konsumierst den Inhalt aus " + consumable + ".\n" + consumableItem.Effect);
+                ThrowAway(consumable);
             }
             else
             {
-                SendPrivateMessage("Es gibt nichts mit dem Namen " + consumable + " was du zu dir nehmen kannst!");
+                SendPrivateMessage("Es gibt nichts mit dem Namen " + consumable + " in deinem Inventar, was du zu dir nehmen kannst!");
             }
         }
     }
