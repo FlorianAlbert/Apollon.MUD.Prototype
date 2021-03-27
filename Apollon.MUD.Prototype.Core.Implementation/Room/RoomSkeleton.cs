@@ -101,7 +101,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
             {
                 description += "\n" + inspectable.Name;
             }
-            description += "\nExits:";
+            description += "\nAusgänge:";
             if (DirectionsToNeigbors.Contains(EDirections.NORTH)) description += "\nNORDEN";
             if (DirectionsToNeigbors.Contains(EDirections.SOUTH)) description += "\nSUEDEN";
             if (DirectionsToNeigbors.Contains(EDirections.EAST)) description += "\nOSTEN";
