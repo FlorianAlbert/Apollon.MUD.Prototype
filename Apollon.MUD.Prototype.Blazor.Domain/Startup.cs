@@ -54,7 +54,6 @@ namespace Apollon.MUD.Prototype.Domain
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                     new[] { "application/octet-stream" });
             });
-            services.AddHttpContextAccessor();
             services.AddSingleton<IDungeonRepo, DungeonRepo>();
             services.AddScoped<AvatarConfigurator>();
             services.AddSingleton<ClientContextProvider>();
@@ -65,6 +64,8 @@ namespace Apollon.MUD.Prototype.Domain
 
             // TODO: This adds all mediators found in the Assembly where class 'Startup' is located. Change 'Startup' to one specific actual Mediator type
             services.AddMediatR(typeof(Startup).Assembly);
+
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,6 +100,7 @@ namespace Apollon.MUD.Prototype.Domain
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
                 endpoints.MapHub<ConsoleHub>("/hubs/ConsoleHub");
+                endpoints.MapHub<ChatHub>("/hubs/ChatHub");
             });
         }
     }

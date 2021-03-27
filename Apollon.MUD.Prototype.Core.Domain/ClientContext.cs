@@ -65,7 +65,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
                     {
                         ClientState = ClientState.SettingRace;
 
-                        SendMessageToClient($"Bitte gib deine Art ein. \nZur Verfügung stehen\n\t-: {string.Join("\n\t-", AvatarConfigurator.GetRaceNames())}", connectionId);
+                        SendMessageToClient($"Bitte gib deine Art ein. \nZur Verfügung stehen:\n\t-{string.Join("\n\t-", AvatarConfigurator.GetRaceNames())}", connectionId);
                     }
                     else
                     {
@@ -78,7 +78,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
                     {
                         ClientState = ClientState.SettingClass;
 
-                        SendMessageToClient($"Bitte gib deine Klasse ein. \nZur Verfügung stehen\n\t-: {string.Join("\n\t-", AvatarConfigurator.GetClassNames())}", connectionId);
+                        SendMessageToClient($"Bitte gib deine Klasse ein. \nZur Verfügung stehen:\n\t-{string.Join("\n\t-", AvatarConfigurator.GetClassNames())}", connectionId);
                     }
                     else
                     {
