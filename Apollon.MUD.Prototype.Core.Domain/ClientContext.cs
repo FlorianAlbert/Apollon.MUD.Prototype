@@ -123,13 +123,13 @@ namespace Apollon.MUD.Prototype.Core.Domain
                 case "inventar":
                     DungeonRepo.ShowInventory(Avatar);
                     break;
-                case "werfe":
+                case "wirf":
                     DungeonRepo.ThrowItemAway(RoomId.Value, Avatar, stringParts[1].ToLower());
                     break;
                 case "konsumiere":
                     DungeonRepo.ConsumeConsumable(Avatar, stringParts[1].ToLower());
                     break;
-                case "schauen":
+                case "schaue":
                     DungeonRepo.Show(RoomId.Value, Avatar);
                     break;
             }

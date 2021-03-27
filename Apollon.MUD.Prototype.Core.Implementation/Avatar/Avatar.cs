@@ -83,7 +83,7 @@ namespace Apollon.MUD.Prototype.Core.Interface.Avatar
             var item = Inventory.Find(x => string.Equals(consumable, x.Name, StringComparison.CurrentCultureIgnoreCase));
             if(item is IConsumable consumableItem)
             {
-                SendPrivateMessage("Du konsumierst den Inhalt aus " + consumable + ".\n" + consumableItem.Effect);
+                SendPrivateMessage("Du konsumierst " + consumable + ".\n" + consumableItem.Effect);
                 ThrowAway(consumable);
             }
             else
