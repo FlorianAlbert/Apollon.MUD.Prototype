@@ -30,10 +30,17 @@ namespace Apollon.MUD.Prototype.Outbound.Ports.Storage
 
         int ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction);
 
+        void ConsumeConsumable(IAvatar avatar, string itemName);
+
+        void ThrowItemAway(int currentRoomId, IAvatar avatar, string itemName);
+
+        void ShowInventory(IAvatar avatar);
+
         void AddDungeon(IDungeon dungeon);
 
         void RemoveDungeon(int dungeonId);
 
         int? EnterDungeon(int dungeonId, IAvatar avatar);
+
     }
 }

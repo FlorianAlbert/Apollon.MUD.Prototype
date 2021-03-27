@@ -40,10 +40,10 @@ namespace Apollon.MUD.Prototype.Core.Domain
             return true;
         }
 
-        public bool AddConsumable(string name, string description, bool goodEffect)
+        public bool AddConsumable(string name, string description, string effect, short weight)
         {
             if (ConfiguredInspectables.Exists(x => string.Equals(name, x.Name, StringComparison.CurrentCultureIgnoreCase))) { return false; }
-            ConfiguredInspectables.Add(new Consumable(name, description, goodEffect));
+            ConfiguredInspectables.Add(new Consumable(name, description, effect, weight));
             return true;
         }
     }

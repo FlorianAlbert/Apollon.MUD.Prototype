@@ -6,22 +6,26 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Item
 {
     public class Consumable : IConsumable
     {
-        public Consumable(string consumableName, string consumableDescription, bool consumableEffect)
+        public Consumable(string consumableName, string consumableDescription, string consumableEffect, short weight)
         {
-            GoodEffect = consumableEffect;
+            Effect = consumableEffect;
             Name = consumableName;
+            Weight = weight;
             Description = consumableDescription;
         }
 
-        public bool GoodEffect { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Effect { get; set; }
 
         public string Name { get; }
 
         public string Description { get; }
 
+        public short Weight { get; set; }
+
         public bool Consume(IAvatar avatar)
         {
-            throw new NotImplementedException();
+            avatar.SendPrivateMessage("Du konsumierst den Inhalt aus " + Name + ".\n"+ Effect);
+            return true;
         }
     }
 }

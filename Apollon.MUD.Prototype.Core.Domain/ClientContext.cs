@@ -108,17 +108,26 @@ namespace Apollon.MUD.Prototype.Core.Domain
             var stringParts = message.Split(' ', '\t', StringSplitOptions.RemoveEmptyEntries);
             switch (stringParts[0].ToLower())
             {
-                case "take":
+                case "nimm":
                     DungeonRepo.TakeItem(RoomId.Value, Avatar, stringParts[1].ToLower());
                     break;
-                case "inspect":
+                case "untersuche":
                     DungeonRepo.Inspect(RoomId.Value, Avatar, stringParts[1].ToLower());
                     break;
-                case "exit":
+                case "beende":
                     DungeonRepo.LeaveDungeon(RoomId.Value, Avatar);
                     break;
-                case "move":
+                case "gehe":
                     RoomId = DungeonRepo.ChangeRoom(RoomId.Value, Avatar, (EDirections)Enum.Parse(typeof(EDirections), stringParts[1].ToUpper()));
+                    break;
+                case "inventar":
+                    DungeonRepo.ShowInventory(Avatar);
+                    break;
+                case "werfe":
+                    DungeonRepo.ThrowItemAway(RoomId.Value, Avatar, stringParts[1].ToLower());
+                    break;
+                case "kosumiere":
+                    DungeonRepo.ConsumeConsumable(Avatar, stringParts[1].ToLower());
                     break;
             }
         }

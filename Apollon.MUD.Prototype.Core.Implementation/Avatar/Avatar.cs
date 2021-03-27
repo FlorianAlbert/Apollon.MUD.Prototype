@@ -47,10 +47,14 @@ namespace Apollon.MUD.Prototype.Core.Interface.Avatar
             return Inventory.Contains(inspectable);
         }
 
-        public List<string> GetInventoryContent()
+        public void GetInventoryContent()
         {
-            var result = Inventory.Select(x => x.Name).ToList();
-            return result;
+            var items = Inventory.Select(x => x.Name).ToList();
+            var content = "Inventar:";
+            foreach (var item in items)
+            {
+                content += "\n"+ item;
+            }
         }
 
         public void SendPrivateMessage(string message)
@@ -60,9 +64,30 @@ namespace Apollon.MUD.Prototype.Core.Interface.Avatar
 
         public ITakeable ThrowAway(string itemName)
         {
-            var itemToRemove = Inventory.Find(x => x.Name == itemName);
-            Inventory.Remove(itemToRemove);
+            var itemToRemove = Inventory.Find(x => string.Equals(itemName, x.Name, StringComparison.CurrentCultureIgnoreCase));
+            if (Inventory.Remove(itemToRemove))
+            {
+                SendPrivateMessage("Du wirfst " + itemName + "auf den Boden.");
+            }
+            else
+            {
+                SendPrivateMessage("Du hast nichts in deinem Inventar, dass " + itemName + "heißt.");
+            }
             return itemToRemove;
+        }
+
+        public void ConsumeItem(string consumable)
+        {
+            var item = Inventory.Find(x => string.Equals(consumable, x.Name, StringComparison.CurrentCultureIgnoreCase));
+            if(item is IConsumable consumableItem)
+            {
+                consumableItem.Consume(this);
+                return;
+            }
+            else
+            {
+                SendPrivateMessage("Es gibt nichts mit dem Namen " + consumable + " was du zu dir nehmen kannst!");
+            }
         }
     }
 }
