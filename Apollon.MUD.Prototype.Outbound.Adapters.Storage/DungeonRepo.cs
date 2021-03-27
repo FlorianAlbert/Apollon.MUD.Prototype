@@ -72,10 +72,10 @@ namespace Apollon.MUD.Prototype.Outbound.Adapters.Storage
             DungeonMockData.Dungeon.GetRoom(currentRoomId).TakeItem(avatar, itemName);
         }
 
-        public void ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction)
+        public int ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction)
         {
             //ActiveDungeons.Find(x => x.DungeonId == currentDungeonId)?.ChangeRoom(currentRoomId, avatar, direction);
-            DungeonMockData.Dungeon.ChangeRoom(currentRoomId, avatar, direction);
+            return DungeonMockData.Dungeon.ChangeRoom(currentRoomId, avatar, direction);
         }
 
         public void AddDungeon(IDungeon dungeon)

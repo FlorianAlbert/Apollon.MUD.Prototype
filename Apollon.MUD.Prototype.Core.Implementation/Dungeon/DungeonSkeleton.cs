@@ -94,7 +94,7 @@ namespace Apollon.MUD.Prototype.Core.Interface.Dungeon
             return DefaultRoomId;
         }
 
-        public void ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction)
+        public int ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction)
         {
             int newRoomId;
 
@@ -114,13 +114,15 @@ namespace Apollon.MUD.Prototype.Core.Interface.Dungeon
                 }
                 else
                 {
-                    // TODO: Send Error to Client
-                    throw new NotImplementedException();
+                    avatar.SendPrivateMessage("Es ist keine gute Idee diesen Weg einzuschlagen. Gehe lieber in eine der angegebenen Richtungen...");
+                    return currentRoomId;
                 }
             }
 
             GetRoom(currentRoomId).Leave(avatar);
             GetRoom(newRoomId).Enter(avatar);
+
+            return newRoomId;
         }
 
         public int RemoveNeighborship(int firstNeighborId, int secondNeighborId)

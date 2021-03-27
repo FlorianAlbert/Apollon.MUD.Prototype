@@ -40,13 +40,16 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
             {
                 avatar.SendPrivateMessage(toInspect.Description);
             }
-            else avatar.SendPrivateMessage("Es gibt hier nichts zu untersuchen mit dem Namen " + toInspect.Name + " .");
+            else
+            {
+                avatar.SendPrivateMessage("Es gibt hier nichts zu untersuchen mit dem Namen " + toInspect.Name + " .");
+            }
 
         }
 
         public bool TakeItem(IAvatar avatar, string itemName)
         {
-            var item = Inspectables.Find(x => x.Name == itemName);
+            var item = Inspectables.Find(x => string.Equals(itemName, x.Name, StringComparison.CurrentCultureIgnoreCase));
 
             if (item is ITakeable takeableItem)
             {
