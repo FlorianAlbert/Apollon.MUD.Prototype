@@ -47,7 +47,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
             DungeonRepo = dungeonRepo;
             DungeonConfigurator = dungeonConfigurator;
             HubConnection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:5001/hubs/ConsoleHub")
+                .WithUrl("http://localhost:5000/hubs/ConsoleHub")
                 .Build();
 
             HubConnection.StartAsync();
@@ -65,7 +65,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
                     {
                         ClientState = ClientState.SettingRace;
 
-                        SendMessageToClient($"Bitte gib deine Art ein. \nZur Verfügung stehen\n\t-: {string.Join("\n\t-", AvatarConfigurator.GetRaceNames())}", connectionId);
+                        SendMessageToClient($"Bitte gib deine Art ein. \nZur Verfügung stehen:\n\t-{string.Join("\n\t-", AvatarConfigurator.GetRaceNames())}", connectionId);
                     }
                     else
                     {
@@ -78,7 +78,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
                     {
                         ClientState = ClientState.SettingClass;
 
-                        SendMessageToClient($"Bitte gib deine Klasse ein. \nZur Verfügung stehen\n\t-: {string.Join("\n\t-", AvatarConfigurator.GetClassNames())}", connectionId);
+                        SendMessageToClient($"Bitte gib deine Klasse ein. \nZur Verfügung stehen:\n\t-{string.Join("\n\t-", AvatarConfigurator.GetClassNames())}", connectionId);
                     }
                     else
                     {
@@ -108,17 +108,29 @@ namespace Apollon.MUD.Prototype.Core.Domain
             var stringParts = message.Split(' ', '\t', StringSplitOptions.RemoveEmptyEntries);
             switch (stringParts[0].ToLower())
             {
-                case "take":
+                case "nimm":
                     DungeonRepo.TakeItem(RoomId.Value, Avatar, stringParts[1].ToLower());
                     break;
-                case "inspect":
+                case "untersuche":
                     DungeonRepo.Inspect(RoomId.Value, Avatar, stringParts[1].ToLower());
                     break;
-                case "exit":
+                case "beende":
                     DungeonRepo.LeaveDungeon(RoomId.Value, Avatar);
                     break;
-                case "move":
+                case "gehe":
                     RoomId = DungeonRepo.ChangeRoom(RoomId.Value, Avatar, (EDirections)Enum.Parse(typeof(EDirections), stringParts[1].ToUpper()));
+                    break;
+                case "inventar":
+                    DungeonRepo.ShowInventory(Avatar);
+                    break;
+                case "wirf":
+                    DungeonRepo.ThrowItemAway(RoomId.Value, Avatar, stringParts[1].ToLower());
+                    break;
+                case "konsumiere":
+                    DungeonRepo.ConsumeConsumable(Avatar, stringParts[1].ToLower());
+                    break;
+                case "schaue":
+                    DungeonRepo.Show(RoomId.Value, Avatar);
                     break;
             }
         }

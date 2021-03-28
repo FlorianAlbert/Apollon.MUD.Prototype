@@ -24,9 +24,9 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Avatar
         //IUseable Weapon { get; }
 
         void SendPrivateMessage(string message);
-        //bool ConsumeItem(IConsumable consumable);
+        void ConsumeItem(string consumable);
         bool AddItemToInventory(ITakeable inspectable);
-        List<string> GetInventoryContent();
+        void GetInventoryContent();
         //bool UseItem(IUseable useable);
         //bool PullOut(IUseable useable);
         //bool PutIn(IUseable useable);

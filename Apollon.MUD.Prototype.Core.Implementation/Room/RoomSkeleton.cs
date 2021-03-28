@@ -43,7 +43,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
             }
             else
             {
-                avatar.SendPrivateMessage("Es gibt hier nichts zu untersuchen mit dem Namen " + toInspect.Name + " .");
+                avatar.SendPrivateMessage("Es gibt hier nichts zu untersuchen mit dem Namen " + toInspect.Name + ".");
             }
 
         }
@@ -70,7 +70,6 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
         {
             Inspectables.Add(avatar);
             InspectRoom(avatar);
-            // TODO: Send Room Description to Client
             return Inspectables.Contains(avatar);
 
         }
@@ -97,22 +96,25 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
 
         public void InspectRoom(IAvatar avatar)
         {
-            var description = Description;
+            var description = Description + "\n\nRauminhalt:";
             foreach(var inspectable in Inspectables)
             {
-                description += "\n" + inspectable.Name;
+                description += "\n\t" + inspectable.Name;
             }
-            description += "\nAusgänge:";
-            if (DirectionsToNeigbors.Contains(EDirections.NORTH)) description += "\nNORDEN";
-            if (DirectionsToNeigbors.Contains(EDirections.SOUTH)) description += "\nSUEDEN";
-            if (DirectionsToNeigbors.Contains(EDirections.EAST)) description += "\nOSTEN";
-            if (DirectionsToNeigbors.Contains(EDirections.WEST)) description += "\nWESTEN";
+            description += "\n\nAusgänge:";
+            if (DirectionsToNeigbors.Contains(EDirections.NORDEN)) description += "\n\tNORDEN";
+            if (DirectionsToNeigbors.Contains(EDirections.SÜDEN)) description += "\n\tSUEDEN";
+            if (DirectionsToNeigbors.Contains(EDirections.OSTEN)) description += "\n\tOSTEN";
+            if (DirectionsToNeigbors.Contains(EDirections.WESTEN)) description += "\n\tWESTEN";
             avatar.SendPrivateMessage(description);
         }
 
-        public void InspectRoom(IAvatar avatar, string exitDirections)
+
+        public bool PlaceItem(ITakeable item)
         {
-            throw new NotImplementedException();
+            if (item == null) { return false; }
+            Inspectables.Add(item);
+            return true;
         }
     }
 }
