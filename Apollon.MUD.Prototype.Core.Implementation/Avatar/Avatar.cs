@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs;
 
-namespace Apollon.MUD.Prototype.Core.Implementation.Avatar
+namespace Apollon.MUD.Prototype.Core.Interface.Avatar
 {
     public class Avatar : IAvatar
     { 
@@ -36,13 +36,16 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Avatar
 
         public int Protection => Race.DefaultProtection + Class.DefaultProtection;
 
+        public string ConnectionId { get; }
+
         public event ChatHandler Chat;
 
-        public Avatar(string avatarName, IRace avatarRace, IClass avatarClass)
+        public Avatar(string avatarName, IRace avatarRace, IClass avatarClass, string connectionId)
         {
             Name = avatarName;
             Race = avatarRace;
             Class = avatarClass;
+            ConnectionId = connectionId;
         }
 
         public bool AddItemToInventory(ITakeable inspectable)
@@ -59,7 +62,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Avatar
 
         public void SendPrivateMessage(string message)
         {
-            Chat?.Invoke(message);
+            Chat?.Invoke(message, ConnectionId);
         }
 
         public ITakeable ThrowAway(string itemName)

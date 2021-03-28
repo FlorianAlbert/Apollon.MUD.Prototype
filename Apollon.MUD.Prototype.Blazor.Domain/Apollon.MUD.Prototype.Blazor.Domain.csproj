@@ -6,14 +6,18 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Apollon.MUD.Prototype.Domain' " />
+
   <ItemGroup>
     <None Remove="Pages\Create.razor.css" />
     <None Remove="Pages\GamePage.razor.css" />
+    <None Remove="Shared\Chat.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Pages\Create.razor.css" />
     <Content Include="Pages\GamePage.razor.css" />
+    <Content Include="Shared\Chat.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,8 +34,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Apollon.MUD.Prototype.Inbound.SignalR\Apollon.MUD.Prototype.Inbound.SignalR.csproj" />
     <ProjectReference Include="..\Apollon.MUD.Prototype.Outbound.Adapters.Storage\Apollon.MUD.Prototype.Outbound.Adapters.Storage.csproj" />
     <ProjectReference Include="..\Apollon.MUD.Prototype.Outbound.Ports.Storage\Apollon.MUD.Prototype.Outbound.Ports.Storage.csproj" />
+    <ProjectReference Include="..\Apollon.MUD.Prototype.Core.Domain\Apollon.MUD.Prototype.Core.Domain.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>

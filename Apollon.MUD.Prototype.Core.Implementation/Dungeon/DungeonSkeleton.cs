@@ -6,20 +6,22 @@ using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
 using Apollon.MUD.Prototype.Core.Interfaces.Configuration.AvatarConfigs;
 using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
+using Apollon.MUD.Prototype.Core.Interfaces.Item;
 using Apollon.MUD.Prototype.Core.Interfaces.Room;
 
-namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
+namespace Apollon.MUD.Prototype.Core.Interface.Dungeon
 {
     public class DungeonSkeleton : IDungeon
     {
-        public int DungeonId { get; }
+        public int DungeonId { get; init; }
         public string DungeonDescription { get; set; }
-        public string DungeonEpoch { get; }
-        public List<IRace> ConfiguredRaces { get; }
-        public List<IClass> ConfiguredClasses { get; }
-        protected List<Neighborship> _Neighborships = new();
-        protected List<IRoom> _Rooms = new();
-        private int DefaultRoomId { get; set; }
+        public string DungeonEpoch { get; init; }
+        public List<IRace> ConfiguredRaces { get; init; }
+        public List<IClass> ConfiguredClasses { get; init; }
+        public List<IInspectable> ConfiguredInspectables { get; init; }
+        public List<INeighborship> Neighborships { get; init; } = new() ;
+        public List<IRoom> Rooms { get; init; } = new();
+        public int DefaultRoomId { get; set; }
 
         public DungeonSkeleton (string dungeonEpoch)
         {
@@ -30,7 +32,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
         {
             get
             {
-                return _Rooms.SelectMany(x => x.Inspectables).OfType<IAvatar>().ToList();
+                return Rooms.SelectMany(x => x.Inspectables).OfType<IAvatar>().ToList();
             }
         }
 
@@ -39,36 +41,38 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
             //TODO does foreach truely iterate over the index structure of the list? -> found on stackoverflow but I'm not sure
             var nextIndex = 0;
             //_Rooms.Sort((r1, r2) => r1.CompareTo(r2));
-            _Rooms.OrderBy(x => x.RoomId);
-            foreach (var room in _Rooms)
+            Rooms.OrderBy(x => x.RoomId);
+            foreach (var room in Rooms)
                 if (room.RoomId == nextIndex)
                     nextIndex++;
                 else break;
             var newRoom = new RoomSkeleton(nextIndex);
 
-            if (asDefault || _Rooms.Count == 0) DefaultRoomId = newRoom.RoomId;
+            if (asDefault || Rooms.Count == 0) DefaultRoomId = newRoom.RoomId;
 
-            _Rooms.Add(newRoom);
+            Rooms.Add(newRoom);
 
             return newRoom;
         }
 
         public IRoom GetRoom(int roomId)
         {
-            return _Rooms.Find(r => r.RoomId == roomId);
+            return Rooms.Find(r => r.RoomId == roomId);
         }
 
         public bool RemoveRoom(int roomId)
         {
-            _Neighborships.RemoveAll(n => n.IsInvolved(roomId));
-            return _Rooms.Remove(_Rooms.Find(r => r.RoomId == roomId));
+            //TODO update Neigborship Directions in Room
+            Neighborships.RemoveAll(n => n.IsInvolved(roomId));
+            return Rooms.Remove(Rooms.Find(r => r.RoomId == roomId));
         }
 
         public bool AddNeighborship(int sourceId, EDirections fromSourceToSink, int sinkId)
         {
+            //TODO update Neigborship Directions in Room
             var newNeighborship = new Neighborship(sourceId, fromSourceToSink, sinkId);
 
-            var neighborAlreadyExists = _Neighborships
+            var neighborAlreadyExists = Neighborships
                 .Select(x => x).Count(x => x.SourceId.Equals(newNeighborship.SourceId) &&
                                            x.FromSourceToSinkDirection == newNeighborship.FromSourceToSinkDirection ||
                                            x.SinkId.Equals(newNeighborship.SinkId) &&
@@ -80,7 +84,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
 
             if (neighborAlreadyExists) return false;
 
-            _Neighborships.Add(newNeighborship);
+            Neighborships.Add(newNeighborship);
             return true;
         }
 
@@ -90,11 +94,11 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
             return DefaultRoomId;
         }
 
-        public void ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction)
+        public int ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction)
         {
             int newRoomId;
 
-            var requestedNeighborship = _Neighborships.Find(x => x.SourceId == currentRoomId && x.FromSourceToSinkDirection == direction);
+            var requestedNeighborship = Neighborships.Find(x => x.SourceId == currentRoomId && x.FromSourceToSinkDirection == direction);
 
             if (requestedNeighborship != null)
             {
@@ -102,7 +106,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
             }
             else
             {
-                requestedNeighborship = _Neighborships.Find(x => x.SinkId == currentRoomId && x.FromSinkToSourceDirection == direction);
+                requestedNeighborship = Neighborships.Find(x => x.SinkId == currentRoomId && x.FromSinkToSourceDirection == direction);
 
                 if (requestedNeighborship != null)
                 {
@@ -110,19 +114,22 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Dungeon
                 }
                 else
                 {
-                    // TODO: Send Error to Client
-                    throw new NotImplementedException();
+                    avatar.SendPrivateMessage("Es ist keine gute Idee diesen Weg einzuschlagen. Gehe lieber in eine der angegebenen Richtungen...");
+                    return currentRoomId;
                 }
             }
 
             GetRoom(currentRoomId).Leave(avatar);
             GetRoom(newRoomId).Enter(avatar);
+
+            return newRoomId;
         }
 
         public int RemoveNeighborship(int firstNeighborId, int secondNeighborId)
         {
+            //TODO update Neigborship Directions in Room
             //TODO add Direction? removes all neighborships between firsNeighbor and secondNeighbor
-            return _Neighborships.RemoveAll(n => n.SourceId == firstNeighborId && n.SinkId == secondNeighborId ||
+            return Neighborships.RemoveAll(n => n.SourceId == firstNeighborId && n.SinkId == secondNeighborId ||
                                             n.SourceId == secondNeighborId && n.SinkId == firstNeighborId);
         }
     }

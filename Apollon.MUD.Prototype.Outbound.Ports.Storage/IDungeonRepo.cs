@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Apollon.MUD.Prototype.Core.Implementation.Dungeon;
+using Apollon.MUD.Prototype.Core.Interface.Dungeon;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
 using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
@@ -19,6 +19,16 @@ namespace Apollon.MUD.Prototype.Outbound.Ports.Storage
         void TakeItem(int currentDungeonId, int currentRoomId, IAvatar avatar, string itemName);
 
         void ChangeRoom(int currentDungeonId, int currentRoomId, IAvatar avatar, EDirections direction);
+
+        void DoSpecialAction(int currentRoomId, IAvatar avatar, string action);
+
+        void Inspect(int currentRoomId, IAvatar avatar, string aimName);
+
+        void LeaveDungeon(int currentRoomId, IAvatar avatar);
+
+        void TakeItem(int currentRoomId, IAvatar avatar, string itemName);
+
+        int ChangeRoom(int currentRoomId, IAvatar avatar, EDirections direction);
 
         void AddDungeon(IDungeon dungeon);
 

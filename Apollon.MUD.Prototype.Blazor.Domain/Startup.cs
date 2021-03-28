@@ -1,4 +1,5 @@
 using System.Linq;
+using Apollon.MUD.Prototype.Core.Domain;
 using Apollon.MUD.Prototype.Domain.Areas.Identity;
 using Apollon.MUD.Prototype.Domain.Data;
 using Apollon.MUD.Prototype.Outbound.Adapters.Storage;
@@ -55,6 +56,12 @@ namespace Apollon.MUD.Prototype.Domain
             });
             services.AddHttpContextAccessor();
             services.AddSingleton<IDungeonRepo, DungeonRepo>();
+            services.AddScoped<AvatarConfigurator>();
+            services.AddSingleton<ClientContextProvider>();
+            services.AddScoped<DungeonConfigurator>();
+            services.AddScoped<RoomConfigurator>();
+            services.AddScoped<ClassConfigurator>();
+            services.AddScoped<RaceConfigurator>();
 
             // TODO: This adds all mediators found in the Assembly where class 'Startup' is located. Change 'Startup' to one specific actual Mediator type
             services.AddMediatR(typeof(Startup).Assembly);
@@ -63,6 +70,7 @@ namespace Apollon.MUD.Prototype.Domain
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
             app.UseResponseCompression();
 
             if (env.IsDevelopment())
@@ -90,6 +98,7 @@ namespace Apollon.MUD.Prototype.Domain
                 endpoints.MapControllers();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
+                endpoints.MapHub<ConsoleHub>("/hubs/ConsoleHub");
             });
         }
     }

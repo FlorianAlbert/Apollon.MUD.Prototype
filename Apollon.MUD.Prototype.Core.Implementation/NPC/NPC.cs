@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Apollon.MUD.Prototype.Core.Implementation.NPC
+namespace Apollon.MUD.Prototype.Core.Interface.NPC
 {
     class NPC : INPC
     {
