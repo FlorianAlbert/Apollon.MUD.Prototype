@@ -4,7 +4,7 @@ using System;
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Item
 {
-    class Consumable : IConsumable
+    public class Consumable : IConsumable
     {
         public Consumable(bool consumableEffect, string consumableName, string consumableDescription)
         {
@@ -13,11 +13,11 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Item
             Description = consumableDescription;
         }
 
-        public bool GoodEffect { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool GoodEffect { get; set; }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
-        public string Description { get; }
+        public string Description { get; set; }
 
         public bool Consume(IAvatar avatar)
         {

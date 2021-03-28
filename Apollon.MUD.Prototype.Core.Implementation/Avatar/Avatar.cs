@@ -9,8 +9,15 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Avatar
 {
     public class Avatar : IAvatar
     { 
-        public string Name { get; }
-        public string Description => Race.Description;
+        public string Name { get; set; }
+        //public string Description => Race.Description;
+
+        public string Description
+        {
+            get { return Race.Description ; }
+            set { Race.Description = value; }
+        }
+
 
         private List<ITakeable> _Inventory;
 

@@ -8,7 +8,7 @@ namespace Apollon.MUD.Prototype.Core.Interfaces.Room
 {
     public interface IRoom : IComparable
     {
-        int RoomId { get; }
+        int RoomId { get; set; }
         string Description { get; set; }
         List<IInspectable> Inspectables { get; set; }
         

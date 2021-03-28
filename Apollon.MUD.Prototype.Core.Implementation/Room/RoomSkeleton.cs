@@ -11,12 +11,19 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
     {
         public string Description { get; set; } = "Please enter a description.";
 
-        public int RoomId { get; }
+        public int RoomId { get; set; }
         public List<IInspectable> Inspectables { get; set; } = new();
 
+        public RoomSkeleton(int roomId, string roomDescription)
+        {
+            RoomId = roomId;
+            Description = roomDescription;
+        }
+        
         public RoomSkeleton(int roomId)
         {
             RoomId = roomId;
+            Description = "No Description given";
         }
 
         public int CompareTo(object other)

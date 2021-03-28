@@ -17,7 +17,7 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Configuration
         {
             if(roomToConfigure == null) { throw new ArgumentNullException("The room to configure was null."); }
             RoomToConfigure = roomToConfigure;
-            ConfiguredRoom = new RoomSkeleton(RoomToConfigure.RoomId);
+            ConfiguredRoom = new RoomSkeleton(RoomToConfigure.RoomId, RoomToConfigure.Description);
             ConfiguredRoom.Inspectables.AddRange(roomToConfigure.Inspectables);
             ConfiguredRoom.Description = RoomToConfigure.Description;
         }

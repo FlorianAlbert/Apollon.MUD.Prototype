@@ -2,7 +2,7 @@
 
 namespace Apollon.MUD.Prototype.Core.Implementation.Item
 {
-    class Takeable : ITakeable
+    public class Takeable : ITakeable
     {
         public Takeable(string takeableName, string takeableDescription, short takeableWeight)
         {
@@ -11,10 +11,10 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Item
             Weight = takeableWeight;
         }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
         public string Description { get; set; }
 
-        public short Weight { get; }
+        public short Weight { get; set; }
     }
 }
