@@ -10,8 +10,8 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Item
             Description = inspectableDescription;
         }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
-        public string Description { get; }
+        public string Description { get; set; }
     }
 }
