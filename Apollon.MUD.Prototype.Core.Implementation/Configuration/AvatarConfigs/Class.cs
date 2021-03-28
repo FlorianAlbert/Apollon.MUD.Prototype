@@ -10,6 +10,16 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Configuration.AvatarConfigs
             DefaultHealthMax = classHealth;
             DefaultDamage = classDamage;
             DefaultProtection = classProtection;
+            Description = "No Description given";
+        }
+
+        public Class(string className, int classDamage, int classHealth, int classProtection, string classDesc)
+        {
+            Name = className;
+            DefaultHealthMax = classHealth;
+            DefaultDamage = classDamage;
+            DefaultProtection = classProtection;
+            Description = classDesc;
         }
 
         public string Name { get; set; }
@@ -19,5 +29,6 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Configuration.AvatarConfigs
         public int DefaultDamage { get; set; }
 
         public int DefaultProtection { get; set; }
+        public string Description { get; set; }
     }
 }

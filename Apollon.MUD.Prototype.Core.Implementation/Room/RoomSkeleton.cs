@@ -28,12 +28,6 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
             Description = "No Description given";
         }
 
-        public RoomSkeleton(int roomId, string description)
-        {
-            RoomId = roomId;
-            Description = description;
-        }
-
         public int CompareTo(IRoom other)
         {
             if (other == null) return 1;
