@@ -47,7 +47,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
             DungeonRepo = dungeonRepo;
             DungeonConfigurator = dungeonConfigurator;
             HubConnection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:5001/hubs/ConsoleHub")
+                .WithUrl("http://localhost:5000/hubs/ConsoleHub")
                 .Build();
 
             HubConnection.StartAsync();
