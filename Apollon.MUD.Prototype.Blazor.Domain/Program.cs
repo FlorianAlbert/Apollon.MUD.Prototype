@@ -21,7 +21,6 @@ namespace Apollon.MUD.Prototype.Domain
             {
                 var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 db.Database.EnsureCreated();
-                //db.Database.Migrate();
             }
             host.Run();
         }

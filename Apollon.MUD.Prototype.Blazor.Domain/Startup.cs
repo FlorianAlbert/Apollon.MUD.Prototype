@@ -32,9 +32,11 @@ namespace Apollon.MUD.Prototype.Domain
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection"),contextOptionsBuilder => {
-                        contextOptionsBuilder.MigrationsAssembly("Apollon.MUD.Prototype.Blazor.Domain");
-                    }));
+                    Configuration.GetConnectionString("DefaultConnection")//,
+                        //contextOptionsBuilder => {
+                        //contextOptionsBuilder.MigrationsAssembly("Apollon.MUD.Prototype.Blazor.Domain");
+                   // }
+                    ));
             services.AddDefaultIdentity<IdentityUser>(options => {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.SignIn.RequireConfirmedEmail = false;
