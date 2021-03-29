@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
 using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
+using Apollon.MUD.Prototype.Core.Interfaces.Item;
 using Apollon.MUD.Prototype.Core.Domain;
 
 namespace Apollon.MUD.Prototype.Outbound.Adapters.Storage
@@ -108,6 +109,30 @@ namespace Apollon.MUD.Prototype.Outbound.Adapters.Storage
             var roomId = DungeonMockData.Dungeon.Enter(avatar);
 
             return roomId;
+        }
+
+        public void ConsumeConsumable(IAvatar avatar, string itemName)
+        {
+            avatar.ConsumeItem(itemName);
+        }
+
+        public void ThrowItemAway(int currentRoomId, IAvatar avatar, string itemName)
+        {
+            var item = avatar.ThrowAway(itemName);
+            if(item != null)
+            {
+                DungeonMockData.Dungeon.GetRoom(currentRoomId).PlaceItem(item);
+            }
+        }
+
+        public void ShowInventory(IAvatar avatar)
+        {
+            avatar.GetInventoryContent();
+        }
+
+        public void Show(int currentRoomId, IAvatar avatar)
+        {
+            DungeonMockData.Dungeon.GetRoom(currentRoomId).InspectRoom(avatar);
         }
     }
 }

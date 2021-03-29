@@ -2,9 +2,9 @@
 
 namespace Apollon.MUD.Prototype.Core.Interfaces.Item
 {
-    public interface IConsumable : IInspectable
+    public interface IConsumable : ITakeable
     {
-        bool GoodEffect { get; set; }
+        string Effect { get; set; }
 
         bool Consume(IAvatar avatar);
     }
