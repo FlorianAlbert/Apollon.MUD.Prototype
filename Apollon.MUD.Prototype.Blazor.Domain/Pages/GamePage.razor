@@ -11,9 +11,8 @@
                 <div class="window">
                     <div class="row">
                         <div class="col">
-                            <div class="terminal mt-3 rounded" style="font-family: Monaco, monospace; font-size: 16px; line-height: 24px;">
-                                <span>Welcome to Apollon Dungeons</span>
-                                <span>Welcome to Apollon Dungeons</span>
+                            <div class="terminal mt-3 rounded" style="font-family: Monaco, monospace;" onchange="scrollToBottom()">
+                                <span> </span>
                                 <span>Welcome to Apollon Dungeons</span>
                                 <span>   _____                .__  .__                           </span>
                                 <span>  /  _  \ ______   ____ |  | |  |   ____   ____            </span>
@@ -28,15 +27,16 @@
                                 <span>/_______  /____/|___|  /\___  / \___  &gt;____/|___|  /____  &gt;</span>
                                 <span>        \/           \//_____/      \/           \/     \/ </span>
                                 <span> </span>
-                                <span>> Bitte gib deinen Namen ein: </span>
+                                <span>> Bitte gib deinen Namen ein: </span><br />
                                 @foreach (var entry in entries)
                                 {
-                                    <span>@entry</span>
-                                    <span></span>
+                                    <span> </span>
+                                    <span>@entry</span><br />
+                                    <span> </span><br />
                                 }
                             </div>
                             <div class="prompt d-flex">
-                                <input @bind="messageInput" id="prompt" type="text" class="form-control" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
+                                <input @bind="messageInput" id="prompt" type="text" class="form-control" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" />
                                 <button id="send" class="btn btn-primary" @onclick="Send" disabled="@(!IsConnected)">Send</button>
                             </div>
                         </div>
@@ -94,3 +94,4 @@
         await hubConnection.DisposeAsync();
     }
 }
+
