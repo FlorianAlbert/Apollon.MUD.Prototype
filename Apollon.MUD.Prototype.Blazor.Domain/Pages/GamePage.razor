@@ -58,7 +58,7 @@
 
 @code {
     private HubConnection hubConnection;
-    private List<string> entries = new List<string>();
+    private Queue<string> entries = new Queue<string>();
     private string messageInput;
 
     protected override async Task OnInitializedAsync()
@@ -69,19 +69,28 @@
 
         hubConnection.On<string>("ReceiveMessage", message =>
         {
-            var encodedMsg = $"> {message}";
-            entries.Add(encodedMsg);
+            var encodedMsg = $"> {message}\n";
+            entries.Enqueue(encodedMsg);
+            while (entries.Count > 20)
+            {
+                entries.Dequeue();
+            }
             StateHasChanged();
         });
 
         await hubConnection.StartAsync();
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         hubConnection.SendAsync("EnterMockDungeonRequest");
     }
 
     async Task Send()
     {
-        entries.Add(messageInput);
+        entries.Enqueue(messageInput + "\n");
+        
+        while (entries.Count > 20)
+        {
+            entries.Dequeue();
+        }
+
         StateHasChanged();
         hubConnection.SendAsync("SendMessage", messageInput);
     }
