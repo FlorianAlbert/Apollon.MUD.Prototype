@@ -94,7 +94,7 @@ namespace Apollon.MUD.Prototype.Domain
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
