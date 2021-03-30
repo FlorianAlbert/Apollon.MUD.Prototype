@@ -28,7 +28,6 @@
                                 <span>/_______  /____/|___|  /\___  / \___  &gt;____/|___|  /____  &gt;</span>
                                 <span>        \/           \//_____/      \/           \/     \/ </span>
                                 <span> </span>
-                                <span>> Bitte gib deinen Namen ein: </span><br />
                                 @foreach (var entry in entries)
                                 {
                                     <span> </span>
@@ -42,7 +41,7 @@
                             </div>
                         </div>
                         <div class="col-3">
-                            <Chat />
+                            <Chat/>
                         </div>
                     </div>
                 </div>
@@ -64,6 +63,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        entries.Enqueue("> Bitte gib deinen Namen ein: ");
         hubConnection = new HubConnectionBuilder()
             .WithUrl(NavigationManager.ToAbsoluteUri("/hubs/ConsoleHub"))
             .Build();

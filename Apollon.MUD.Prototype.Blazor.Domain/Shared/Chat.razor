@@ -1,7 +1,9 @@
 ﻿@using Microsoft.AspNetCore.SignalR.Client
 @using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
 @inject NavigationManager NavigationManager
-@inject IHttpContextAccessor HttpContextAccessor
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IJSRuntime JSRuntime
 
 
@@ -14,19 +16,19 @@
             <ul class="chat">
                 @foreach (var message in messages)
                 {
-                    <li class="left clearfix">
-                        <div class="chat-body clearfix">
-                            <div class="header">
-                                <strong class="primary-font">@message.from</strong>
-                                <small class="pull-right text-muted">
-                                    <span class="glyphicon glyphicon-time"></span>to @message.to:
-                                </small>
-                            </div>
-                            <p>
-                                @message.message
-                            </p>
+                <li class="left clearfix">
+                    <div class="chat-body clearfix">
+                        <div class="header">
+                            <strong class="primary-font">@message.from</strong>
+                            <small class="pull-right text-muted">
+                                <span class="glyphicon glyphicon-time"></span>to @message.to:
+                            </small>
                         </div>
-                    </li>
+                        <p>
+                            @message.message
+                        </p>
+                    </div>
+                </li>
                 }
             </ul>
         </div>
@@ -85,8 +87,11 @@
             messages.Dequeue();
         }
 
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
         StateHasChanged();
-        hubConnection.SendAsync("SendMessage", HttpContextAccessor.HttpContext.User.Identity.Name, messageInput);
+        hubConnection.SendAsync("SendMessage", user.Identity?.Name, messageInput);
         await JSRuntime.InvokeVoidAsync("clearPrompt", "chat-prompt");
         await JSRuntime.InvokeVoidAsync("goToBottom", "chat");
     }
