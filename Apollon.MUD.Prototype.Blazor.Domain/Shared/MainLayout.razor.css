@@ -1,12 +1,14 @@
-.page {
+#MainLayout {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3FB3DA 70%);
+}
+
+/*.page {
     position: relative;
     display: flex;
     flex-direction: column;
 }
 
-#MainLayout {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3FB3DA 70%);
-}
+
 
 .main {
     flex: 1;
@@ -72,3 +74,4 @@
         padding-right: 1.5rem !important;
     }
 }
+*/

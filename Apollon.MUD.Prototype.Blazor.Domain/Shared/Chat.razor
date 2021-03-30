@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Http
 @inject NavigationManager NavigationManager
 @inject IHttpContextAccessor HttpContextAccessor
+@inject IJSRuntime JSRuntime
 
 
 <div class="container bg-light rounded">
@@ -9,7 +10,7 @@
         <div class="panel-heading mt-3 text-center">
             <h5>Chat</h5>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" id="chat">
             <ul class="chat">
                 @foreach (var message in messages)
                 {
@@ -31,7 +32,7 @@
         </div>
         <div class="chat mt-2 mb-2">
             <div class="prompt d-flex">
-                <input @bind="messageInput" id="prompt" type="text" class="form-control" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
+                <input @bind="messageInput" @onkeyup="@Check4Enter" id="chat-prompt" type="text" class="form-control" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
                 <button @onclick="Send" id="send" class="btn btn-primary ms-2">Send</button>
             </div>
             <span> </span>
@@ -43,6 +44,7 @@
     private Queue<(string from, string to, string message)> messages;
     private HubConnection hubConnection;
     private string messageInput;
+    private int counter;
 
     protected async override Task OnInitializedAsync()
     {
@@ -60,17 +62,24 @@
             {
                 messages.Dequeue();
             }
-
             StateHasChanged();
+            JSRuntime.InvokeVoidAsync("goToBottom", "chat");
         });
 
         await hubConnection.StartAsync();
     }
 
+    public void Check4Enter(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            Send();
+        }
+    }
+
     private async Task Send()
     {
         messages.Enqueue(("Me", "All", messageInput));
-
         while (messages.Count > 20)
         {
             messages.Dequeue();
@@ -78,6 +87,8 @@
 
         StateHasChanged();
         hubConnection.SendAsync("SendMessage", HttpContextAccessor.HttpContext.User.Identity.Name, messageInput);
+        await JSRuntime.InvokeVoidAsync("clearPrompt", "chat-prompt");
+        await JSRuntime.InvokeVoidAsync("goToBottom", "chat");
     }
 
 }

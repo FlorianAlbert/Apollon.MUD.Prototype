@@ -1,11 +1,11 @@
 ﻿
-.play {
+/*.play {
     border-top: 2px solid #495869;
     width: 100%;
     position: absolute;
     top: 58px;
     bottom: 0;
-}
+}*/
 
 .play .terminal {
 
@@ -17,29 +17,30 @@
     overflow-y: scroll;
     background-color: #000;
     color: #c3cbd5;
-    white-space: pre-wrap;
+    white-space:pre-wrap;
     
 }
 
-.terminal .span {
-
-    text-align:left;
+.terminal span {
+    float:left;
+    margin-left: 20px;
+    width: 100%;
 }
 
 .play .prompt {
-    width: 70%;
     display: flex;
     flex-shrink: 0;
     padding: 16px;
     z-index: 10;
     background-color: #fff;
+
 }
 
 .play .prompt #send {
     margin-left: 8px;
 }
 
-.play .prompt #prompt {
+/*.play .prompt #prompt {
     flex: 1;
     margin-right: 8px;
-}
+}*/

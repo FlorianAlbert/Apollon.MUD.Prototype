@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.SignalR.Client
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IJSRuntime JSRuntime
 @implements IAsyncDisposable
 
 <AuthorizeView>
@@ -11,7 +12,9 @@
                 <div class="window">
                     <div class="row">
                         <div class="col">
-                            <div class="terminal mt-3 rounded" style="font-family: Monaco, monospace; font-size: 16px; line-height: 24px;">
+                            <div id="terminal" class="terminal mt-3 rounded" style="font-family: Monaco, monospace;">
+                                <span> </span>
+                                <span>Welcome to Apollon Dungeons</span>
                                 <span>   _____                .__  .__                           </span>
                                 <span>  /  _  \ ______   ____ |  | |  |   ____   ____            </span>
                                 <span> /  /_\  \\____ \ /  _ \|  | |  |  /  _ \ /    \           </span>
@@ -25,15 +28,17 @@
                                 <span>/_______  /____/|___|  /\___  / \___  &gt;____/|___|  /____  &gt;</span>
                                 <span>        \/           \//_____/      \/           \/     \/ </span>
                                 <span> </span>
-                                > Bitte gib deinen Namen ein:
+                                <span>> Bitte gib deinen Namen ein: </span><br />
                                 @foreach (var entry in entries)
                                 {
-                                    @entry
+                                    <span> </span>
+                                    <span>@entry</span><br />
+                                    <span> </span><br />
                                 }
                             </div>
                             <div class="prompt d-flex">
-                                <input @bind="messageInput" id="prompt" type="text" class="form-control" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
-                                <button id="send" class="btn btn-primary" @onclick="Send" disabled="@(!IsConnected)">Send</button>
+                                <input @bind="messageInput" @onkeyup="@Check4Enter" id="prompt" type="text" class="form-control" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" autofocus/>
+                                <button type="submit" id="send" class="btn btn-primary" @onclick="Send" disabled="@(!IsConnected)">Send</button>
                             </div>
                         </div>
                         <div class="col-3">
@@ -72,16 +77,25 @@
                 entries.Dequeue();
             }
             StateHasChanged();
+            JSRuntime.InvokeVoidAsync("goToBottom", "terminal");
         });
 
         await hubConnection.StartAsync();
         hubConnection.SendAsync("EnterMockDungeonRequest");
     }
 
+    public void Check4Enter(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            Send();
+        }
+    }
+
     async Task Send()
     {
         entries.Enqueue(messageInput + "\n");
-        
+
         while (entries.Count > 20)
         {
             entries.Dequeue();
@@ -89,6 +103,8 @@
 
         StateHasChanged();
         hubConnection.SendAsync("SendMessage", messageInput);
+        await JSRuntime.InvokeVoidAsync("clearPrompt", "prompt");
+        await JSRuntime.InvokeVoidAsync("goToBottom", "terminal");
     }
 
     public bool IsConnected =>
@@ -99,3 +115,4 @@
         await hubConnection.DisposeAsync();
     }
 }
+
