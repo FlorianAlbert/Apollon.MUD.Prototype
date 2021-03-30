@@ -90,6 +90,7 @@ namespace Apollon.MUD.Prototype.Core.Interface.Dungeon
 
         public int Enter(IAvatar avatar)
         {
+            avatar.SendPrivateMessage("!!!Um zu erfahren wie gespielt wird, gib 'Hilfe' ein!!!");
             GetRoom(DefaultRoomId).Enter(avatar);
             return DefaultRoomId;
         }

@@ -82,6 +82,8 @@
 
         await hubConnection.StartAsync();
         hubConnection.SendAsync("EnterMockDungeonRequest");
+
+        JSRuntime.InvokeVoidAsync("goToBottom", "terminal");
     }
 
     public void Check4Enter(KeyboardEventArgs e)

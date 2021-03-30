@@ -37,13 +37,13 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
         public void Inspect(IAvatar avatar, string aimName)
         {
             var toInspect = Inspectables.Find(x => string.Equals(aimName, x.Name, StringComparison.CurrentCultureIgnoreCase));
-            if(string.Equals(aimName, toInspect.Name, StringComparison.CurrentCultureIgnoreCase))
+            if(toInspect != null && string.Equals(aimName, toInspect.Name, StringComparison.CurrentCultureIgnoreCase))
             {
                 avatar.SendPrivateMessage(toInspect.Description);
             }
             else
             {
-                avatar.SendPrivateMessage("Es gibt hier nichts zu untersuchen mit dem Namen " + toInspect.Name + ".");
+                avatar.SendPrivateMessage($"Es gibt hier nichts zu untersuchen mit dem Namen { aimName }.");
             }
 
         }
@@ -51,6 +51,12 @@ namespace Apollon.MUD.Prototype.Core.Implementation.Room
         public bool TakeItem(IAvatar avatar, string itemName)
         {
             var item = Inspectables.Find(x => string.Equals(itemName, x.Name, StringComparison.CurrentCultureIgnoreCase));
+
+            if (item == null)
+            {
+                avatar.SendPrivateMessage($"Was du suchst ist hier nicht zu sehen...");
+                return false;
+            }
 
             if (item is ITakeable takeableItem)
             {

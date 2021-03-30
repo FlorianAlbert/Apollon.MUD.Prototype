@@ -2,9 +2,9 @@
 @using Microsoft.AspNetCore.Http
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Components.Authorization
-@inject NavigationManager NavigationManager
-@inject AuthenticationStateProvider AuthenticationStateProvider
-@inject IJSRuntime JSRuntime
+@inject NavigationManager _NavigationManager
+@inject AuthenticationStateProvider _AuthenticationStateProvider
+@inject IJSRuntime _JsRuntime
 
 
 <div class="container bg-light rounded">
@@ -14,7 +14,7 @@
         </div>
         <div class="panel-body" id="chat">
             <ul class="chat">
-                @foreach (var message in messages)
+                @foreach (var message in _Messages)
                 {
                 <li class="left clearfix">
                     <div class="chat-body clearfix">
@@ -34,7 +34,7 @@
         </div>
         <div class="chat mt-2 mb-2">
             <div class="prompt d-flex">
-                <input @bind="messageInput" @onkeyup="@Check4Enter" id="chat-prompt" type="text" class="form-control" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
+                <input @bind="_MessageInput" @onkeyup="@Check4Enter" id="chat-prompt" type="text" class="form-control" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
                 <button @onclick="Send" id="send" class="btn btn-primary ms-2">Send</button>
             </div>
             <span> </span>
@@ -43,32 +43,32 @@
 </div>
 
 @code {
-    private Queue<(string from, string to, string message)> messages;
-    private HubConnection hubConnection;
-    private string messageInput;
-    private int counter;
+    private Queue<(string from, string to, string message)> _Messages;
+    private HubConnection _HubConnection;
+    private string _MessageInput;
+    private int _Counter;
 
     protected async override Task OnInitializedAsync()
     {
-        messages = new Queue<(string, string, string)>();
+        _Messages = new Queue<(string, string, string)>();
 
-        hubConnection = new HubConnectionBuilder()
-            .WithUrl(NavigationManager.ToAbsoluteUri("/hubs/ChatHub"))
+        _HubConnection = new HubConnectionBuilder()
+            .WithUrl(_NavigationManager.ToAbsoluteUri("/hubs/ChatHub"))
             .Build();
 
-        hubConnection.On<string, string, string>("ReceiveMessage", (from, to, message) =>
+        _HubConnection.On<string, string, string>("ReceiveMessage", (from, to, message) =>
         {
-            messages.Enqueue((from, to, message));
+            _Messages.Enqueue((from, to, message));
 
-            while (messages.Count > 20)
+            while (_Messages.Count > 20)
             {
-                messages.Dequeue();
+                _Messages.Dequeue();
             }
             StateHasChanged();
-            JSRuntime.InvokeVoidAsync("goToBottom", "chat");
+            _JsRuntime.InvokeVoidAsync("goToBottom", "chat");
         });
 
-        await hubConnection.StartAsync();
+        await _HubConnection.StartAsync();
     }
 
     public void Check4Enter(KeyboardEventArgs e)
@@ -81,19 +81,19 @@
 
     private async Task Send()
     {
-        messages.Enqueue(("Me", "All", messageInput));
-        while (messages.Count > 20)
+        _Messages.Enqueue(("Me", "All", _MessageInput));
+        while (_Messages.Count > 20)
         {
-            messages.Dequeue();
+            _Messages.Dequeue();
         }
 
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var authState = await _AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
 
         StateHasChanged();
-        hubConnection.SendAsync("SendMessage", user.Identity?.Name, messageInput);
-        await JSRuntime.InvokeVoidAsync("clearPrompt", "chat-prompt");
-        await JSRuntime.InvokeVoidAsync("goToBottom", "chat");
+        _HubConnection.SendAsync("SendMessage", user.Identity?.Name, _MessageInput);
+        await _JsRuntime.InvokeVoidAsync("clearPrompt", "chat-prompt");
+        await _JsRuntime.InvokeVoidAsync("goToBottom", "chat");
     }
 
 }

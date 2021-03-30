@@ -65,6 +65,7 @@ namespace Apollon.MUD.Prototype.Outbound.Adapters.Storage
         {
             //ActiveDungeons.Find(x => x.DungeonId == currentDungeonId)?.GetRoom(currentRoomId).Leave(avatar);
             DungeonMockData.Dungeon.GetRoom(currentRoomId).Leave(avatar);
+            avatar.SendPrivateMessage("Dein Avatar hat das Dungeon nun verlassen...");
         }
 
         public void TakeItem(int currentRoomId, IAvatar avatar, string itemName)

@@ -1,18 +1,32 @@
-﻿using Apollon.MUD.Prototype.Core.Interface.Enums;
+﻿using System;
+using System.Threading.Tasks;
+using Apollon.MUD.Prototype.Core.Interface.Enums;
 using Apollon.MUD.Prototype.Core.Interfaces.Avatar;
 using Apollon.MUD.Prototype.Core.Interfaces.Direction;
 using Apollon.MUD.Prototype.Core.Interfaces.Dungeon;
 using Apollon.MUD.Prototype.Outbound.Ports.Storage;
 using Microsoft.AspNetCore.SignalR.Client;
-using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.SignalR;
-
 
 namespace Apollon.MUD.Prototype.Core.Domain
 {
     public class ClientContext
     {
+        private int? _DungeonId;
+
+        public ClientContext(IDungeonRepo dungeonRepo, AvatarConfigurator avatarConfigurator,
+            DungeonConfigurator dungeonConfigurator)
+        {
+            ClientState = ClientState.Inactive;
+            AvatarConfigurator = avatarConfigurator;
+            DungeonRepo = dungeonRepo;
+            DungeonConfigurator = dungeonConfigurator;
+            HubConnection = new HubConnectionBuilder()
+                .WithUrl("http://localhost:5000/hubs/ConsoleHub")
+                .Build();
+
+            HubConnection.StartAsync();
+        }
+
         private HubConnection HubConnection { get; }
 
         private IAvatar Avatar { get; set; }
@@ -23,7 +37,6 @@ namespace Apollon.MUD.Prototype.Core.Domain
 
         public IDungeon DungeonMock => DungeonMockData.Dungeon;
 
-        private int? _DungeonId;
         private int? DungeonId
         {
             get => _DungeonId;
@@ -40,19 +53,6 @@ namespace Apollon.MUD.Prototype.Core.Domain
 
         private int? RoomId { get; set; }
 
-        public ClientContext(IDungeonRepo dungeonRepo, AvatarConfigurator avatarConfigurator, DungeonConfigurator dungeonConfigurator)
-        {
-            ClientState = ClientState.Inactive;
-            AvatarConfigurator = avatarConfigurator;
-            DungeonRepo = dungeonRepo;
-            DungeonConfigurator = dungeonConfigurator;
-            HubConnection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5000/hubs/ConsoleHub")
-                .Build();
-
-            HubConnection.StartAsync();
-        }
-
         public void ClientMessage(string message, string connectionId)
         {
             switch (ClientState)
@@ -65,30 +65,37 @@ namespace Apollon.MUD.Prototype.Core.Domain
                     {
                         ClientState = ClientState.SettingRace;
 
-                        SendMessageToClient($"Bitte gib deine Art ein. \nZur Verfügung stehen:\n\t-{string.Join("\n\t-", AvatarConfigurator.GetRaceNames())}", connectionId);
+                        SendMessageToClient(
+                            $"Bitte gib deine Art ein. \nZur Verfügung stehen:\n\t-{string.Join("\n\t-", AvatarConfigurator.GetRaceNames())}",
+                            connectionId);
                     }
                     else
                     {
-                        SendMessageToClient("Dieser Avatar existiert bereits. Vielleicht solltest du lieber einen eindeutigeren Namen wählen...", connectionId);
+                        SendMessageToClient(
+                            "Dieser Avatar existiert bereits. Vielleicht solltest du lieber einen eindeutigeren Namen wählen...",
+                            connectionId);
                     }
-                    
+
                     break;
                 case ClientState.SettingRace:
                     if (AvatarConfigurator.SetRace(message))
                     {
                         ClientState = ClientState.SettingClass;
 
-                        SendMessageToClient($"Bitte gib deine Klasse ein. \nZur Verfügung stehen:\n\t-{string.Join("\n\t-", AvatarConfigurator.GetClassNames())}", connectionId);
+                        SendMessageToClient(
+                            $"Bitte gib deine Klasse ein. \nZur Verfügung stehen:\n\t-{string.Join("\n\t-", AvatarConfigurator.GetClassNames())}",
+                            connectionId);
                     }
                     else
                     {
                         SendMessageToClient("Diese Art hat noch kein lebendes Wesen je gesehen...?!", connectionId);
                     }
+
                     break;
                 case ClientState.SettingClass:
                     if (AvatarConfigurator.SetClass(message))
                     {
-                        (this.DungeonId, this.Avatar) = AvatarConfigurator.BuildAvatar(connectionId);
+                        (DungeonId, Avatar) = AvatarConfigurator.BuildAvatar(connectionId);
                         Avatar.Chat += SendMessageToClient;
 
                         ClientState = ClientState.Playing;
@@ -97,8 +104,10 @@ namespace Apollon.MUD.Prototype.Core.Domain
                     }
                     else
                     {
-                        SendMessageToClient("Klingt interessant, aber wähle lieber eine der verfügbaren Klassen!", connectionId);
+                        SendMessageToClient("Klingt interessant, aber wähle lieber eine der verfügbaren Klassen!",
+                            connectionId);
                     }
+
                     break;
             }
         }
@@ -118,7 +127,8 @@ namespace Apollon.MUD.Prototype.Core.Domain
                     DungeonRepo.LeaveDungeon(RoomId.Value, Avatar);
                     break;
                 case "gehe":
-                    RoomId = DungeonRepo.ChangeRoom(RoomId.Value, Avatar, (EDirections)Enum.Parse(typeof(EDirections), stringParts[1].ToUpper()));
+                    RoomId = DungeonRepo.ChangeRoom(RoomId.Value, Avatar,
+                        (EDirections) Enum.Parse(typeof(EDirections), stringParts[1].ToUpper()));
                     break;
                 case "inventar":
                     DungeonRepo.ShowInventory(Avatar);
@@ -131,6 +141,21 @@ namespace Apollon.MUD.Prototype.Core.Domain
                     break;
                 case "schaue":
                     DungeonRepo.Show(RoomId.Value, Avatar);
+                    break;
+                case "hilfe":
+                    Avatar.SendPrivateMessage(
+                        "Mögliche Befehle sind: \n" +
+                        "\t-Untersuche <Objekt> --- Liefert eine beschreibende Information über den gewünschten Gegenstand\n" +
+                        "\t-Schaue --- Liefert eine Beschreibung des aktuellen Raums\n" +
+                        "\t-Gehe <Himmelsrichtung> --- Bewegt den Avatar in den Raum in der gewünschten Himmelsrichtung\n" +
+                        "\t-Nimm <Gegenstand> --- Nimmt den gewünschten Gegenstand in den Inventar auf\n" +
+                        "\t-Wirf <Gegenstand> --- Befördert einen Gegenstand aus dem eigenen Inventar in den aktuellen Raum\n" +
+                        "\t-Konsumiere <Nahrung> --- Lässt den Avatar den gewünschten Gegenstand aus dem Inventar konsumieren\n" +
+                        "\t-Inventar --- Gibt den aktuellen Inhalt des Inventars aus\n" +
+                        "\t-Beende --- Lässt den Avatar das Spiel verlassen");
+                    break;
+                default:
+                    Avatar.SendPrivateMessage("Wie bitte...?");
                     break;
             }
         }
@@ -145,14 +170,12 @@ namespace Apollon.MUD.Prototype.Core.Domain
 
             ClientState = ClientState.SettingName;
 
-            
 
             return true;
         }
 
         public bool EnterMockDungeonRequest()
         {
-            
             AvatarConfigurator.SetDungeon(DungeonMockData.Dungeon);
 
             ClientState = ClientState.SettingName;
