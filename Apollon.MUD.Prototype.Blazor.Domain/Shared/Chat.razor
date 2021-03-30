@@ -1,0 +1,99 @@
+﻿@using Microsoft.AspNetCore.SignalR.Client
+@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager _NavigationManager
+@inject AuthenticationStateProvider _AuthenticationStateProvider
+@inject IJSRuntime _JsRuntime
+
+
+<div class="container bg-light rounded">
+    <div class="panel panel-primary">
+        <div class="panel-heading mt-3 text-center">
+            <h5>Chat</h5>
+        </div>
+        <div class="panel-body" id="chat">
+            <ul class="chat">
+                @foreach (var message in _Messages)
+                {
+                <li class="left clearfix">
+                    <div class="chat-body clearfix">
+                        <div class="header">
+                            <strong class="primary-font">@message.from</strong>
+                            <small class="pull-right text-muted">
+                                <span class="glyphicon glyphicon-time"></span>to @message.to:
+                            </small>
+                        </div>
+                        <p>
+                            @message.message
+                        </p>
+                    </div>
+                </li>
+                }
+            </ul>
+        </div>
+        <div class="chat mt-2 mb-2">
+            <div class="prompt d-flex">
+                <input @bind="_MessageInput" @onkeyup="@Check4Enter" id="chat-prompt" type="text" class="form-control" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
+                <button @onclick="Send" id="send" class="btn btn-primary ms-2">Send</button>
+            </div>
+            <span> </span>
+        </div>
+    </div>
+</div>
+
+@code {
+    private Queue<(string from, string to, string message)> _Messages;
+    private HubConnection _HubConnection;
+    private string _MessageInput;
+    private int _Counter;
+
+    protected async override Task OnInitializedAsync()
+    {
+        _Messages = new Queue<(string, string, string)>();
+
+        _HubConnection = new HubConnectionBuilder()
+            .WithUrl(_NavigationManager.ToAbsoluteUri("/hubs/ChatHub"))
+            .Build();
+
+        _HubConnection.On<string, string, string>("ReceiveMessage", (from, to, message) =>
+        {
+            _Messages.Enqueue((from, to, message));
+
+            while (_Messages.Count > 20)
+            {
+                _Messages.Dequeue();
+            }
+            StateHasChanged();
+            _JsRuntime.InvokeVoidAsync("goToBottom", "chat");
+        });
+
+        await _HubConnection.StartAsync();
+    }
+
+    public void Check4Enter(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            Send();
+        }
+    }
+
+    private async Task Send()
+    {
+        _Messages.Enqueue(("Me", "All", _MessageInput));
+        while (_Messages.Count > 20)
+        {
+            _Messages.Dequeue();
+        }
+
+        var authState = await _AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        StateHasChanged();
+        _HubConnection.SendAsync("SendMessage", user.Identity?.Name, _MessageInput);
+        await _JsRuntime.InvokeVoidAsync("clearPrompt", "chat-prompt");
+        await _JsRuntime.InvokeVoidAsync("goToBottom", "chat");
+    }
+
+}

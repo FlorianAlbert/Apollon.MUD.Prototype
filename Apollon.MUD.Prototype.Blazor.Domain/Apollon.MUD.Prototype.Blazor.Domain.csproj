@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>aspnet-Apollon.MUD.Prototype.Domain-78C09CEA-B13D-47A6-869C-708B0AE4BA99</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Apollon.MUD.Prototype.Domain' " />
+
+  <ItemGroup>
+    <None Remove="Pages\Create.razor.css" />
+    <None Remove="Pages\GamePage.razor.css" />
+    <None Remove="Shared\Chat.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\Create.razor.css" />
+    <Content Include="Pages\GamePage.razor.css" />
+    <Content Include="Shared\Chat.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Apollon.MUD.Prototype.Inbound.SignalR\Apollon.MUD.Prototype.Inbound.SignalR.csproj" />
+    <ProjectReference Include="..\Apollon.MUD.Prototype.Outbound.Adapters.Storage\Apollon.MUD.Prototype.Outbound.Adapters.Storage.csproj" />
+    <ProjectReference Include="..\Apollon.MUD.Prototype.Outbound.Ports.Storage\Apollon.MUD.Prototype.Outbound.Ports.Storage.csproj" />
+    <ProjectReference Include="..\Apollon.MUD.Prototype.Core.Domain\Apollon.MUD.Prototype.Core.Domain.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>

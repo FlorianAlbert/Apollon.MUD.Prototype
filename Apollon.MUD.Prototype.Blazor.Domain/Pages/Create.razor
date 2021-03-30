@@ -1,0 +1,741 @@
+﻿@page "/create"
+
+@using Apollon.MUD.Prototype.Core.Implementation.Configuration.AvatarConfigs
+@using Apollon.MUD.Prototype.Core.Implementation.Item
+@using Apollon.MUD.Prototype.Core.Implementation.Room
+@using Apollon.MUD.Prototype.Core.Interfaces.Item
+
+<AuthorizeView>
+    <Authorized>
+        <div class="container-fluid bg-light ">
+            <div class="row min-vh-100">
+                <nav class="col-md-2 d-none d-md-block bg-secondary sidebar">
+                    <div class="sidebar-sticky">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="create#General">
+                                    <span data-feather="home"></span>
+                                    Settings
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="create#Classes">
+                                    Classes
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="create#Races">
+                                    Races
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="create#Items">
+                                    Items
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="create#Rooms">
+                                    Rooms
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Dungeon 1</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group mr-2">
+                                <button class="btn btn-sm btn-outline-secondary">Invite</button>
+                            </div>
+                        </div>
+                    </div>
+                    <section class="General" id="General">
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Name</label>
+                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Description</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section class="Classes w-75 mt-3" id="Classes">
+                        <h2>Classes</h2>
+                        <form class="@_NewClassValidation">
+                            <div class="d-flex">
+                                <select class="form-select" aria-label="Default select example" @bind="_ClassValues[0]" @onclick="ClassSelectionChanged">
+                                    @if (!(_Classes is null))
+                                    {
+                                        @foreach (var avatarClass in _Classes)
+                                        {
+                                            <option selected value="@avatarClass.Name">@avatarClass.Name</option>
+                                        }}
+                                </select>
+                                <input type="button" class="btn btn-primary ms-2" @onclick="AddClassButton" value="New" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control text" placeholder="Name" @bind="_ClassValues[0]" required>
+                                <div class="invalid-feedback">Try giving it a name</div>
+                                <div class="valid-feedback">Sounds good!</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Damage</label>
+                                <input type="number" class="form-control" placeholder="Damage" @bind="_ClassValues[1]" required>
+                                <div class="invalid-feedback">Damage is required, it has to be a whole number!</div>
+                                <div class="valid-feedback">Looking good!</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Health</label>
+                                <input type="number" class="form-control" placeholder="Health" @bind="_ClassValues[2]" required>
+                                <div class="invalid-feedback">Health is required, it has to be a whole number!</div>
+                                <div class="valid-feedback">Looking good!</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Protection</label>
+                                <input type="number" class="form-control" placeholder="Protection" @bind="_ClassValues[3]" required>
+                                <div class="invalid-feedback">Protection is required, it has to be a whole number!</div>
+                                <div class="valid-feedback">Looking good!</div>
+                            </div>
+                            <div class="text-end">
+                                <input type="button" class="btn btn-primary mt-2" @onclick="SaveClassButton" value="Save" />
+                            </div>
+                        </form>
+                    </section>
+
+                    <section class="Races w-75 mt-3" id="Races">
+                        <h2>Races</h2>
+                        <form class="@_NewRaceValidation">
+                            <div class="d-flex">
+                                <select class="form-select" aria-label="Default select example" @bind="_RaceValues[0]" @onclick="RaceSelectionChanged">
+                                    @if (!(_Classes is null))
+                                    {
+                                        @foreach (var avatarRace in _Races)
+                                        {
+                                            <option selected value="@avatarRace.Name">@avatarRace.Name</option>
+                                        }}
+                                </select>
+                                <input type="button" class="btn btn-primary ms-2" @onclick="AddRaceButton" value="New" />
+                            </div>
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control text" placeholder="Name" @bind="_RaceValues[0]" required>
+                                <div class="invalid-feedback">Try giving it a name</div>
+                                <div class="valid-feedback">Sounds good!</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Damage</label>
+                                <input type="number" class="form-control" placeholder="Damage" @bind="_RaceValues[1]" required>
+                                <div class="invalid-feedback">Damage is required, it has to be a whole number!</div>
+                                <div class="valid-feedback">Looking good!</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Health</label>
+                                <input type="number" class="form-control" placeholder="Health" @bind="_RaceValues[2]" required>
+                                <div class="invalid-feedback">Health is required, it has to be a whole number!</div>
+                                <div class="valid-feedback">Looking good!</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Protection</label>
+                                <input type="number" class="form-control" placeholder="Protection" @bind="_RaceValues[3]" required>
+                                <div class="invalid-feedback">Protection is required, it has to be a whole number!</div>
+                                <div class="valid-feedback">Looking good!</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ClassDescriptionControl">Description</label>
+                                <textarea class="form-control" id="ClassDescriptionControl" rows="3" @bind="_RaceValues[4]" required></textarea>
+                                <div class="invalid-feedback">A description is required, try being as detailled as possible</div>
+                                <div class="valid-feedback">Thats awesome!</div>
+                            </div>
+                            <div class="text-end">
+                                <input type="button" class="btn btn-primary mt-2" @onclick="SaveRaceButton" value="Save" />
+                            </div>
+                        </form>
+                    </section>
+
+                    <section class="Items w-75 mt-3" id="Items">
+                        <h2>Items</h2>
+                        <form class="@_NewItemValidation">
+                            <div class="d-flex">
+                                <select class="form-select" aria-label="Default select example" @bind="_ItemValues[0]" @onclick="ItemSelectionChanged">
+                                    @if (!(_Items is null))
+                                    {
+                                        @foreach (var roomItem in _Items)
+                                        {
+                                            <option selected value="@roomItem.Name">@roomItem.Name</option>
+                                        }}
+                                </select>
+                                <input type="button" class="btn btn-primary ms-2" @onclick="AddItemButton" value="New" />
+                            </div>
+                            <label>Type</label>
+                            <select class="form-select" aria-label="Default select example" @bind="_ItemValues[1]" required>
+                                <option selected value="Consumable">Consumable</option>
+                                <option selected value="Inspectable">inspectable</option>
+                                <option selected value="Pickable">Pickable</option>
+                            </select>
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control text" placeholder="Name" @bind="_ItemValues[0]" required>
+                                <div class="invalid-feedback">Try giving it a name</div>
+                                <div class="valid-feedback">Sounds good!</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control" rows="3" @bind="_ItemValues[2]" required></textarea>
+                                <div class="invalid-feedback">A description is required, try being as detailled as possible</div>
+                                <div class="valid-feedback">Thats awesome!</div>
+                            </div>
+                            <div class="form-group">
+                                @if (_ItemValues[1] == "Consumable")
+                                {
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Positive Effect
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" disabled>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Negative Effect
+                                        </label>
+                                    </div> }
+                                else if (_ItemValues[1] == "Pickable")
+                                {
+                                    <label>Weight</label>
+                                    <input type="number" class="form-control" placeholder="Weight" @bind="_ItemValues[3]" required>
+                                    <div class="invalid-feedback">weight is required, it has to be a whole number!</div>
+                                    <div class="valid-feedback">Looking good!</div>}
+                            </div>
+                            <div class="text-end">
+                                <input type="button" class="btn btn-primary mt-2" @onclick="SaveItemButton" value="Save" />
+                            </div>
+                        </form>
+                    </section>
+
+
+                    <section class="Rooms w-75 mt-3" id="Rooms">
+                        <h2>Rooms</h2>
+                        <form class="@_NewRoomValidation">
+                            <div class="d-flex">
+                                <select class="form-select" aria-label="Default select example" @bind="_RoomValues[0]" @onclick="RoomSelectionChanged">
+                                    @if (!(_Rooms is null))
+                                    {
+                                        @foreach (var room in _Rooms)
+                                        {
+                                            <option selected value="@room.RoomId">@room.RoomId</option>
+                                        }}
+                                </select>
+                                <input type="button" class="btn btn-primary ms-2" @onclick="AddRoomButton" value="New" />
+                            </div>
+                            <div class="form-group">
+                                <label>Room-ID</label>
+                                <input type="number" class="form-control text" placeholder="Name" @bind="_RoomValues[0]" required>
+                                <div class="invalid-feedback">Try giving it an ID</div>
+                                <div class="valid-feedback">Sounds good!</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control" id="ClassDescriptionControl" rows="3" @bind="_RoomValues[1]" required></textarea>
+                                <div class="invalid-feedback">A description is required, try being as detailled as possible</div>
+                                <div class="valid-feedback">Thats awesome!</div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-2">
+                                    <label>North</label>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" aria-label="Default select example" @bind="_RoomValues[2]">
+                                        <option selected value="0">Nothing</option>
+                                        @if (!(_Rooms is null))
+                                        {
+                                            @foreach (var room in _Rooms)
+                                            {
+                                                @if (!(room.RoomId.ToString().Equals(_RoomValues[0])))
+                                                {
+                                                    <option selected value="@room.RoomId">@room.RoomId</option>
+                                                }}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-2">
+                                    <label>East</label>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" aria-label="Default select example" @bind="_RoomValues[3]">
+                                        <option selected value="0">Nothing</option>
+                                        @if (!(_Rooms is null))
+                                        {
+                                            @foreach (var room in _Rooms)
+                                            {
+                                                @if (!(room.RoomId.ToString().Equals(_RoomValues[0])))
+                                                {
+                                                    <option selected value="@room.RoomId">@room.RoomId</option>
+                                                }}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-2">
+                                    <label>South</label>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" aria-label="Default select example" @bind="_RoomValues[4]">
+                                        <option selected value="0">Nothing</option>
+                                        @if (!(_Rooms is null))
+                                        {
+                                            @foreach (var room in _Rooms)
+                                            {
+                                                @if (!(room.RoomId.ToString().Equals(_RoomValues[0])))
+                                                {
+                                                    <option selected value="@room.RoomId">@room.RoomId</option>
+                                                }}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-2">
+                                    <label>West</label>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" aria-label="Default select example" @bind="_RoomValues[5]">
+                                        <option selected value="0">Nothing</option>
+                                        @if (!(_Rooms is null))
+                                        {
+                                            @foreach (var room in _Rooms)
+                                            {
+                                                @if (!(room.RoomId.ToString().Equals(_RoomValues[0])))
+                                                {
+                                                    <option selected value="@room.RoomId">@room.RoomId</option>
+                                                }}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-2">
+                                    <label>Item-1</label>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" aria-label="Default select example" @bind="_RoomValues[6]">
+                                        <option selected value="0"> </option>
+                                        @if (!(_Items is null))
+                                        {
+                                            @foreach (var item in _Items)
+                                            {
+                                                @if (!(item.Name is null))
+                                                {
+                                                    <option selected value="@item.Name">@item.Name</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-2">
+                                    <label>Item-2</label>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" aria-label="Default select example" @bind="_RoomValues[7]">
+                                        <option selected value="0"> </option>
+                                        @if (!(_Items is null))
+                                        {
+                                            @foreach (var item in _Items)
+                                            {
+                                                @if (!(item.Name is null))
+                                                {
+                                                    <option selected value="@item.Name">@item.Name</option>
+                                                }}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-2">
+                                    <label>Item-3:</label>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" aria-label="Default select example" @bind="_RoomValues[8]">
+                                        <option selected value="0"> </option>
+                                        @if (!(_Items is null))
+                                        {
+                                            @foreach (var item in _Items)
+                                            {
+                                                @if (!(item.Name is null))
+                                                {
+                                                    <option selected value="@item.Name">@item.Name</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <input type="button" class="btn btn-primary mt-2" @onclick="SaveRoomButton" value="Save" />
+                            </div>
+
+
+                        </form>
+                    </section>
+
+                    <section class="Submit w-75 mt-3 mb-5" id="Submit">
+                        <div>
+                            <input type="button" class="btn btn-success btn-lg w-100" value="Submit Dungeon" />
+                        </div>
+                    </section>
+                </main>
+
+            </div>
+        </div>
+    </Authorized>
+
+    <NotAuthorized>
+        <div class="alert alert-danger" role="alert">
+            You need to be logged in to see this page.<a href="Identity/Account/Login" class="alert-link">Login</a>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code
+{ 
+    private readonly List<Class> _Classes = new();
+    private readonly List<Race> _Races = new();
+    private readonly List<IInspectable> _Items = new();
+    private readonly List<RoomSkeleton> _Rooms = new();
+
+    private readonly string[] _ClassValues = new string[4];
+    private readonly string[] _RaceValues = new string[5];
+    private readonly string[] _ItemValues = new string[4];
+    private readonly string[] _RoomValues = new string[9];
+    private readonly Dictionary<int, string[]> _Neighbourships = new();
+
+    private bool _NewClass;
+    private string _NewClassValidation;
+
+    private bool _NewRace;
+    private string _NewRaceValidation;
+
+    private bool _NewItem;
+    private string _NewItemValidation;
+
+    private bool _NewRoom;
+    private string _NewRoomValidation;
+
+
+    protected override void OnInitialized()
+    {
+        _Classes.Add(new Class("ExampleClass", 1, 1, 1));
+        _Races.Add(new Race("Example Race", "This is an Example of a Race", 1, 1, 1));
+        _Items.Add(new Takeable("Example Pickable", "This is an Example of an Item the user can pick up", 5));
+        _Items.Add(new Takeable("Sword", "This is a nice looking Sword", 5));
+        _Items.Add(new Inspectable("Baum", "A big tree, some birds in it, someone carved a heart into its Log"));
+        _Rooms.Add(new RoomSkeleton(1, "Test Room"));
+        _Neighbourships.Add(1, new [] { "0", "0", "0", "0" });
+        for (var i = 0; i < 3; i++)
+        {
+            _Rooms[0].Inspectables.Add(_Items[i]);
+        }
+    }
+
+    protected void AddClassButton()
+    {
+        _NewClass = true;
+        _NewClassValidation = "was-validated";
+
+        for (var i = 0; i < 4; i++)
+        {
+            _ClassValues[i] = string.Empty;
+        }
+
+    }
+
+    protected void SaveClassButton()
+    {
+        _NewClassValidation = "is-valid";
+        if (_NewClass)
+        {
+            _Classes.Add(new Class(_ClassValues[0], int.Parse(_ClassValues[1]), int.Parse(_ClassValues[2]), int.Parse(_ClassValues[3])));
+        }
+        else
+        {
+            var selectedClass = _Classes.Find(_class => _class.Name == _ClassValues[0]);
+
+            if (selectedClass is null) return;
+            try
+            {
+                selectedClass.Name = _ClassValues[0];
+                selectedClass.DefaultDamage = int.Parse(_ClassValues[1]);
+                selectedClass.DefaultHealthMax = int.Parse(_ClassValues[2]);
+                selectedClass.DefaultProtection = int.Parse(_ClassValues[3]);
+            }
+            catch (Exception)
+            {
+                //TODO Error Handling
+            }
+        }
+    }
+
+    protected void ClassSelectionChanged(EventArgs args)
+    {
+        var selectedClass = _Classes.Find(item => item.Name == _ClassValues[0]);
+        _NewClass = false;
+        _NewClassValidation = "is-valid";
+
+        if (selectedClass is null) return;
+        try
+        {
+            _ClassValues[1] = selectedClass.DefaultDamage.ToString();
+            _ClassValues[2] = selectedClass.DefaultHealthMax.ToString();
+            _ClassValues[3] = selectedClass.DefaultProtection.ToString();
+        }
+        catch (Exception)
+        {
+            //TODO Error Handling
+        }
+    }
+
+    protected void AddRaceButton()
+    {
+        _NewRace = true;
+        _NewRaceValidation = "was-validated";
+
+        for (var i = 0; i < 5; i++)
+        {
+            _RaceValues[i] = string.Empty;
+        }
+
+    }
+
+    protected void SaveRaceButton()
+    {
+        _NewRaceValidation = "is-valid";
+        if (_NewRace)
+        {
+            _Races.Add(new Race(_RaceValues[0], _RaceValues[4], int.Parse(_RaceValues[1]), int.Parse(_RaceValues[2]), int.Parse(_RaceValues[3])));
+        }
+        else
+        {
+            var selectedRace = _Races.Find(race => race.Name == _RaceValues[0]);
+
+            if (selectedRace is null) return;
+            try
+            {
+                selectedRace.Name = _RaceValues[0];
+                selectedRace.DefaultDamage = int.Parse(_RaceValues[1]);
+                selectedRace.DefaultHealthMax = int.Parse(_RaceValues[2]);
+                selectedRace.DefaultProtection = int.Parse(_RaceValues[3]);
+                selectedRace.Description = _RaceValues[4];
+            }
+            catch (Exception)
+            {
+                //TODO Error Handling
+            }
+        }
+    }
+
+    protected void RaceSelectionChanged(EventArgs args)
+    {
+        var selectedRace = _Races.Find(item => item.Name == _RaceValues[0]);
+        _NewRace = false;
+        _NewRaceValidation = "is-valid";
+
+        if (selectedRace is null) return;
+        try
+        {
+            _RaceValues[1] = selectedRace.DefaultDamage.ToString();
+            _RaceValues[2] = selectedRace.DefaultHealthMax.ToString();
+            _RaceValues[3] = selectedRace.DefaultProtection.ToString();
+        }
+        catch (Exception)
+        {
+            //TODO Error Handling
+        }
+    }
+
+    protected void AddItemButton()
+    {
+        _NewItem = true;
+        _NewItemValidation = "was-validated";
+
+        for (var i = 0; i < 4; i++)
+        {
+            _ItemValues[i] = string.Empty;
+        }
+
+    }
+
+    protected void SaveItemButton()
+    {
+        _NewItemValidation = "is-valid";
+        if (_NewItem)
+        {
+            switch (_ItemValues[1])
+            {
+                case "Consumable":
+                    _Items.Add(new Consumable(_ItemValues[0], _ItemValues[2], "good", 1));
+                    break;
+                case "Inspectable":
+                    _Items.Add(new Inspectable(_ItemValues[0], _ItemValues[2]));
+                    break;
+                case "Pickable":
+                    _Items.Add(new Takeable(_ItemValues[0], _ItemValues[2], short.Parse(_ItemValues[3])));
+                    break;
+            }
+        }
+        else
+        {
+            var selectedItem = _Items.Find(item => item.Name == _ItemValues[0]);
+
+            if (selectedItem is null) return;
+            try
+            {
+                selectedItem.Name = _ItemValues[0];
+                selectedItem.Description = _ItemValues[2];
+            }
+            catch (Exception)
+            {
+                //TODO Error Handling
+            }
+        }
+    }
+
+    protected void ItemSelectionChanged(EventArgs args)
+    {
+        _NewItem = false;
+        _NewItemValidation = "is-valid";
+
+        var selectedItem = _Items.Find(item => item.Name == _ItemValues[0]);
+        if (selectedItem is null) return;
+        _ItemValues[2] = selectedItem.Description;
+        switch (selectedItem.GetType().ToString())
+        {
+            case "Apollon.MUD.Prototype.Core.Implementation.Item.Consumable":
+                //TODO Implementiere den ganzen Scheiß mit dem Radio Button
+                _ItemValues[1] = "Consumable";
+                break;
+            case "Apollon.MUD.Prototype.Core.Implementation.Item.Takeable":
+                _ItemValues[3] = ((Takeable)selectedItem).Weight.ToString();
+                _ItemValues[1] = "Pickable";
+                break;
+            case "Apollon.MUD.Prototype.Core.Implementation.Item.Inspectable":
+                _ItemValues[1] = "Inspectable";
+                break;
+        }
+    }
+
+    protected void AddRoomButton()
+    {
+        _NewRoom = true;
+        _NewRoomValidation = "was-validated";
+        _RoomValues[0] = string.Empty;
+        _RoomValues[1] = string.Empty;
+        for (var i = 2; i < 9; i++)
+        {
+            _RoomValues[i] = "0";
+        }
+
+    }
+
+    protected void SaveRoomButton()
+    {
+        _NewRoomValidation = "is-valid";
+        if (_NewRoom && !_Neighbourships.ContainsKey(int.Parse(_RoomValues[0])))
+        {
+            var newRoom = new RoomSkeleton(int.Parse(_RoomValues[0]), _RoomValues[1]);
+            _Rooms.Add(newRoom);
+            _Neighbourships.Add(int.Parse(_RoomValues[0]), new[] { _RoomValues[2], _RoomValues[3], _RoomValues[4], _RoomValues[5] });
+
+            for (var i = 0; i < 3; i++)
+            {
+                var k = i + 6;
+                var item = _Items.Find(itemInput => itemInput.Name == _RoomValues[k]);
+                if (!(item is null))
+                {
+                    newRoom.Inspectables.Add(item);
+                }
+            }
+        }
+        else
+        {
+            try
+            {
+                var selectedRoom = _Rooms.Find(room => room.RoomId == int.Parse(_RoomValues[0]));
+                if (selectedRoom is null) return;
+                selectedRoom.RoomId = int.Parse(_RoomValues[0]);
+                selectedRoom.Description = _RoomValues[1];
+                var task1 = Task.Run(() =>
+                {
+                    for (var i = 0; i < 3; i++)
+                    {
+                        var k = i + 6;
+                        var item = _Items.Find(itemInput => itemInput.Name == _RoomValues[k]);
+                        if (!(item is null))
+                        {
+                            if (selectedRoom.Inspectables.Count < i + 1)
+                            {
+                                selectedRoom.Inspectables.Add(item);
+                            }
+                            else
+                            {
+                                selectedRoom.Inspectables[i] = item;
+                            }
+                        }
+
+
+                    }
+                });
+                for (var i = 0; i < 5; i++)
+                {
+                    _Neighbourships[selectedRoom.RoomId][i] = _RoomValues[(i + 2)];
+                }
+                task1.Wait();
+            }
+            catch (Exception)
+            {
+                //TODO Error Handling
+            }
+        }
+    }
+
+    protected void RoomSelectionChanged(EventArgs args)
+    {
+        _NewRoom = false;
+        if (_RoomValues[0] is null || string.Empty.Equals(_RoomValues[0])) return;
+        var selectedRoom = _Rooms.Find(item => item.RoomId == int.Parse(_RoomValues[0]));
+        _NewRoomValidation = "is-valid";
+
+        if (selectedRoom is null) return;
+        try
+        {
+            _RoomValues[0] = selectedRoom.RoomId.ToString();
+            _RoomValues[1] = selectedRoom.Description;
+            var task1 = Task.Run(() =>
+            {
+                _RoomValues[6] = "0";
+                _RoomValues[7] = "0";
+                _RoomValues[8] = "0";
+                for (var k = 0; k < 3; k++)
+                {
+                    _RoomValues[(k + 6)] = selectedRoom.Inspectables[k].Name;
+                }
+            });
+            for (var i = 0; i < 4; i++)
+            {
+                _RoomValues[(i + 2)] = _Neighbourships[selectedRoom.RoomId][i];
+            }
+            task1.Wait();
+        }
+        catch (Exception)
+        {
+            //TODO Error Handling
+        }
+    }
+}

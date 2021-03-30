@@ -1,0 +1,41 @@
+﻿@page "/"
+@namespace Apollon.MUD.Prototype.Blazor.Domain.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apollon.MUD.Prototype.Blazor.Domain</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css"/>
+    <link href="css/site.css" rel="stylesheet" />
+    <link href="Apollon.MUD.Prototype.Blazor.Domain.styles.css" rel="stylesheet" />
+    <script src="css/bootstrap/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <component type="typeof(App)" render-mode="ServerPrerendered" />
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="css/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/js/siteScript.js"></script>
+</body>
+</html>
