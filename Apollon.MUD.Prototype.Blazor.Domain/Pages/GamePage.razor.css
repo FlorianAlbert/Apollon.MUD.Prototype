@@ -24,6 +24,7 @@
 .terminal span {
     float:left;
     margin-left: 20px;
+    width: 100%;
 }
 
 .play .prompt {

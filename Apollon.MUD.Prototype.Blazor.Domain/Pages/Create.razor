@@ -4,6 +4,7 @@
 @using Apollon.MUD.Prototype.Core.Implementation.Item
 @using Apollon.MUD.Prototype.Core.Implementation.Room
 @using Apollon.MUD.Prototype.Core.Interfaces.Item
+@using System.Threading.Tasks
 
 <AuthorizeView>
     <Authorized>
@@ -71,9 +72,10 @@
                                 <select class="form-select" aria-label="Default select example" @bind="ClassValues[0]" @onclick="ClassSelectionChanged">
                                     @if (!(Classes is null))
                                     {
-                    @foreach (var avatarClass in Classes)
-                    {
-<option selected value="@avatarClass.Name">@avatarClass.Name</option>}}
+                                        @foreach (var avatarClass in Classes)
+                                        {
+                                            <option selected value="@avatarClass.Name">@avatarClass.Name</option>
+                                        }}
                                 </select>
                                 <input type="button" class="btn btn-primary ms-2" @onclick="AddClassButton" value="New" />
                             </div>
@@ -115,9 +117,10 @@
                                 <select class="form-select" aria-label="Default select example" @bind="RaceValues[0]" @onclick="RaceSelectionChanged">
                                     @if (!(Classes is null))
                                     {
-                    @foreach (var avatarRace in Races)
-                    {
-<option selected value="@avatarRace.Name">@avatarRace.Name</option>}}
+                                        @foreach (var avatarRace in Races)
+                                        {
+                                            <option selected value="@avatarRace.Name">@avatarRace.Name</option>
+                                        }}
                                 </select>
                                 <input type="button" class="btn btn-primary ms-2" @onclick="AddRaceButton" value="New" />
                             </div>
@@ -164,9 +167,10 @@
                                 <select class="form-select" aria-label="Default select example" @bind="ItemValues[0]" @onclick="ItemSelectionChanged">
                                     @if (!(Items is null))
                                     {
-                    @foreach (var roomItem in Items)
-                    {
-<option selected value="@roomItem.Name">@roomItem.Name</option>}}
+                                        @foreach (var roomItem in Items)
+                                        {
+                                            <option selected value="@roomItem.Name">@roomItem.Name</option>
+                                        }}
                                 </select>
                                 <input type="button" class="btn btn-primary ms-2" @onclick="AddItemButton" value="New" />
                             </div>
@@ -191,24 +195,24 @@
                             <div class="form-group">
                                 @if (ItemValues[1] == "Consumable")
                                 {
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Positive Effect
-                    </label>
-                </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Positive Effect
+                                        </label>
+                                    </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" disabled>
                                         <label class="form-check-label" for="flexRadioDefault2">
                                             Negative Effect
                                         </label>
                                     </div> }
-                                                    else if (ItemValues[1] == "Pickable")
-                                                    {
+                                else if (ItemValues[1] == "Pickable")
+                                {
                                     <label>Weight</label>
-                                                        <input type="number" class="form-control" placeholder="Weight" @bind="ItemValues[3]" required>
-                                                                            <div class="invalid-feedback">weight is required, it has to be a whole number!</div>
-                                                                                                <div class="valid-feedback">Looking good!</div>}
+                                    <input type="number" class="form-control" placeholder="Weight" @bind="ItemValues[3]" required>
+                                    <div class="invalid-feedback">weight is required, it has to be a whole number!</div>
+                                    <div class="valid-feedback">Looking good!</div>}
                             </div>
                             <div class="text-end">
                                 <input type="button" class="btn btn-primary mt-2" @onclick="SaveItemButton" value="Save" />
@@ -224,16 +228,17 @@
                                 <select class="form-select" aria-label="Default select example" @bind="RoomValues[0]" @onclick="RoomSelectionChanged">
                                     @if (!(Rooms is null))
                                     {
-                    @foreach (var room in Rooms)
-                    {
-<option selected value="@room.RoomId">@room.RoomId</option>}}
+                                        @foreach (var room in Rooms)
+                                        {
+                                            <option selected value="@room.RoomId">@room.RoomId</option>
+                                        }}
                                 </select>
                                 <input type="button" class="btn btn-primary ms-2" @onclick="AddRoomButton" value="New" />
                             </div>
                             <div class="form-group">
                                 <label>Room-ID</label>
                                 <input type="number" class="form-control text" placeholder="Name" @bind="RoomValues[0]" required>
-                                <div class="invalid-feedback">Try giving it a name</div>
+                                <div class="invalid-feedback">Try giving it an ID</div>
                                 <div class="valid-feedback">Sounds good!</div>
                             </div>
                             <div class="form-group">
@@ -257,10 +262,7 @@
                                                 @if (!(room.RoomId.ToString().Equals(RoomValues[0])))
                                                 {
                                                     <option selected value="@room.RoomId">@room.RoomId</option>
-                                                }
-                                                
-                                            }
-                                        }
+                                                }}}
                                     </select>
                                 </div>
                             </div>
@@ -278,9 +280,7 @@
                                                 @if (!(room.RoomId.ToString().Equals(RoomValues[0])))
                                                 {
                                                     <option selected value="@room.RoomId">@room.RoomId</option>
-                                                }
-                                             }
-                                        }
+                                                }}}
                                     </select>
                                 </div>
                             </div>
@@ -298,9 +298,7 @@
                                                 @if (!(room.RoomId.ToString().Equals(RoomValues[0])))
                                                 {
                                                     <option selected value="@room.RoomId">@room.RoomId</option>
-                                                }
-                                             }
-                                        }
+                                                }}}
                                     </select>
                                 </div>
                             </div>
@@ -318,8 +316,65 @@
                                                 @if (!(room.RoomId.ToString().Equals(RoomValues[0])))
                                                 {
                                                     <option selected value="@room.RoomId">@room.RoomId</option>
-                                                 }
-                                             }
+                                                }}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-2">
+                                    <label>Item-1</label>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" aria-label="Default select example" @bind="RoomValues[6]">
+                                        <option selected value="0"> </option>
+                                        @if (!(Items is null))
+                                        {
+                                            @foreach (var item in Items)
+                                            {
+                                                @if (!(item.Name is null))
+                                                {
+                                                    <option selected value="@item.Name">@item.Name</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-2">
+                                    <label>Item-2</label>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" aria-label="Default select example" @bind="RoomValues[7]">
+                                        <option selected value="0"> </option>
+                                        @if (!(Items is null))
+                                        {
+                                            @foreach (var item in Items)
+                                            {
+                                                @if (!(item.Name is null))
+                                                {
+                                                    <option selected value="@item.Name">@item.Name</option>
+                                                }}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-2">
+                                    <label>Item-3:</label>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" aria-label="Default select example" @bind="RoomValues[8]">
+                                        <option selected value="0"> </option>
+                                        @if (!(Items is null))
+                                        {
+                                            @foreach (var item in Items)
+                                            {
+                                                @if (!(item.Name is null))
+                                                {
+                                                    <option selected value="@item.Name">@item.Name</option>
+                                                }
+                                            }
                                         }
                                     </select>
                                 </div>
@@ -327,10 +382,12 @@
                             <div class="text-end">
                                 <input type="button" class="btn btn-primary mt-2" @onclick="SaveRoomButton" value="Save" />
                             </div>
+
+
                         </form>
                     </section>
 
-                    <section class="Submit w-75 mt-3" id="Submit">
+                    <section class="Submit w-75 mt-3 mb-5" id="Submit">
                         <div>
                             <input type="button" class="btn btn-success btn-lg w-100" value="Submit Dungeon" />
                         </div>
@@ -347,312 +404,360 @@
         </div>
     </NotAuthorized>
 </AuthorizeView>
-@code 
-{ 
-    private List<Class> Classes = new List<Class>();
-            private List<Race> Races = new List<Race>();
-            private List<IInspectable> Items = new List<IInspectable>();
-            private List<RoomSkeleton> Rooms = new List<RoomSkeleton>();
 
-            private string[] ClassValues = new string[4];
-            private string[] RaceValues = new string[5];
-            private string[] ItemValues = new string[4];
-            private string[] RoomValues = new string[6];
-            private Dictionary<int, string[]> Neighbourships = new Dictionary<int, string[]>();
+@code
+{ private List<Class> Classes = new List<Class>();
+    private List<Race> Races = new List<Race>();
+    private List<IInspectable> Items = new List<IInspectable>();
+    private List<RoomSkeleton> Rooms = new List<RoomSkeleton>();
 
-            private bool NewClass = false;
-            private int SelectedClass;
-            private string NewClassValidation;
+    private string[] ClassValues = new string[4];
+    private string[] RaceValues = new string[5];
+    private string[] ItemValues = new string[4];
+    private string[] RoomValues = new string[9];
+    private Dictionary<int, string[]> Neighbourships = new Dictionary<int, string[]>();
 
-            private bool NewRace = false;
-            private int SelectedRace;
-            private string NewRaceValidation;
+    private bool NewClass = false;
+    private int SelectedClass;
+    private string NewClassValidation;
 
-            private bool NewItem = false;
-            private int SelectedItem;
-            private string NewItemValidation;
+    private bool NewRace = false;
+    private int SelectedRace;
+    private string NewRaceValidation;
 
-            private bool NewRoom = false;
-            private int SelectedRoom;
-            private string NewRoomValidation;
+    private bool NewItem = false;
+    private int SelectedItem;
+    private string NewItemValidation;
+
+    private bool NewRoom = false;
+    private int SelectedRoom;
+    private string NewRoomValidation;
 
 
-            protected override void OnInitialized()
+    protected override void OnInitialized()
+    {
+        Classes.Add(new Class("ExampleClass", 1, 1, 1));
+        Races.Add(new Race("Example Race", "This is an Example of a Race", 1, 1, 1));
+        Items.Add(new Takeable("Example Pickable", "This is an Example of an Item the user can pick up", 5));
+        Items.Add(new Takeable("Sword", "This is a nice looking Sword", 5));
+        Items.Add(new Inspectable("Baum", "A big tree, some birds in it, someone carved a heart into its Log"));
+        Rooms.Add(new RoomSkeleton(1, "Test Room"));
+        Neighbourships.Add(1, new string[] { "0", "0", "0", "0" });
+        for (int i = 0; i < 3; i++)
+        {
+            Rooms[0].Inspectables.Add(Items[i]);
+        }
+    }
+
+    protected void AddClassButton()
+    {
+        NewClass = true;
+        NewClassValidation = "was-validated";
+
+        for (int i = 0; i < 4; i++)
+        {
+            ClassValues[i] = string.Empty;
+        }
+
+    }
+
+    protected void SaveClassButton()
+    {
+        NewClassValidation = "is-valid";
+        if (NewClass)
+        {
+            Classes.Add(new Class(ClassValues[0], int.Parse(ClassValues[1]), int.Parse(ClassValues[2]), int.Parse(ClassValues[3])));
+        }
+        else
+        {
+            Class selectedClass = Classes.Find(Class => Class.Name == ClassValues[0]);
+
+            if (!(selectedClass is null))
             {
-                Classes.Add(new Class("ExampleClass", 1, 1, 1));
-                Races.Add(new Race("Example Race", "This is an Example of a Race", 1, 1, 1));
-                Items.Add(new Takeable("Example Pickable", "This is an Example of an Item the user can pick up", 5));
-                Rooms.Add(new RoomSkeleton(1, "Test Room"));
-                Neighbourships.Add(1, new string[] { string.Empty, string.Empty, string.Empty, string.Empty, });
-            }
-
-            protected void AddClassButton()
-            {
-                NewClass = true;
-                NewClassValidation = "was-validated";
-
-                for (int i = 0; i < 4; i++)
+                try
                 {
-                    ClassValues[i] = string.Empty;
+                    selectedClass.Name = ClassValues[0];
+                    selectedClass.DefaultDamage = int.Parse(ClassValues[1]);
+                    selectedClass.DefaultHealthMax = int.Parse(ClassValues[2]);
+                    selectedClass.DefaultProtection = int.Parse(ClassValues[3]);
                 }
-
-            }
-
-            protected void SaveClassButton()
-            {
-                NewClassValidation = "is-valid";
-                if (NewClass)
+                catch (Exception e)
                 {
-                    Classes.Add(new Class(ClassValues[0], int.Parse(ClassValues[1]), int.Parse(ClassValues[2]), int.Parse(ClassValues[3])));
+                    //TODO Error Handling
                 }
-                else
-                {
-                    Class selectedClass = Classes.Find(Class => Class.Name == ClassValues[0]);
+            }
+        }
+    }
 
-                    if (!(selectedClass is null))
+    protected void ClassSelectionChanged(System.EventArgs args)
+    {
+        Class selectedClass = Classes.Find(item => item.Name == ClassValues[0]);
+        NewClass = false;
+        NewClassValidation = "is-valid";
+
+        if (!(selectedClass is null))
+        {
+            try
+            {
+                ClassValues[1] = selectedClass.DefaultDamage.ToString();
+                ClassValues[2] = selectedClass.DefaultHealthMax.ToString();
+                ClassValues[3] = selectedClass.DefaultProtection.ToString();
+            }
+            catch (Exception exc)
+            {
+                //TODO Error Handling
+            }
+        }
+    }
+
+    protected void AddRaceButton()
+    {
+        NewRace = true;
+        NewRaceValidation = "was-validated";
+
+        for (int i = 0; i < 5; i++)
+        {
+            RaceValues[i] = string.Empty;
+        }
+
+    }
+
+    protected void SaveRaceButton()
+    {
+        NewRaceValidation = "is-valid";
+        if (NewRace)
+        {
+            Races.Add(new Race(RaceValues[0], RaceValues[4], int.Parse(RaceValues[1]), int.Parse(RaceValues[2]), int.Parse(RaceValues[3])));
+        }
+        else
+        {
+            Race selectedRace = Races.Find(Race => Race.Name == RaceValues[0]);
+
+            if (!(selectedRace is null))
+            {
+                try
+                {
+                    selectedRace.Name = RaceValues[0];
+                    selectedRace.DefaultDamage = int.Parse(RaceValues[1]);
+                    selectedRace.DefaultHealthMax = int.Parse(RaceValues[2]);
+                    selectedRace.DefaultProtection = int.Parse(RaceValues[3]);
+                    selectedRace.Description = RaceValues[4];
+                }
+                catch (Exception e)
+                {
+                    //TODO Error Handling
+                }
+            }
+        }
+    }
+
+    protected void RaceSelectionChanged(System.EventArgs args)
+    {
+        Race selectedRace = Races.Find(item => item.Name == RaceValues[0]);
+        NewRace = false;
+        NewRaceValidation = "is-valid";
+
+        if (!(selectedRace is null))
+        {
+            try
+            {
+                RaceValues[1] = selectedRace.DefaultDamage.ToString();
+                RaceValues[2] = selectedRace.DefaultHealthMax.ToString();
+                RaceValues[3] = selectedRace.DefaultProtection.ToString();
+            }
+            catch (Exception exc)
+            {
+                //TODO Error Handling
+            }
+        }
+    }
+
+    protected void AddItemButton()
+    {
+        NewItem = true;
+        NewItemValidation = "was-validated";
+
+        for (int i = 0; i < 4; i++)
+        {
+            ItemValues[i] = string.Empty;
+        }
+
+    }
+
+    protected void SaveItemButton()
+    {
+        NewItemValidation = "is-valid";
+        if (NewItem)
+        {
+            switch (ItemValues[1])
+            {
+                case "Consumable":
+                    Items.Add(new Consumable(ItemValues[0], ItemValues[2], "good", 1));
+                    break;
+                case "Inspectable":
+                    Items.Add(new Inspectable(ItemValues[0], ItemValues[2]));
+                    break;
+                case "Pickable":
+                    Items.Add(new Takeable(ItemValues[0], ItemValues[2], short.Parse(ItemValues[3])));
+                    break;
+            }
+        }
+        else
+        {
+            var selectedItem = Items.Find(Item => Item.Name == ItemValues[0]);
+
+            if (!(selectedItem is null))
+            {
+                try
+                {
+                    selectedItem.Name = ItemValues[0];
+                    selectedItem.Description = ItemValues[2];
+                }
+                catch (Exception e)
+                {
+                    //TODO Error Handling
+                }
+            }
+        }
+    }
+
+    protected void ItemSelectionChanged(System.EventArgs args)
+    {
+        NewItem = false;
+        NewItemValidation = "is-valid";
+
+        var selectedItem = Items.Find(item => item.Name == ItemValues[0]);
+        if (!(selectedItem is null))
+        {
+            ItemValues[2] = selectedItem.Description;
+            switch (selectedItem.GetType().ToString())
+            {
+                case "Apollon.MUD.Prototype.Core.Implementation.Item.Consumable":
+                    //TODO Implementiere den ganzen Scheiß mit dem Radio Button
+                    ItemValues[1] = "Consumable";
+                    break;
+                case "Apollon.MUD.Prototype.Core.Implementation.Item.Takeable":
+                    ItemValues[3] = ((Takeable)selectedItem).Weight.ToString();
+                    ItemValues[1] = "Pickable";
+                    break;
+                case "Apollon.MUD.Prototype.Core.Implementation.Item.Inspectable":
+                    ItemValues[1] = "Inspectable";
+                    break;
+            }
+        }
+    }
+
+    protected void AddRoomButton()
+    {
+        NewRoom = true;
+        NewRoomValidation = "was-validated";
+        RoomValues[0] = string.Empty;
+        RoomValues[1] = string.Empty;
+        for (int i = 2; i < 9; i++)
+        {
+            RoomValues[i] = "0";
+        }
+
+    }
+
+    protected void SaveRoomButton()
+    {
+        NewRoomValidation = "is-valid";
+        if (NewRoom && !Neighbourships.ContainsKey(int.Parse(RoomValues[0])))
+        {
+            RoomSkeleton newRoom = new RoomSkeleton(int.Parse(RoomValues[0]), RoomValues[1]);
+            Rooms.Add(newRoom);
+            Neighbourships.Add(int.Parse(RoomValues[0]), new string[] { RoomValues[2], RoomValues[3], RoomValues[4], RoomValues[5] });
+
+            for (int i = 0; i < 3; i++)
+            {
+                int k = i + 6;
+                var item = Items.Find(item => item.Name == RoomValues[k]);
+                if (!(item is null))
+                {
+                    newRoom.Inspectables.Add(item);
+                }
+            }
+        }
+        else
+        {
+            try
+            {
+                RoomSkeleton selectedRoom = Rooms.Find(Room => Room.RoomId == int.Parse(RoomValues[0]));
+                if (!(selectedRoom is null))
+                {
+                    selectedRoom.RoomId = int.Parse(RoomValues[0]);
+                    selectedRoom.Description = RoomValues[1];
+                    Task task1 = Task.Run(() =>
                     {
-                        try
+                        for (int i = 0; i < 3; i++)
                         {
-                            selectedClass.Name = ClassValues[0];
-                            selectedClass.DefaultDamage = int.Parse(ClassValues[1]);
-                            selectedClass.DefaultHealthMax = int.Parse(ClassValues[2]);
-                            selectedClass.DefaultProtection = int.Parse(ClassValues[3]);
-                        }
-                        catch (Exception e)
-                        {
-                            //TODO Error Handling
-                        }
-                    }
-                }
-            }
-
-            protected void ClassSelectionChanged(System.EventArgs args)
-            {
-                Class selectedClass = Classes.Find(item => item.Name == ClassValues[0]);
-                NewClass = false;
-                NewClassValidation = "is-valid";
-
-                if (!(selectedClass is null))
-                {
-                    try
-                    {
-                        ClassValues[1] = selectedClass.DefaultDamage.ToString();
-                        ClassValues[2] = selectedClass.DefaultHealthMax.ToString();
-                        ClassValues[3] = selectedClass.DefaultProtection.ToString();
-                    }
-                    catch (Exception exc)
-                    {
-                        //TODO Error Handling
-                    }
-                }
-            }
-
-            protected void AddRaceButton()
-            {
-                NewRace = true;
-                NewRaceValidation = "was-validated";
-
-                for (int i = 0; i < 5; i++)
-                {
-                    RaceValues[i] = string.Empty;
-                }
-
-            }
-
-            protected void SaveRaceButton()
-            {
-                NewRaceValidation = "is-valid";
-                if (NewRace)
-                {
-                    Races.Add(new Race(RaceValues[0], RaceValues[4], int.Parse(RaceValues[1]), int.Parse(RaceValues[2]), int.Parse(RaceValues[3])));
-                }
-                else
-                {
-                    Race selectedRace = Races.Find(Race => Race.Name == RaceValues[0]);
-
-                    if (!(selectedRace is null))
-                    {
-                        try
-                        {
-                            selectedRace.Name = RaceValues[0];
-                            selectedRace.DefaultDamage = int.Parse(RaceValues[1]);
-                            selectedRace.DefaultHealthMax = int.Parse(RaceValues[2]);
-                            selectedRace.DefaultProtection = int.Parse(RaceValues[3]);
-                            selectedRace.Description = RaceValues[4];
-                        }
-                        catch (Exception e)
-                        {
-                            //TODO Error Handling
-                        }
-                    }
-                }
-            }
-
-            protected void RaceSelectionChanged(System.EventArgs args)
-            {
-                Race selectedRace = Races.Find(item => item.Name == RaceValues[0]);
-                NewRace = false;
-                NewRaceValidation = "is-valid";
-
-                if (!(selectedRace is null))
-                {
-                    try
-                    {
-                        RaceValues[1] = selectedRace.DefaultDamage.ToString();
-                        RaceValues[2] = selectedRace.DefaultHealthMax.ToString();
-                        RaceValues[3] = selectedRace.DefaultProtection.ToString();
-                    }
-                    catch (Exception exc)
-                    {
-                        //TODO Error Handling
-                    }
-                }
-            }
-
-            protected void AddItemButton()
-            {
-                NewItem = true;
-                NewItemValidation = "was-validated";
-
-                for (int i = 0; i < 4; i++)
-                {
-                    ItemValues[i] = string.Empty;
-                }
-
-            }
-
-            protected void SaveItemButton()
-            {
-                NewItemValidation = "is-valid";
-                if (NewItem)
-                {
-                    switch (ItemValues[1])
-                    {
-                        case "Consumable":
-                            Items.Add(new Consumable(ItemValues[0], ItemValues[2], true));
-                            break;
-                        case "Inspectable":
-                            Items.Add(new Inspectable(ItemValues[0], ItemValues[2]));
-                            break;
-                        case "Pickable":
-                            Items.Add(new Takeable(ItemValues[0], ItemValues[2], short.Parse(ItemValues[3])));
-                            break;
-                    }
-                }
-                else
-                {
-                    var selectedItem = Items.Find(Item => Item.Name == ItemValues[0]);
-
-                    if (!(selectedItem is null))
-                    {
-                        try
-                        {
-                            selectedItem.Name = ItemValues[0];
-                            selectedItem.Description = ItemValues[2];
-                        }
-                        catch (Exception e)
-                        {
-                            //TODO Error Handling
-                        }
-                    }
-                }
-            }
-
-            protected void ItemSelectionChanged(System.EventArgs args)
-            {
-                NewItem = false;
-                NewItemValidation = "is-valid";
-
-                var selectedItem = Items.Find(item => item.Name == ItemValues[0]);
-                if (!(selectedItem is null))
-                {
-                    ItemValues[2] = selectedItem.Description;
-                    switch (selectedItem.GetType().ToString())
-                    {
-                        case "Apollon.MUD.Prototype.Core.Implementation.Item.Consumable":
-                            //TODO Implementiere den ganzen Scheiß mit dem Radio Button
-                            ItemValues[1] = "Consumable";
-                            break;
-                        case "Apollon.MUD.Prototype.Core.Implementation.Item.Takeable":
-                            ItemValues[3] = ((Takeable)selectedItem).Weight.ToString();
-                            ItemValues[1] = "Pickable";
-                            break;
-                        case "Apollon.MUD.Prototype.Core.Implementation.Item.Inspectable":
-                            ItemValues[1] = "Inspectable";
-                            break;
-                    }
-                }
-            }
-
-            protected void AddRoomButton()
-            {
-                NewRoom = true;
-                NewRoomValidation = "was-validated";
-                RoomValues[0] = string.Empty;
-                RoomValues[1] = string.Empty;
-                for (int i = 2; i < 6; i++)
-                {
-                    RoomValues[i] = "0";
-                }
-
-            }
-
-            protected void SaveRoomButton()
-            {
-                NewRoomValidation = "is-valid";
-                if (NewRoom)
-                {
-                    Rooms.Add(new RoomSkeleton(int.Parse(RoomValues[0]), RoomValues[1]));
-                    Neighbourships.Add(int.Parse(RoomValues[0]), new string[] { RoomValues[2], RoomValues[3], RoomValues[4], RoomValues[5] });
-                }
-                else
-                {
-                    RoomSkeleton selectedRoom = Rooms.Find(Room => Room.RoomId == int.Parse(RoomValues[0]));
-
-                    if (!(selectedRoom is null))
-                    {
-                        try
-                        {
-                            selectedRoom.RoomId = int.Parse(RoomValues[0]);
-                            selectedRoom.Description = RoomValues[1];
-                            for (int i = 0; i < 5; i++)
+                            int k = i + 6;
+                            var item = Items.Find(item => item.Name == RoomValues[k]);
+                            if (!(item is null))
                             {
-                                Neighbourships[selectedRoom.RoomId][i] = RoomValues[(i + 2)];
+                                if (selectedRoom.Inspectables.Count < i + 1)
+                                {
+                                    selectedRoom.Inspectables.Add(item);
+                                }
+                                else
+                                {
+                                    selectedRoom.Inspectables[i] = item;
+                                }
                             }
-                        }
-                        catch (Exception e)
-                        {
-                            //TODO Error Handling
-                        }
-                    }
-                }
-            }
 
-            protected void RoomSelectionChanged(System.EventArgs args)
-            {
-                NewRoom = false;
-                if (!(RoomValues[0] is null || string.Empty.Equals(RoomValues[0])))
-                {
-                    RoomSkeleton selectedRoom = Rooms.Find(item => item.RoomId == int.Parse(RoomValues[0]));
-                    NewRoomValidation = "is-valid";
 
-                    if (!(selectedRoom is null))
+                        }
+                    });
+                    for (int i = 0; i < 5; i++)
                     {
-                        try
-                        {
-                            RoomValues[0] = selectedRoom.RoomId.ToString();
-                            RoomValues[1] = selectedRoom.Description;
-                            for (int i = 0; i < 5; i++)
-                            {
-                                RoomValues[(i + 2)] = Neighbourships[selectedRoom.RoomId][i];
-                            }
-                        }
-                        catch (Exception exc)
-                        {
-                            //TODO Error Handling
-                        }
+                        Neighbourships[selectedRoom.RoomId][i] = RoomValues[(i + 2)];
                     }
+                    task1.Wait();
                 }
             }
-}
+            catch (Exception e)
+            {
+                //TODO Error Handling
+            }
+        }
+    }
+
+    protected void RoomSelectionChanged(System.EventArgs args)
+    {
+        NewRoom = false;
+        if (!(RoomValues[0] is null || string.Empty.Equals(RoomValues[0])))
+        {
+            RoomSkeleton selectedRoom = Rooms.Find(item => item.RoomId == int.Parse(RoomValues[0]));
+            NewRoomValidation = "is-valid";
+
+            if (!(selectedRoom is null))
+            {
+                try
+                {
+                    RoomValues[0] = selectedRoom.RoomId.ToString();
+                    RoomValues[1] = selectedRoom.Description;
+                    Task task1 = Task.Run(() =>
+                    {
+                        RoomValues[6] = "0";
+                        RoomValues[7] = "0";
+                        RoomValues[8] = "0";
+                        for (int k = 0; k < 3; k++)
+                        {
+                            RoomValues[(k + 6)] = selectedRoom.Inspectables[k].Name.ToString();
+                        }
+                    });
+                    for (int i = 0; i < 4; i++)
+                    {
+                        RoomValues[(i + 2)] = Neighbourships[selectedRoom.RoomId][i];
+                    }
+                    task1.Wait();
+                }
+                catch (Exception exc)
+                {
+                    //TODO Error Handling
+                }
+            }
+        }
+    }
 }
