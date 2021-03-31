@@ -25,8 +25,8 @@ namespace Apollon.MUD.Prototype.Core.Domain
             string dungeonDescription =
                 "Dies ist ein vordefiniertes Mock-Dungeon, welches die Benutzung eines Dungeons näher beleuten soll.";
             string dungeonEpoch = "Mittelalter";
-            IRace Orks = new RaceSkeleton("Ork", "Orks sind schlimme Wesen.", 50, 20, 10);
-            IRace Elfen = new RaceSkeleton("Elf", "Elfen sind tolle Wesen.", 40, 10, 30);
+            IRace Orks = new RaceSkeleton("Ork", "Orks sind schlimme Wesen.", 30, 20, 10);
+            IRace Elfen = new RaceSkeleton("Elf", "Elfen sind tolle Wesen.", 50, 10, 30);
             List<IRace> configuredRaces = new List<IRace> {Orks, Elfen};
             IClass Berserker = new ClassSkeleton("Berserker", "Bererker sind stake Krieger.", 50, 30, 10);
             IClass Magier = new ClassSkeleton("Magier", "Magier haben ein langes Durchhaltevermögen.", 60, 10, 40);

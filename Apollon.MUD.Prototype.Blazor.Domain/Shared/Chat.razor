@@ -1,10 +1,9 @@
 ﻿@using Microsoft.AspNetCore.SignalR.Client
-@using Microsoft.AspNetCore.Http
-@using System.Security.Claims
 @using Microsoft.AspNetCore.Components.Authorization
 @inject NavigationManager _NavigationManager
 @inject AuthenticationStateProvider _AuthenticationStateProvider
 @inject IJSRuntime _JsRuntime
+@implements IAsyncDisposable
 
 
 <div class="container bg-light rounded">
@@ -16,19 +15,19 @@
             <ul class="chat">
                 @foreach (var message in _Messages)
                 {
-                <li class="left clearfix">
-                    <div class="chat-body clearfix">
-                        <div class="header">
-                            <strong class="primary-font">@message.from</strong>
-                            <small class="pull-right text-muted">
-                                <span class="glyphicon glyphicon-time"></span>to @message.to:
-                            </small>
+                    <li class="left clearfix">
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font">@message.from</strong>
+                                <small class="pull-right text-muted">
+                                    <span class="glyphicon glyphicon-time"></span>to @message.to:
+                                </small>
+                            </div>
+                            <p>
+                                @message.message
+                            </p>
                         </div>
-                        <p>
-                            @message.message
-                        </p>
-                    </div>
-                </li>
+                    </li>
                 }
             </ul>
         </div>
@@ -94,6 +93,11 @@
         _HubConnection.SendAsync("SendMessage", user.Identity?.Name, _MessageInput);
         await _JsRuntime.InvokeVoidAsync("clearPrompt", "chat-prompt");
         await _JsRuntime.InvokeVoidAsync("goToBottom", "chat");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await _HubConnection.DisposeAsync();
     }
 
 }

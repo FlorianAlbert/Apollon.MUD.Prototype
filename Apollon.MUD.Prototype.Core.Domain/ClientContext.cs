@@ -114,7 +114,7 @@ namespace Apollon.MUD.Prototype.Core.Domain
 
         private void EvaluateCommand(string message, string connectionId)
         {
-            var stringParts = message.Split(' ', '\t', StringSplitOptions.RemoveEmptyEntries);
+            var stringParts = message.Split(new []{' ', '\t'}, StringSplitOptions.RemoveEmptyEntries);
             switch (stringParts[0].ToLower())
             {
                 case "nimm":
@@ -127,8 +127,15 @@ namespace Apollon.MUD.Prototype.Core.Domain
                     DungeonRepo.LeaveDungeon(RoomId.Value, Avatar);
                     break;
                 case "gehe":
-                    RoomId = DungeonRepo.ChangeRoom(RoomId.Value, Avatar,
-                        (EDirections) Enum.Parse(typeof(EDirections), stringParts[1].ToUpper()));
+                    Enum.TryParse(typeof(EDirections), stringParts[1].ToUpper(), true, out var direction);
+                    if (direction != null && RoomId != null)
+                    {
+                        RoomId = DungeonRepo.ChangeRoom(RoomId.Value, Avatar, (EDirections) direction);
+                    }
+                    else
+                    {
+                        Avatar.SendPrivateMessage("Diese Himmelsrichtung existiert nicht...");
+                    }
                     break;
                 case "inventar":
                     DungeonRepo.ShowInventory(Avatar);
@@ -141,6 +148,13 @@ namespace Apollon.MUD.Prototype.Core.Domain
                     break;
                 case "schaue":
                     DungeonRepo.Show(RoomId.Value, Avatar);
+                    break;
+                case "eigenschaften":
+                    Avatar.SendPrivateMessage($"Du bist ein { Avatar.Race.Name } mit der Klasse { Avatar.Class.Name } \n" +
+                                              "Daraus ergeben sich folgende Eigenschaften für dich: \n" +
+                                              $"\tSchaden: { Avatar.Damage }\n" +
+                                              $"\tMaximale Gesundheit: { Avatar.HealthMax }\n" +
+                                              $"\tWiderstandsfähigkeit: { Avatar.Protection }");
                     break;
                 case "hilfe":
                     Avatar.SendPrivateMessage(
